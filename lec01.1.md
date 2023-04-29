@@ -287,24 +287,24 @@ In conclusion, pattern matching is a powerful and versatile feature in Haskell t
 
 
 
-### Types in Haskell
+# Introduction to Types in Haskell
 
-#### Some Vocabulary
+In Haskell, types play a crucial role in ensuring the correctness and safety of your programs. They help prevent potential errors and can make your code more maintainable and readable. Before we dive into types in Haskell, let's review some essential vocabulary related to types:
 
-- **type-safe** (adjective): a program that has no type errors
-- **type-check** (verb): determine whether a program has type errors
-- **static** (adjective): a property of a program that is (or can be) determined without running the program
-- **dynamic** (adjective): a property of a program that is (or can be) determined by running the program
-- **statically typed** (adjective): a programming language with static type checking. Typically, a compiler performs type checking. If the compiler finds a type error, the program does not compile (and therefore can never run).
-- **dynamically typed** (adjective): a programming language with dynamic type checking. An interpreter might perform type-checking as the program runs. If the program has a type error, the program may crash.
-- **type annotation** (noun): information that the programmer provides about the type of a variable, function, etc.
-- **type inference** (noun): a form of type checking that does not require (a lot of) type annotations
+- **Type-safe** (adjective): A program that has no type errors. Type-safe programs are less prone to runtime errors since they have been checked for type consistency.
+- **Type-check** (verb): Determine whether a program has type errors. This process ensures that the program is type-safe by verifying that all operations are performed on compatible data types.
+- **Static** (adjective): A property of a program that is (or can be) determined without running the program. Static properties, such as types, are checked at compile time.
+- **Dynamic** (adjective): A property of a program that is (or can be) determined by running the program. Dynamic properties are checked at runtime and may lead to errors if not handled correctly.
+- **Statically typed** (adjective): A programming language with static type checking. Typically, a compiler performs type checking. If the compiler finds a type error, the program does not compile (and therefore can never run).
+- **Dynamically typed** (adjective): A programming language with dynamic type checking. An interpreter might perform type-checking as the program runs. If the program has a type error, the program may crash.
+- **Type annotation** (noun): Information that the programmer provides about the type of a variable, function, etc. Type annotations make the code more readable and help the compiler understand the programmer's intent.
+- **Type inference** (noun): A form of type checking that does not require (a lot of) type annotations. The compiler deduces the types of expressions and functions based on their usage.
 
-Haskell is a **statically typed language** that uses **type inference**.
+Haskell is a statically typed language that uses type inference. This means that Haskell checks the types of your program at compile time, ensuring that your program is type-safe before it ever runs. With type inference, Haskell can often deduce the types of your expressions and functions without requiring you to provide explicit type annotations.
 
-#### Examining Types in `ghci`
+## Examining Types in ghci
 
-We can ask `ghci` for the type of an expression using:
+When working with Haskell in ghci, you can ask for the type of an expression using the `:type` or `:t` command followed by the expression:
 
 ```haskell
 :type <expr>
@@ -316,8 +316,24 @@ or
 :t <expr>
 ```
 
-Haskell is a statically typed language that uses type inference. We are usually not required to write type annotations, but it's still a good idea.
+For example, if you want to know the type of the expression `2 + 3`, you can type:
 
+```haskell
+:t 2 + 3
+```
+
+ghci will respond with the type `Num a => a`, indicating that the expression can have any numeric type `a`.
+
+Although Haskell's type inference often allows you to omit type annotations, it is still a good practice to include them in your code. Type annotations make your code more readable and help catch potential errors early in the development process.
+
+For example, when defining a function that squares a number, you might provide a type annotation like this:
+
+```haskell
+square :: Num a => a -> a
+square x = x * x
+```
+
+This type annotation tells the compiler that the `square` function takes a numeric type `a` as input and returns a value of the same type `a`. Including type annotations in your code can help prevent mistakes and make your code more understandable to others.
 #### Function Types in Haskell
 
 ```haskell
