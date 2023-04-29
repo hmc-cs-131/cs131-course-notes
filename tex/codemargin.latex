@@ -1,0 +1,5 @@
+\documentclass{article}
+\usepackage{framed}
+\newenvironment{codemargin}
+  {\def\FrameCommand{\fboxsep=1cm \fbox}\MakeFramed {\advance\hsize-\width \FrameRestore}}
+  {\endMakeFramed}

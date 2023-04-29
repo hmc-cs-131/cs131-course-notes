@@ -1,0 +1,760 @@
+\hypertarget{haskell-data-types-pattern-matching-type-classes}{%
+\section{Haskell Data Types, Pattern Matching, Type
+Classes}\label{haskell-data-types-pattern-matching-type-classes}}
+
+Haskell provides a way to represent and work with shapes using data
+types. In this lecture, we will explore how to use Haskell data types
+and compare functional programming with object-oriented programming.
+
+\hypertarget{a-haskell-solution-using-data-types}{%
+\paragraph{A Haskell Solution Using Data
+Types}\label{a-haskell-solution-using-data-types}}
+
+First, let's define a data type \texttt{Shape} that can represent
+circles, squares, and right triangles:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data} \DataTypeTok{Shape} 
+  \OtherTok{=} \DataTypeTok{Circle}         \DataTypeTok{Double} \DataTypeTok{Double} \DataTypeTok{Double}
+  \OperatorTok{|} \DataTypeTok{Square}         \DataTypeTok{Double} \DataTypeTok{Double} \DataTypeTok{Double}
+  \OperatorTok{|} \DataTypeTok{RightTriangle}  \DataTypeTok{Double} \DataTypeTok{Double} \DataTypeTok{Double} \DataTypeTok{Double}
+  \KeywordTok{deriving} \DataTypeTok{Show}
+\end{Highlighting}
+\end{Shaded}
+
+Next, we'll define an \texttt{area} function that computes the area of a
+shape:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OtherTok{area ::} \DataTypeTok{Shape} \OtherTok{{-}\textgreater{}} \DataTypeTok{Double}
+\NormalTok{area shape }\OtherTok{=} 
+  \KeywordTok{case}\NormalTok{ shape }\KeywordTok{of}
+    \DataTypeTok{Circle}\NormalTok{ x y r          }\OtherTok{{-}\textgreater{}} \FunctionTok{pi} \OperatorTok{*}\NormalTok{ r }\OperatorTok{*}\NormalTok{ r}
+    \DataTypeTok{Square}\NormalTok{ x y s          }\OtherTok{{-}\textgreater{}}\NormalTok{ s }\OperatorTok{*}\NormalTok{ s}
+    \DataTypeTok{RightTriangle}\NormalTok{ x y l w }\OtherTok{{-}\textgreater{}}\NormalTok{ l }\OperatorTok{*}\NormalTok{ w}
+\end{Highlighting}
+\end{Shaded}
+
+Finally, we'll define a \texttt{shift} function that shifts a shape by a
+given amount in the x and y directions:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OtherTok{shift ::} \DataTypeTok{Shape} \OtherTok{{-}\textgreater{}} \DataTypeTok{Double} \OtherTok{{-}\textgreater{}} \DataTypeTok{Double} \OtherTok{{-}\textgreater{}} \DataTypeTok{Shape}
+\NormalTok{shift shape delta\_x delta\_y }\OtherTok{=} 
+  \KeywordTok{case}\NormalTok{ shape }\KeywordTok{of} 
+    \DataTypeTok{Circle}\NormalTok{ x y r }\OtherTok{{-}\textgreater{}} \DataTypeTok{Circle}\NormalTok{ (x }\OperatorTok{+}\NormalTok{ delta\_x) (y }\OperatorTok{+}\NormalTok{ delta\_y) r}
+    \DataTypeTok{Square}\NormalTok{ x y s }\OtherTok{{-}\textgreater{}} \DataTypeTok{Square}\NormalTok{ (x }\OperatorTok{+}\NormalTok{ delta\_x) (y }\OperatorTok{+}\NormalTok{ delta\_y) s}
+    \DataTypeTok{RightTriangle}\NormalTok{ x y l w }\OtherTok{{-}\textgreater{}} 
+    \DataTypeTok{RightTriangle}\NormalTok{ (x }\OperatorTok{+}\NormalTok{ delta\_x) (y }\OperatorTok{+}\NormalTok{ delta\_y) l w}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{functional-programming-vs-object-oriented-programming}{%
+\paragraph{Functional Programming vs Object Oriented
+Programming}\label{functional-programming-vs-object-oriented-programming}}
+
+When comparing functional programming (FP) and object-oriented
+programming (OOP), it's important to understand that they have different
+points of view.
+
+In OOP, objects know how to perform different operations on themselves.
+For example, a circle knows how to compute its own area and perform a
+shift.
+
+In FP, functions know how to compute over different data types. For
+instance, the \texttt{shift} function knows how to compute a shifted
+square, circle, or right triangle.
+
+These two points of view are orthogonal:
+
+\begin{itemize}
+\tightlist
+\item
+  Object-Oriented Programming: An object knows how to perform different
+  operations on itself.
+\item
+  Functional Programming: A function knows how to compute over different
+  data types.
+\end{itemize}
+
+The key takeaway is that Haskell data types are not classes. Instead,
+they provide a way to represent and work with data in a functional
+programming style.
+
+\hypertarget{simple-data-types-in-haskell}{%
+\subsubsection{Simple Data Types in
+Haskell}\label{simple-data-types-in-haskell}}
+
+Haskell provides a variety of simple data types, some of which include:
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+Value & Type & Description\tabularnewline
+\midrule
+\endhead
+1, 2, 100000000000, -42, \ldots{} & Integer & Integer
+numbers\tabularnewline
+3.14, 3.2831, -2.718, \ldots{} & Double & Floating-point
+numbers\tabularnewline
+True, False & Bool & Boolean values\tabularnewline
+`a', `z', \ldots{} & Char & Character values\tabularnewline
+``hello'', ``world'' & String & String values\tabularnewline
+{[}1, 2, 3, 4{]} & {[}Integer{]} & List of integers\tabularnewline
+(True, 0.5) & (Bool, Double) & Tuple of Bool and Double\tabularnewline
+\bottomrule
+\end{longtable}
+
+All type names in Haskell are upper-case, but not all upper-case names
+are types.
+
+\hypertarget{data-type-simple-examples}{%
+\paragraph{Data Type Simple Examples}\label{data-type-simple-examples}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data} \DataTypeTok{CoinFlip} \OtherTok{=} \DataTypeTok{Heads} \OperatorTok{|} \DataTypeTok{Tails}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{Heads} and \texttt{Tails} are values that have type
+\texttt{CoinFlip}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data} \DataTypeTok{CardSuit} \OtherTok{=} \DataTypeTok{Clubs} \OperatorTok{|} \DataTypeTok{Diamonds} \OperatorTok{|} \DataTypeTok{Hearts} \OperatorTok{|} \DataTypeTok{Spades}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{Clubs}, \texttt{Diamonds}, \texttt{Hearts}, and \texttt{Spades}
+are values that have type \texttt{CardSuit}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data} \DataTypeTok{ThermostatSetting} \OtherTok{=} \DataTypeTok{Off} \OperatorTok{|} \DataTypeTok{Cooling} \OperatorTok{|} \DataTypeTok{Heating}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{Off}, \texttt{Cooling}, and \texttt{Heating} are values that
+have type \texttt{ThermostatSetting}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data} \DataTypeTok{Bool} \OtherTok{=} \DataTypeTok{True} \OperatorTok{|} \DataTypeTok{False}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{True} and \texttt{False} are values that have type
+\texttt{Bool}.
+
+\hypertarget{functions-for-data-types-simple-example}{%
+\section{Functions for Data Types: Simple
+Example}\label{functions-for-data-types-simple-example}}
+
+We have a simple \texttt{ThermostatSetting} data type defined as
+follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data} \DataTypeTok{ThermostatSetting} 
+\OtherTok{=} \DataTypeTok{Off} 
+    \OperatorTok{|} \DataTypeTok{Cooling} 
+    \OperatorTok{|} \DataTypeTok{Heating}
+    \KeywordTok{deriving} \DataTypeTok{Show}
+\end{Highlighting}
+\end{Shaded}
+
+Now, let's create a function \texttt{isRunning} that takes a
+\texttt{ThermostatSetting} and returns a \texttt{Bool}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OtherTok{isRunning ::} \DataTypeTok{ThermostatSetting} \OtherTok{{-}\textgreater{}} \DataTypeTok{Bool}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{defining-functions-for-data-types}{%
+\subsection{Defining Functions for Data
+Types}\label{defining-functions-for-data-types}}
+
+\hypertarget{style-1-pattern-matching-the-function-arguments}{%
+\subsubsection{Style 1: Pattern Matching the Function
+Arguments}\label{style-1-pattern-matching-the-function-arguments}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OtherTok{isRunning ::} \DataTypeTok{ThermostatSetting} \OtherTok{{-}\textgreater{}} \DataTypeTok{Bool}
+
+\NormalTok{isRunning }\DataTypeTok{Off}      \OtherTok{=} \DataTypeTok{False}
+\NormalTok{isRunning }\DataTypeTok{Cooling}  \OtherTok{=} \DataTypeTok{True}
+\NormalTok{isRunning }\DataTypeTok{Heating}  \OtherTok{=} \DataTypeTok{True}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{style-2-pattern-matching-inside-a-case-expression-in-the-function-body}{%
+\subsubsection{Style 2: Pattern Matching Inside a Case Expression in the
+Function
+Body}\label{style-2-pattern-matching-inside-a-case-expression-in-the-function-body}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OtherTok{isRunning ::} \DataTypeTok{ThermostatSetting} \OtherTok{{-}\textgreater{}} \DataTypeTok{Bool}
+
+\NormalTok{isRunning setting }\OtherTok{=} 
+  \KeywordTok{case}\NormalTok{ setting }\KeywordTok{of}
+    \DataTypeTok{Off}     \OtherTok{{-}\textgreater{}} \DataTypeTok{False}
+    \DataTypeTok{Cooling} \OtherTok{{-}\textgreater{}} \DataTypeTok{True}
+    \DataTypeTok{Heating} \OtherTok{{-}\textgreater{}} \DataTypeTok{True}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{style-3-pattern-matching-the-function-arguments-with-a-wildcard-_}{%
+\subsubsection{Style 3: Pattern Matching the Function Arguments with a
+Wildcard
+(\_)}\label{style-3-pattern-matching-the-function-arguments-with-a-wildcard-_}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OtherTok{isRunning ::} \DataTypeTok{ThermostatSetting} \OtherTok{{-}\textgreater{}} \DataTypeTok{Bool}
+
+\NormalTok{isRunning }\DataTypeTok{Off} \OtherTok{=} \DataTypeTok{False}
+\NormalTok{isRunning \_   }\OtherTok{=} \DataTypeTok{True}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{style-4-pattern-matching-in-a-case-expression-in-the-function-body-with-a-wildcard}{%
+\subsubsection{Style 4: Pattern Matching in a Case Expression in the
+Function Body with a
+Wildcard}\label{style-4-pattern-matching-in-a-case-expression-in-the-function-body-with-a-wildcard}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OtherTok{isRunning ::} \DataTypeTok{ThermostatSetting} \OtherTok{{-}\textgreater{}} \DataTypeTok{Bool}
+
+\NormalTok{isRunning setting }\OtherTok{=} 
+  \KeywordTok{case}\NormalTok{ setting }\KeywordTok{of}
+    \DataTypeTok{Off} \OtherTok{{-}\textgreater{}} \DataTypeTok{False}
+\NormalTok{    \_   }\OtherTok{{-}\textgreater{}} \DataTypeTok{True}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{style-5-if-then-else-expression-in-the-function-body}{%
+\subsubsection{Style 5: If-Then-Else Expression in the Function
+Body}\label{style-5-if-then-else-expression-in-the-function-body}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OtherTok{isRunning ::} \DataTypeTok{ThermostatSetting} \OtherTok{{-}\textgreater{}} \DataTypeTok{Bool}
+
+\NormalTok{isRunning setting }\OtherTok{=} 
+  \KeywordTok{if}\NormalTok{ setting }\OperatorTok{==} \DataTypeTok{Off}
+  \KeywordTok{then} \DataTypeTok{False}
+  \KeywordTok{else} \DataTypeTok{True}
+\end{Highlighting}
+\end{Shaded}
+
+In order to use the \texttt{==} operator, we need to derive \texttt{Eq}
+for the \texttt{ThermostatSetting} data type:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data} \DataTypeTok{ThermostatSetting} 
+\OtherTok{=} \DataTypeTok{Off} 
+    \OperatorTok{|} \DataTypeTok{Cooling} 
+    \OperatorTok{|} \DataTypeTok{Heating}
+    \KeywordTok{deriving}\NormalTok{ (}\DataTypeTok{Show}\NormalTok{, }\DataTypeTok{Eq}\NormalTok{)}
+
+\OtherTok{isRunning ::} \DataTypeTok{ThermostatSetting} \OtherTok{{-}\textgreater{}} \DataTypeTok{Bool}
+\NormalTok{isRunning setting }\OtherTok{=} 
+  \KeywordTok{if}\NormalTok{ setting }\OperatorTok{==} \DataTypeTok{Off}
+  \KeywordTok{then} \DataTypeTok{False}
+  \KeywordTok{else} \DataTypeTok{True}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{style-6-a-one-liner-that-does-all-the-work-in-a-single-expression}{%
+\subsubsection{Style 6: A ``One-Liner'' That Does All the Work in a
+Single
+Expression}\label{style-6-a-one-liner-that-does-all-the-work-in-a-single-expression}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OtherTok{isRunning ::} \DataTypeTok{ThermostatSetting} \OtherTok{{-}\textgreater{}} \DataTypeTok{Bool}
+
+\NormalTok{isRunning setting }\OtherTok{=}\NormalTok{ (setting }\OperatorTok{/=} \DataTypeTok{Off}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{style-7-a-one-liner-using-currying-with}{%
+\subsubsection{Style 7: A ``One-Liner'' Using Currying with
+(/=)}\label{style-7-a-one-liner-using-currying-with}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OtherTok{isRunning ::} \DataTypeTok{ThermostatSetting} \OtherTok{{-}\textgreater{}} \DataTypeTok{Bool}
+
+\NormalTok{isRunning }\OtherTok{=}\NormalTok{ ((}\OperatorTok{/=}\NormalTok{) }\DataTypeTok{Off}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{discussion}{%
+\subsection{Discussion}\label{discussion}}
+
+Which style do you personally prefer? Are there situations in which one
+way is definitely better or worse than another? Consider readability,
+writability, and maintainability when evaluating each style.
+
+In general, you might not be able to tell the difference between
+different implementations just by calling the \texttt{isRunning}
+function, but the choice of implementation style can impact how easy it
+is to understand and maintain the code. Choose a style that best suits
+your preferences and the specific situation.
+
+\hypertarget{data-types-and-associated-values}{%
+\section{Data Types and Associated
+Values}\label{data-types-and-associated-values}}
+
+\hypertarget{simple-data-type-examples}{%
+\subsection{Simple Data Type Examples}\label{simple-data-type-examples}}
+
+Here are some simple data type examples:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data} \DataTypeTok{CoinFlip} \OtherTok{=} \DataTypeTok{Heads} \OperatorTok{|} \DataTypeTok{Tails} \KeywordTok{deriving}\NormalTok{ (}\DataTypeTok{Show}\NormalTok{, }\DataTypeTok{Eq}\NormalTok{)}
+
+\KeywordTok{data} \DataTypeTok{Suit} \OtherTok{=} \DataTypeTok{Clubs} \OperatorTok{|} \DataTypeTok{Diamonds} \OperatorTok{|} \DataTypeTok{Hearts} \OperatorTok{|} \DataTypeTok{Spades}
+       \KeywordTok{deriving}\NormalTok{ (}\DataTypeTok{Show}\NormalTok{, }\DataTypeTok{Eq}\NormalTok{)}
+
+\KeywordTok{data} \DataTypeTok{ThermostatSetting} 
+\OtherTok{=} \DataTypeTok{Off} 
+    \OperatorTok{|} \DataTypeTok{Cooling} 
+    \OperatorTok{|} \DataTypeTok{Heating}
+    \KeywordTok{deriving}\NormalTok{ (}\DataTypeTok{Show}\NormalTok{, }\DataTypeTok{Eq}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{data-types-with-associated-values}{%
+\subsection{Data Types with Associated
+Values}\label{data-types-with-associated-values}}
+
+Let's consider a more complex \texttt{ThermostatSetting} data type:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data} \DataTypeTok{ThermostatSetting} 
+\OtherTok{=} \DataTypeTok{Off} 
+    \OperatorTok{|} \DataTypeTok{CoolTo} \DataTypeTok{Int} 
+    \OperatorTok{|} \DataTypeTok{HeatTo} \DataTypeTok{Int}
+    \OperatorTok{|} \DataTypeTok{OutOfService} \DataTypeTok{String}
+    \KeywordTok{deriving}\NormalTok{ (}\DataTypeTok{Show}\NormalTok{, }\DataTypeTok{Eq}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Some example values of the \texttt{ThermostatSetting} data type are:
+
+\begin{verbatim}
+Off                           is a value of type     ThermostatSetting
+CoolTo 27                     is a value of type     ThermostatSetting
+HeatTo 35                     is a value of type     ThermostatSetting
+OutOfService "Maintenance"    is a value of type     ThermostatSetting
+\end{verbatim}
+
+You can create instances of these values:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{setting\_1 }\OtherTok{=} \DataTypeTok{Off}
+\NormalTok{setting\_2 }\OtherTok{=} \DataTypeTok{CoolTo} \DecValTok{20}
+\NormalTok{setting\_3 }\OtherTok{=} \DataTypeTok{OutOfService} \StringTok{"Under repair"}
+\end{Highlighting}
+\end{Shaded}
+
+These constructors have the following types:
+
+\begin{verbatim}
+Off             is a value of type             ThermostatSetting
+CoolTo          is a (function) value of type  Int -> ThermostatSetting
+HeatTo          is a (function) value of type  Int -> ThermostatSetting
+OutOfService    is a (function) value of type  String -> ThermostatSetting
+\end{verbatim}
+
+\hypertarget{general-haskell-data-types}{%
+\subsection{General Haskell Data
+Types}\label{general-haskell-data-types}}
+
+A Haskell datatype declaration has the following form:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data} \OperatorTok{\textless{}}\DataTypeTok{TypeName}\OperatorTok{\textgreater{}} 
+    \OtherTok{=} \OperatorTok{\textless{}}\DataTypeTok{ConstructorName}\OperatorTok{\textgreater{}} \OperatorTok{\textless{}}\DataTypeTok{Type}\OperatorTok{\textgreater{}} \OperatorTok{\textless{}}\DataTypeTok{Type}\OperatorTok{\textgreater{}}\NormalTok{ … }\OperatorTok{\textless{}}\DataTypeTok{Type}\OperatorTok{\textgreater{}}
+    \OperatorTok{|} \OperatorTok{\textless{}}\DataTypeTok{ConstructorName}\OperatorTok{\textgreater{}} \OperatorTok{\textless{}}\DataTypeTok{Type}\OperatorTok{\textgreater{}} \OperatorTok{\textless{}}\DataTypeTok{Type}\OperatorTok{\textgreater{}}\NormalTok{ … }\OperatorTok{\textless{}}\DataTypeTok{Type}\OperatorTok{\textgreater{}}
+    \OperatorTok{...}
+    \OperatorTok{|} \OperatorTok{\textless{}}\DataTypeTok{ConstructorName}\OperatorTok{\textgreater{}} \OperatorTok{\textless{}}\DataTypeTok{Type}\OperatorTok{\textgreater{}} \OperatorTok{\textless{}}\DataTypeTok{Type}\OperatorTok{\textgreater{}}\NormalTok{ … }\OperatorTok{\textless{}}\DataTypeTok{Type}\OperatorTok{\textgreater{}}
+\end{Highlighting}
+\end{Shaded}
+
+You can also add type class constraints using the \texttt{deriving}
+keyword:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data} \OperatorTok{\textless{}}\DataTypeTok{TypeName}\OperatorTok{\textgreater{}} 
+    \OtherTok{=} \OperatorTok{\textless{}}\DataTypeTok{ConstructorName}\OperatorTok{\textgreater{}} \OperatorTok{\textless{}}\DataTypeTok{Type}\OperatorTok{\textgreater{}} \OperatorTok{\textless{}}\DataTypeTok{Type}\OperatorTok{\textgreater{}}\NormalTok{ … }\OperatorTok{\textless{}}\DataTypeTok{Type}\OperatorTok{\textgreater{}}
+    \OperatorTok{|} \OperatorTok{\textless{}}\DataTypeTok{ConstructorName}\OperatorTok{\textgreater{}} \OperatorTok{\textless{}}\DataTypeTok{Type}\OperatorTok{\textgreater{}} \OperatorTok{\textless{}}\DataTypeTok{Type}\OperatorTok{\textgreater{}}\NormalTok{ … }\OperatorTok{\textless{}}\DataTypeTok{Type}\OperatorTok{\textgreater{}}
+    \OperatorTok{...}
+    \OperatorTok{|} \OperatorTok{\textless{}}\DataTypeTok{ConstructorName}\OperatorTok{\textgreater{}} \OperatorTok{\textless{}}\DataTypeTok{Type}\OperatorTok{\textgreater{}} \OperatorTok{\textless{}}\DataTypeTok{Type}\OperatorTok{\textgreater{}}\NormalTok{ … }\OperatorTok{\textless{}}\DataTypeTok{Type}\OperatorTok{\textgreater{}}
+    \KeywordTok{deriving}\NormalTok{ (}\OperatorTok{\textless{}}\DataTypeTok{TypeClass1}\OperatorTok{\textgreater{}}\NormalTok{, }\OperatorTok{\textless{}}\DataTypeTok{TypeClass2}\OperatorTok{\textgreater{}}\NormalTok{, …)}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{Show} and \texttt{Eq} are examples of type classes.
+
+\hypertarget{data-types-associated-values-and-functions}{%
+\subsection{Data Types, Associated Values, and
+Functions}\label{data-types-associated-values-and-functions}}
+
+\hypertarget{functions-with-data-types-and-associated-values}{%
+\subsubsection{Functions with Data Types and Associated
+Values}\label{functions-with-data-types-and-associated-values}}
+
+Here is an example of a function working with the
+\texttt{ThermostatSetting} data type:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OtherTok{isRunning ::} \DataTypeTok{Int} \OtherTok{{-}\textgreater{}} \DataTypeTok{ThermostatSetting} \OtherTok{{-}\textgreater{}} \DataTypeTok{Bool}
+
+\NormalTok{isRunning temp }\DataTypeTok{Off}                \OtherTok{=} \DataTypeTok{False}
+\NormalTok{isRunning temp (}\DataTypeTok{OutOfService}\NormalTok{ msg) }\OtherTok{=} \DataTypeTok{False}
+\NormalTok{isRunning temp (}\DataTypeTok{CoolTo}\NormalTok{ t)         }\OtherTok{=}\NormalTok{ temp }\OperatorTok{\textgreater{}}\NormalTok{ t}
+\NormalTok{isRunning temp (}\DataTypeTok{HeatTo}\NormalTok{ t)         }\OtherTok{=}\NormalTok{ temp }\OperatorTok{\textless{}}\NormalTok{ t}
+\end{Highlighting}
+\end{Shaded}
+
+Alternatively, you can use a wildcard \texttt{\_} to ignore the unneeded
+values:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OtherTok{isRunning ::} \DataTypeTok{Int} \OtherTok{{-}\textgreater{}} \DataTypeTok{ThermostatSetting} \OtherTok{{-}\textgreater{}} \DataTypeTok{Bool}
+
+\NormalTok{isRunning \_ }\DataTypeTok{Off}              \OtherTok{=} \DataTypeTok{False}
+\NormalTok{isRunning \_ (}\DataTypeTok{OutOfService}\NormalTok{ \_) }\OtherTok{=} \DataTypeTok{False}
+\NormalTok{isRunning temp (}\DataTypeTok{CoolTo}\NormalTok{ t)    }\OtherTok{=}\NormalTok{ temp }\OperatorTok{\textgreater{}}\NormalTok{ t}
+\NormalTok{isRunning temp (}\DataTypeTok{HeatTo}\NormalTok{ t)    }\OtherTok{=}\NormalTok{ temp }\OperatorTok{\textless{}}\NormalTok{ t}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{recursive-data-types}{%
+\section{Recursive Data Types}\label{recursive-data-types}}
+
+\hypertarget{creating-custom-lists-with-recursive-data-types}{%
+\subsection{Creating Custom Lists with Recursive Data
+Types}\label{creating-custom-lists-with-recursive-data-types}}
+
+A list can be an empty list or an element and another list:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data} \DataTypeTok{IntList}
+    \OtherTok{=} \DataTypeTok{Empty}
+    \OperatorTok{|} \DataTypeTok{Cons} \DataTypeTok{Int} \DataTypeTok{IntList} 
+    \KeywordTok{deriving}\NormalTok{ (}\DataTypeTok{Show}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{examples-of-intlist}{%
+\subsubsection{Examples of IntList}\label{examples-of-intlist}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{list1 }\OtherTok{=} \DataTypeTok{Empty}
+\NormalTok{list2 }\OtherTok{=} \DataTypeTok{Cons} \DecValTok{6} \DataTypeTok{Empty}
+\NormalTok{list3 }\OtherTok{=} \DataTypeTok{Cons} \DecValTok{10}\NormalTok{ (}\DataTypeTok{Cons} \DecValTok{20}\NormalTok{ list2)}
+\NormalTok{list4 }\OtherTok{=} \DataTypeTok{Cons}\NormalTok{ (}\OperatorTok{{-}}\DecValTok{4}\NormalTok{) list3}
+\NormalTok{list5 }\OtherTok{=} \DataTypeTok{Cons} \DecValTok{100}\NormalTok{ (}\DataTypeTok{Cons} \DecValTok{13}\NormalTok{ list4)}
+\NormalTok{list6 }\OtherTok{=} \DataTypeTok{Cons} \DecValTok{100}\NormalTok{ (}\DataTypeTok{Cons} \DecValTok{13}\NormalTok{ list5)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{functions-on-intlist}{%
+\subsubsection{Functions on IntList}\label{functions-on-intlist}}
+
+\hypertarget{length}{%
+\paragraph{Length}\label{length}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OtherTok{intListLength ::} \DataTypeTok{IntList} \OtherTok{{-}\textgreater{}} \DataTypeTok{Int}
+
+\NormalTok{intListLength }\DataTypeTok{Empty} \OtherTok{=} \DecValTok{0}
+\NormalTok{intListLength (}\DataTypeTok{Cons}\NormalTok{ x xs) }\OtherTok{=} \DecValTok{1} \OperatorTok{+}\NormalTok{ intListLength xs}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{head}{%
+\paragraph{Head}\label{head}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OtherTok{intListHead ::} \DataTypeTok{IntList} \OtherTok{{-}\textgreater{}} \DataTypeTok{Int}
+
+\NormalTok{intListHead }\DataTypeTok{Empty} \OtherTok{=} \FunctionTok{undefined}
+\NormalTok{intListHead (}\DataTypeTok{Cons}\NormalTok{ x xs) }\OtherTok{=}\NormalTok{ x}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{tail}{%
+\paragraph{Tail}\label{tail}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OtherTok{intListTail ::} \DataTypeTok{IntList} \OtherTok{{-}\textgreater{}} \DataTypeTok{IntList}
+
+\NormalTok{intListTail }\DataTypeTok{Empty} \OtherTok{=} \FunctionTok{undefined}
+\NormalTok{intListTail (}\DataTypeTok{Cons}\NormalTok{ x xs) }\OtherTok{=}\NormalTok{ xs}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{map}{%
+\paragraph{Map}\label{map}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OtherTok{intListMap ::}\NormalTok{ (}\DataTypeTok{Int} \OtherTok{{-}\textgreater{}} \DataTypeTok{Int}\NormalTok{) }\OtherTok{{-}\textgreater{}} \DataTypeTok{IntList} \OtherTok{{-}\textgreater{}} \DataTypeTok{IntList}
+
+\NormalTok{intListMap f }\DataTypeTok{Empty} \OtherTok{=} \DataTypeTok{Empty}
+\NormalTok{intListMap f (}\DataTypeTok{Cons}\NormalTok{ x xs) }\OtherTok{=} \DataTypeTok{Cons}\NormalTok{ (f x) (intListMap f xs)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{sum}{%
+\paragraph{Sum}\label{sum}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OtherTok{intListSum ::} \DataTypeTok{IntList} \OtherTok{{-}\textgreater{}} \DataTypeTok{Int}
+
+\NormalTok{intListSum }\DataTypeTok{Empty} \OtherTok{=} \DecValTok{0}
+\NormalTok{intListSum (}\DataTypeTok{Cons}\NormalTok{ x xs) }\OtherTok{=}\NormalTok{ x }\OperatorTok{+}\NormalTok{ intListSum xs}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{string-binary-trees-with-recursive-data-types}{%
+\subsection{String Binary Trees with Recursive Data
+Types}\label{string-binary-trees-with-recursive-data-types}}
+
+A \texttt{StringBinaryTree} is either a leaf with a \texttt{String} in
+it or a node with a \texttt{String} and two \texttt{StringBinaryTree}s:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data} \DataTypeTok{StringBinaryTree}
+  \OtherTok{=} \DataTypeTok{Leaf} \DataTypeTok{String}
+  \OperatorTok{|} \DataTypeTok{Node} \DataTypeTok{String} \DataTypeTok{StringBinaryTree} \DataTypeTok{StringBinaryTree}
+  \KeywordTok{deriving}\NormalTok{ (}\DataTypeTok{Show}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{examples-of-stringbinarytree}{%
+\subsubsection{Examples of
+StringBinaryTree}\label{examples-of-stringbinarytree}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tree1 }\OtherTok{=} \DataTypeTok{Leaf} \StringTok{"a"}
+\NormalTok{tree2 }\OtherTok{=} \DataTypeTok{Leaf} \StringTok{"b"}
+\NormalTok{tree3 }\OtherTok{=} \DataTypeTok{Leaf} \StringTok{"c"}
+\NormalTok{tree4 }\OtherTok{=} \DataTypeTok{Node} \StringTok{"f"}\NormalTok{ (}\DataTypeTok{Leaf} \StringTok{"d"}\NormalTok{) (}\DataTypeTok{Leaf} \StringTok{"e"}\NormalTok{)}
+\NormalTok{tree5 }\OtherTok{=} \DataTypeTok{Node} \StringTok{"g"}\NormalTok{ tree1 tree2}
+\NormalTok{tree6 }\OtherTok{=} \DataTypeTok{Node} \StringTok{"h"}\NormalTok{ tree5 tree4}
+\NormalTok{tree7 }\OtherTok{=} \DataTypeTok{Node} \StringTok{"i"}\NormalTok{ tree3 tree6}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{functions-on-stringbinarytree}{%
+\subsubsection{Functions on
+StringBinaryTree}\label{functions-on-stringbinarytree}}
+
+\hypertarget{size}{%
+\paragraph{Size}\label{size}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OtherTok{treeSize ::} \DataTypeTok{StringBinaryTree} \OtherTok{{-}\textgreater{}} \DataTypeTok{Int}
+
+\NormalTok{treeSize (}\DataTypeTok{Leaf}\NormalTok{ \_) }\OtherTok{=} \DecValTok{1}
+\NormalTok{treeSize (}\DataTypeTok{Node}\NormalTok{ \_ left right) }\OtherTok{=} \DecValTok{1} \OperatorTok{+}\NormalTok{ (treeSize left) }\OperatorTok{+}\NormalTok{ (treeSize right)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{height}{%
+\paragraph{Height}\label{height}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OtherTok{treeHeight ::} \DataTypeTok{StringBinaryTree} \OtherTok{{-}\textgreater{}} \DataTypeTok{Int}
+
+\NormalTok{treeHeight (}\DataTypeTok{Leaf}\NormalTok{ \_) }\OtherTok{=} \DecValTok{0}
+\NormalTok{treeHeight (}\DataTypeTok{Node}\NormalTok{ \_ left right) }\OtherTok{=} \DecValTok{1} \OperatorTok{+} \FunctionTok{max}\NormalTok{ (treeHeight left) (treeHeight right)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{map-1}{%
+\paragraph{Map}\label{map-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OtherTok{treeMap ::}\NormalTok{ (}\DataTypeTok{String} \OtherTok{{-}\textgreater{}} \DataTypeTok{String}\NormalTok{) }\OtherTok{{-}\textgreater{}} \DataTypeTok{StringBinaryTree} \OtherTok{{-}\textgreater{}} \DataTypeTok{StringBinaryTree}
+
+\NormalTok{treeMap f (}\DataTypeTok{Leaf}\NormalTok{ s) }\OtherTok{=} \DataTypeTok{Leaf}\NormalTok{ (f s)}
+\NormalTok{treeMap f (}\DataTypeTok{Node}\NormalTok{ s left right) }\OtherTok{=} \DataTypeTok{Node}\NormalTok{ (f s) (treeMap f left) (treeMap f right)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{example-excited-tree}{%
+\subsubsection{Example: Excited Tree}\label{example-excited-tree}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{excitedTree }\OtherTok{=}\NormalTok{ treeMap (}\OperatorTok{++} \StringTok{"!"}\NormalTok{) tree7}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{type-classes}{%
+\section{Type Classes}\label{type-classes}}
+
+\hypertarget{values-types-and-type-classes}{%
+\subsection{Values, Types, and Type
+Classes}\label{values-types-and-type-classes}}
+
+We've already learned a lot about values and types. Values are instances
+of Types, and this relationship is similar to set membership, where
+values are members of types.
+
+Example values:
+
+\begin{itemize}
+\tightlist
+\item
+  `C'
+\item
+  True
+\item
+  {[}True, False{]}
+\item
+  ``Hello''
+\end{itemize}
+
+The Types of these values, respectively, are:
+
+\begin{itemize}
+\tightlist
+\item
+  Char
+\item
+  Bool
+\item
+  {[}Bool{]}
+\item
+  {[}Char{]}
+\end{itemize}
+
+\hypertarget{haskells-families-of-types-type-classes}{%
+\subsection{Haskell's Families of Types --- Type
+Classes}\label{haskells-families-of-types-type-classes}}
+
+Types belong to type classes:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{Eq} defines the \texttt{==} and \texttt{/=} operators
+\item
+  \texttt{Ord} defines comparison operators, such as
+  \texttt{\textless{}} (Note that any type in \texttt{Ord} must also be
+  in \texttt{Eq})
+\item
+  \texttt{Read} defines the \texttt{read} operator which turns a
+  \texttt{String} into a value
+\item
+  \texttt{Show} defines the \texttt{show} operator which turns a value
+  into a \texttt{String}
+\item
+  \texttt{Num} defines \texttt{+}, \texttt{-}, \texttt{/}, etc.
+\end{itemize}
+
+There are many more type classes, and we'll introduce them as needed.
+
+\hypertarget{simple-data-type-examples-1}{%
+\subsubsection{Simple Data Type
+Examples}\label{simple-data-type-examples-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data} \DataTypeTok{CardSuit} \OtherTok{=} \DataTypeTok{Clubs} \OperatorTok{|} \DataTypeTok{Diamonds} \OperatorTok{|} \DataTypeTok{Hearts} \OperatorTok{|} \DataTypeTok{Spades}
+\end{Highlighting}
+\end{Shaded}
+
+Here, \texttt{Clubs}, \texttt{Diamonds}, \texttt{Hearts}, and
+\texttt{Spades} are values that have the \texttt{CardSuit} type.
+
+\hypertarget{data-type-examples-with-type-classes}{%
+\subsubsection{Data Type Examples with Type
+Classes}\label{data-type-examples-with-type-classes}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data} \DataTypeTok{CardSuit} \OtherTok{=} \DataTypeTok{Clubs} \OperatorTok{|} \DataTypeTok{Diamonds} \OperatorTok{|} \DataTypeTok{Hearts} \OperatorTok{|} \DataTypeTok{Spades}
+    \KeywordTok{deriving}\NormalTok{ (}\DataTypeTok{Show}\NormalTok{, }\DataTypeTok{Eq}\NormalTok{, }\DataTypeTok{Ord}\NormalTok{, }\DataTypeTok{Read}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{Clubs}, \texttt{Diamonds}, \texttt{Hearts}, and \texttt{Spades}
+are values that have the \texttt{CardSuit} type.
+
+\hypertarget{type-classes-are-not-oop-classes}{%
+\subsection{Type Classes are NOT OOP
+Classes}\label{type-classes-are-not-oop-classes}}
+
+Type classes in Haskell are not the same as the concept of classes from
+object-oriented programming. They both use the word ``class,'' but they
+mean totally different things.
+
+\hypertarget{bonus-combining-two-or-more-data-types}{%
+\subsection{Bonus: Combining Two (or more) Data
+Types}\label{bonus-combining-two-or-more-data-types}}
+
+\hypertarget{combining-data-types}{%
+\subsubsection{Combining Data Types}\label{combining-data-types}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data} \DataTypeTok{CardSuit} \OtherTok{=} \DataTypeTok{Clubs} \OperatorTok{|} \DataTypeTok{Diamonds} \OperatorTok{|} \DataTypeTok{Hearts} \OperatorTok{|} \DataTypeTok{Spades}
+  \KeywordTok{deriving}\NormalTok{ (}\DataTypeTok{Show}\NormalTok{, }\DataTypeTok{Eq}\NormalTok{, }\DataTypeTok{Ord}\NormalTok{)}
+
+\KeywordTok{data} \DataTypeTok{FaceValues}
+  \OtherTok{=} \DataTypeTok{Two}  \OperatorTok{|} \DataTypeTok{Three}  \OperatorTok{|} \DataTypeTok{Four}  \OperatorTok{|} \DataTypeTok{Five}  \OperatorTok{|} \DataTypeTok{Six}  \OperatorTok{|} \DataTypeTok{Seven}  \OperatorTok{|} \DataTypeTok{Eight}  
+  \OperatorTok{|} \DataTypeTok{Nine}  \OperatorTok{|} \DataTypeTok{Ten}  \OperatorTok{|} \DataTypeTok{Jack} \OperatorTok{|} \DataTypeTok{Queen}  \OperatorTok{|} \DataTypeTok{King} \OperatorTok{|} \DataTypeTok{Ace}
+  \KeywordTok{deriving}\NormalTok{ (}\DataTypeTok{Show}\NormalTok{, }\DataTypeTok{Eq}\NormalTok{, }\DataTypeTok{Ord}\NormalTok{)}
+
+\KeywordTok{type} \DataTypeTok{Card} \OtherTok{=}\NormalTok{ (}\DataTypeTok{FaceValues}\NormalTok{, }\DataTypeTok{CardSuit}\NormalTok{)}
+
+\KeywordTok{data} \DataTypeTok{CardList}
+  \OtherTok{=} \DataTypeTok{Empty}
+  \OperatorTok{|} \DataTypeTok{Hand} \DataTypeTok{Card} \DataTypeTok{CardList}
+  \KeywordTok{deriving}\NormalTok{ (}\DataTypeTok{Show}\NormalTok{, }\DataTypeTok{Eq}\NormalTok{, }\DataTypeTok{Ord}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Example of a \texttt{CardList}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cardList1 }\OtherTok{=} \DataTypeTok{Hand}\NormalTok{ (}\DataTypeTok{Two}\NormalTok{, }\DataTypeTok{Hearts}\NormalTok{) (}\DataTypeTok{Hand}\NormalTok{ (}\DataTypeTok{Ace}\NormalTok{, }\DataTypeTok{Diamonds}\NormalTok{) (}\DataTypeTok{Hand}\NormalTok{ (}\DataTypeTok{Ten}\NormalTok{, }\DataTypeTok{Spades}\NormalTok{) }\DataTypeTok{Empty}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
