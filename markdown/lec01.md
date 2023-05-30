@@ -69,15 +69,16 @@ Here's a summary of the tasks to be completed this week:
 - Submit HW1 by Sunday, 11:59 PM.
 - Fill out CS 131 intro survey to subit your GitHub ID.
 - (optional but encouraged!) Attend Prof. Bang's office hours today from 5-6 PM in this room.
-- On Monday, the HW2 kickoff will take place, along with a Haskell programming environment demo. Ensure that everyone feels prepared and comfortable to start HW2 and Module 2.
+- On Monday, the HW2 kickoff will take place, along with a Haskell programming environment demo. We'll ensure everyone feels prepared and comfortable to start HW2 and Module 2.
 
-## A Little History and Herstory: 1830s-1840s
-In this section, we explore the historical context of programming languages. We introduce Ada Lovelace, known as our "mathematician," and Charles Babbage, known as our "engineer." During this era, the concept of a computer was different from what we understand today. "Computers" were people employed to perform complex calculations, such as logarithms, planetary motions, and trigonometric functions.
+## A Little History and Herstory (Theirstory?): 1830s-1840s
+In this section, we explore the historical context of programming languages. We introduce Ada Lovelace (1815-1852), our "mathematician," and Charles Babbage (1791-1871), our "engineer." During the 1800s, the concept of a computer was different from what we understand today. "Computers" were people employed to perform complex calculations, such as logarithms, planetary motions, and trigonometric functions. Babbage realized that relying on humans for computations was prone to errors and tedious. This led to the development of mechanical machines for mathematical calculations. The combination of engineering and mathematics laid the foundation for modern computing.
 
-### What Even is a Computer?
-During the 1800s, Babbage realized that relying on humans for computations was prone to errors and tedious. This led to the development of mechanical machines for mathematical calculations. The combination of engineering and mathematics laid the foundation for modern computing.
+Babbage, often referred to as the "father of the computer," designed early mechanical computing machines such as the Difference Engine and the Analytical Engine. The Difference Engine was a mechanical calculator that aimed to automate complex mathematical calculations. Babbage designed several versions of the machine, but it was never fully completed during his lifetime. The Analytical Engine was Babbage's most ambitious creation. It was an proposed general-purpose mechanical computer that had the ability to perform calculations, store data, and even execute conditional branching and loops. 
 
-### Math, Logic, and Western Philosophy Before 1900
+Ada Lovelace wrote an extensive set of notes on Babbage's Analytical Engine, which contained what is now recognized as the first published algorithm. Her notes described how the machine could be programmed to compute Bernoulli numbers; because of this, she could be considered the first computer programmer. Lovelace recognized that the Analytical Engine could go beyond mere arithmentic calculations and could be used to manipulate symbols. These insights into the Analytical Engine's capabilities foreshadowed the development of programming languages that would enable humans to interact with computers and instruct them to perform specific tasks.
+
+## Math, Logic, and Western Philosophy Before 1900
 Philosophers and mathematicians of the past, such as Gottfried Leibniz, George Boole, and John Locke, posed questions about the nature of knowledge, the laws of thought, and what can be known or proven. These inquiries set the stage for advancements in mathematics, logic, and the exploration of computation.
 
 ### What Can We Know and Prove?
@@ -94,9 +95,6 @@ Pure functional languages, like Haskell, go a step further in abstraction by eli
 
 ## Why Functional Programming?
 Functional programming offers several advantages. It eliminates the complexities of managing mutable state, provides a new way of thinking about computation, complements knowledge of other paradigms, and finds applications in correctness-crucial domains like security and finance. Many languages, including C++, Java, and Python, are incorporating functional features, making it a valuable skill for programmers.
-
-## The Essence of CS 131: Functions are Data
-A fundamental principle of programming languages is that there is no inherent difference between programs and data. This realization allows us to write programs that take other programs as input or produce programs as output. It opens the door to powerful concepts like program interpretation and metaprogramming.
 
 ## Topics in CS 131
 Throughout this course, we will cover various topics that explore the depth and breadth of programming languages:
