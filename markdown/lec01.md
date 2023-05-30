@@ -5,12 +5,12 @@
 ### Course Information
 #### Professors
 - Lucas Bang, "Prof. Bang" (he/him)
-  - Interests: quantitative program analysis, programming, society, and culture, cold brew horchata coffee, singing dogs.
+  - Interests: quantitative program analysis, programming, society, and culture, cold brew horchata coffee, singing dogs
 - Ben Wiedermann, "Prof. Ben" (he/they)
-  - Interests: programming language design + accessibility, programming, society, and culture, platypuses.
+  - Interests: programming language design + accessibility, programming, society, and culture, platypuses (platypi?)
 
 ### Course Mechanics
-In this course, we emphasize Flexibility, Community, and Certainty. Here's an overview of how the course operates:
+In this course, we emphasize **Flexibility, Community, and Certainty**. Here's an overview of how the course operates:
 - All course materials, including videos, readings, and exercises, are available on Sakai.
 - We follow a flipped classroom model where you engage with the course materials before the class session.
 - Pair programming is encouraged to foster collaboration and learning from peers.
