@@ -226,9 +226,7 @@ f 4
 f 5
 ```
 
-In the refact
-
-ored code above, we introduced a helper function `f` to eliminate the repetition. Now, instead of duplicating the same expression multiple times, we can simply call `f` with different arguments. This approach improves code maintainability and reduces the risk of introducing errors.
+In the refactored code above, we introduced a helper function `f` to eliminate the repetition. Now, instead of duplicating the same expression multiple times, we can simply call `f` with different arguments. This approach improves code maintainability and reduces the risk of introducing errors.
 
 Abstraction is a fundamental concept in CS 131, allowing us to write clean and reusable code.
 
