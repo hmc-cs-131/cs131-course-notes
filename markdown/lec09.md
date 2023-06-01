@@ -1,6 +1,6 @@
-# CS 131: Programming Languages
+### CS 131: Programming Languages
 
-## Parsing, Part 1
+# Parsing, Part 1
 
 ## Today's Topics
 - Software architecture of a programming language

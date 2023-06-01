@@ -1,6 +1,6 @@
-# CS131: Programming Languages
+### CS 131: Programming Languages
 
-## Recap: Syntax, semantics, evaluation of simple expressions
+# Recap: Syntax, semantics, evaluation of simple expressions
 
 In this lecture, we will provide a detailed recap of the important concepts related to syntax, semantics, and evaluation of simple expressions. We will also explore the representation of abstract syntax and the evaluation of expressions involving variables and functions.
 
@@ -10,7 +10,7 @@ Syntax refers to the rules and structure of a programming language that define w
 
 Semantics, on the other hand, deals with the meaning or interpretation of expressions. It defines how expressions are evaluated and the results they produce. In Haskell, semantics is expressed using abstract syntax, which represents expressions as a tree-like data structure.
 
-## Representing Abstract Syntax
+### Representing Abstract Syntax
 
 To represent abstract syntax in Haskell, we utilize data types. Let's consider an example of representing the abstract syntax for simple arithmetic expressions, which we'll refer to as "Arith":
 
@@ -45,7 +45,7 @@ eval (BinOp left DivOp right) = eval left / eval right
 
 The `eval` function recursively evaluates expressions by breaking them down into subexpressions and applying the appropriate operations. For example, when encountering a number (`Num`), the associated value is simply returned. For binary operations (`BinOp`), the evaluation is performed recursively on the left and right subexpressions, with the operator applied to the results.
 
-## Evaluating Expressions with Variables
+### Evaluating Expressions with Variables
 
 To extend the evaluation of expressions to include variables, we introduce the concept of a symbol dictionary. The symbol dictionary associates symbols (variables) with their corresponding values or expressions. Here's the detailed implementation:
 
@@ -64,7 +64,7 @@ The `SymbolDictionary` type is a list of pairs, where each pair consists of a sy
 
 With the symbol dictionary and the `symbolLookup` function, we can evaluate expressions with variables by replacing variable symbols with their corresponding expressions or values during the evaluation process.
 
-## Evaluating Expressions with Functions
+### Evaluating Expressions with Functions
 
 To represent functions in the abstract syntax, we extend the `Exp` data type. Here's the updated definition:
 
@@ -105,7 +105,7 @@ eval (Apply func arg) dict =
 
 The modified `eval` function handles function application by checking if the evaluated function is a `FuncDef`. If it is, it substitutes the evaluated argument for the function's parameter in the body and evaluates the resulting expression.
 
-## Expression Substitution
+### Expression Substitution
 
 To perform expression substitution, we define a `substitute` function:
 

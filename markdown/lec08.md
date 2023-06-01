@@ -1,13 +1,13 @@
-# CS131: Programming Languages
+### CS 131: Programming Languages
 
-## Recap: Defining and Applying Functions
+# Recap: Defining and Applying Functions
 
-### Syntax and Semantics
+## Syntax and Semantics
 
 - The syntax of a programming language refers to the sequence of characters or tokens that make up valid programs.
 - The semantics of a programming language defines the meaning of programs and how they should be executed.
 
-### Code as Data and Functions as Data
+## Code as Data and Functions as Data
 
 - An important concept in programming languages is that code is data.
 - Functions can also be treated as data and manipulated like other values in the language.
@@ -132,11 +132,11 @@ eval (Let varname exp letBody) =
 - It constructs a function definition using the variable name and let body.
 - Then it applies the function to the expression representing the value.
 
-### Is Substitution Really the Way?
+## Is Substitution Really the Way?
 
 Instead of using substitution for evaluating function applications and let expressions, we can create new abstract syntax and express their semantics using existing semantics.
 
-### Function Definition and Application
+## Function Definition and Application
 
 Here are examples of function definition and application using our abstract syntax:
 
@@ -194,7 +194,7 @@ b" (FuncDef "c" (FuncDef "d"
 
 As we add more arguments, the function expressions grow in size, resulting in more computational work. The complexity increases from O(N) to O(N^2), where N is the number of parameters.
 
-### An Alternative to Substitution
+## An Alternative to Substitution
 
 #### Adding more arguments
 We can use our `eval` function to handle additional arguments. Consider the following example:
@@ -262,7 +262,7 @@ eval (BinOp left TimesOp right) dict =  (eval left dict) * (eval right dict)
 eval (BinOp left DivOp right) dict =  (eval left dict) / (eval right dict)
 ```
 
-### A great idea: save the environment!
+## A great idea: save the environment!
 
 Instead of performing substitution every time, we can "remember" the substitutions and apply them when we need the values of the local parameters.
 
@@ -301,7 +301,7 @@ in Apply (Apply (Apply
 
 In this modified expression, we create an environment `env1` that maps the variable "a" to the value `Num 1`. We then use this environment while evaluating the expression.
 
-#### Modifying the `eval` Function
+### Modifying the `eval` Function
 
 To support saving the environment, we need to modify the `eval` function to take an additional parameter for the variable dictionary. Here's the updated implementation:
 
@@ -328,7 +328,7 @@ eval (Apply func arg) dict =
         _ -> error "Invalid application: non-function value"
 ```
 
-#### Example Evaluation with Saved Environment
+### Example Evaluation with Saved Environment
 
 Let's evaluate the modified expression using the updated `eval` function and the saved environment `env1`:
 

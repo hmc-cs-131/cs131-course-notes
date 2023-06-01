@@ -1,16 +1,16 @@
-# CS131: Programming Languages
+### CS 131: Programming Languages
 
-## Parsing, Part 2
+# Parsing, Part 2
 
 In this lecture, we will delve deeper into parsing and explore advanced concepts such as parser combinators, parameterized types, and the Maybe type. Parsing is a fundamental aspect of programming languages, as it involves checking for syntax errors and constructing the Abstract Syntax Tree (AST) when the syntax is correct.
 
-### Let's Build a Parsing Library!
+## Let's Build a Parsing Library!
 
 To understand the purpose of a parser, we first need to grasp the distinction between syntax and semantics. Syntax refers to what the programmer writes, usually represented as a sequence of characters (text or strings). Semantics, on the other hand, deals with the meaning behind the syntax. In Haskell, the syntax is defined using data types, and the semantics are captured by an evaluation function written in Haskell.
 
 When implementing a parser, there are several approaches we can take. We can build the parser from scratch manually, utilize an existing parsing library, employ a parser generator that compiles a syntax description to parser code, or use a parser synthesizer that generates parser code based on examples of valid and invalid programs. In the CS131 course, which focuses on compilers, we explore these different techniques and delve into ongoing research in the field.
 
-### Parser Combinators
+## Parser Combinators
 
 We begin our exploration of parsing techniques with parser combinators. A parser combinator is a higher-order function that takes one or more parsers as input and returns a new parser as output. These combinators allow us to create complex parsers by combining simpler parsers together.
 
@@ -47,7 +47,7 @@ space :: ParsingFunction
 space s  = getCharThat isSpace s
 ```
 
-### Composing Parsers
+## Composing Parsers
 
 With basic parsers in hand, we can now combine them to build more complex parsers. Parser combinators allow us to express sequential parsing (`p1` then `p2`) and alternative parsing (`p1` or `p2`).
 

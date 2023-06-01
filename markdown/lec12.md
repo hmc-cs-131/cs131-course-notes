@@ -1,10 +1,10 @@
-# CS131: Programming Languages
+### CS 131: Programming Languages
 
-## Functional Abstractions
+# Functional Abstractions
 
 Hello! In this lecture, we will explore functional abstractions in Haskell. We'll cover important concepts such as typeclasses, functors, monads, and the do notation. These concepts provide powerful tools for writing reusable and composable code. So let's dive in!
 
-### Typeclasses
+## Typeclasses
 
 Typeclasses in Haskell allow us to define common behavior for different types. They provide a way to generalize functions and operations that can work with various data types. We can think of typeclasses as interfaces or contracts that specify the behavior expected from types that are instances of the typeclass.
 
@@ -22,7 +22,7 @@ Let's take a look at some examples of typeclasses:
 
 - **Fractional**: The `Fractional` typeclass is used for fractional numbers and provides division (`/`) and other related operations.
 
-### Functors
+## Functors
 
 Functors in Haskell represent data structures that can be mapped over. They define the `fmap` function, which allows us to apply a function to each element within the structure while preserving the structure itself.
 
@@ -34,7 +34,7 @@ fmap :: Functor f => (a -> b) -> f a -> f b
 
 Functors provide a way to perform common transformations on data structures without unwrapping and rewrapping them.
 
-### Monads
+## Monads
 
 Monads are a powerful abstraction in functional programming that enable sequencing of computations. They encapsulate computations within a context and provide operations to compose these computations in a structured manner.
 
@@ -44,7 +44,7 @@ Monads also provide the `return` function, which takes a value and wraps it in a
 
 Monads enable us to handle effects, such as IO, error handling, and non-determinism, in a controlled and modular way. They provide a way to sequence actions, handle failures, and manage state.
 
-### Do Notation
+## Do Notation
 
 The do notation is a convenient syntax for working with monadic computations. It allows us to write imperative-style code in a monadic context, making it easier to understand and reason about sequential operations.
 
@@ -67,7 +67,7 @@ reverseInput = do
 
 In this example, we prompt the user for a string, read the input using `getLine`, reverse the string, and then print the reversed string using `putStrLn`. The do notation helps us express this sequential flow of IO actions in a readable and intuitive way.
 
-### IO in Haskell
+## IO in Haskell
 
 IO is a special monad in Haskell that allows us to perform input and output operations. It represents computations that interact with the external world, such as reading from the console, writing to files, or making network requests.
 
@@ -77,7 +77,7 @@ The IO monad has a type `IO a`, where `a` represents the type of the result prod
 
 IO operations are executed when they are sequenced in a do block and invoked using the `main` function, which is the entry point of a Haskell program. The main function must have the type `IO ()` to indicate that it performs IO operations but does not produce any meaningful result.
 
-### Recap
+## Recap
 
 In this lecture, we covered important functional abstractions in Haskell, including typeclasses, functors, monads, and the do notation. Typeclasses provide a way to define common behavior for different types, allowing us to write generic functions. Functors enable mapping over data structures, applying functions to each element while preserving the structure. Monads facilitate sequencing of computations and handling effects in a modular way. The do notation provides a convenient syntax for working with monadic computations, making them easier to read and understand.
 

@@ -1,10 +1,10 @@
-# CS131: Programming Languages
+### CS 131: Programming Languages
 
-## Parsing, Part 3
+# Parsing, Part 3
 
 In this lecture, we continue our exploration of parsing techniques, focusing on parameterized parsers and parsers capable of constructing Abstract Syntax Trees (ASTs). These concepts enhance our ability to parse complex language structures and extract meaningful representations from the input.
 
-### Recap: Our Library So Far
+## Recap: Our Library So Far
 
 To provide context, let's briefly recap the progress we have made with our parsing library. We started by understanding the distinction between syntax and semantics, where syntax refers to what the programmer writes, and semantics captures the meaning behind the syntax. Our library aims to check for syntax errors and construct an AST when the syntax is correct.
 
@@ -49,7 +49,7 @@ type ParsingFunction = String -> (Bool, String)
 
 We then developed parsing functions for different non-terminals, such as `expr` and `factor`, using combinators such as `<&&>` and `<||>` to handle sequencing and alternatives.
 
-### Introducing AST Construction
+## Introducing AST Construction
 
 While our parsing library successfully checks for syntax errors, it currently falls short in constructing an AST, which represents the structure and meaning of the parsed expression. To address this limitation, we need to enhance our parsing functions to generate AST nodes.
 
@@ -77,11 +77,9 @@ This revised `expr` function encapsulates the logic for parsing expressions and 
 
 To achieve this, we need to modify the implementation of our parsing functions to return the parsed AST node along with the remaining unparsed portion of the input string.
 
-### Wrapping Up
+## Wrapping Up
 
-With the introduction of parameterized parsers
-
- and the ability to construct ASTs, our parsing library becomes more powerful and expressive. We can now handle complex language structures, parse with context, and generate meaningful representations of the input.
+With the introduction of parameterized parsers and the ability to construct ASTs, our parsing library becomes more powerful and expressive. We can now handle complex language structures, parse with context, and generate meaningful representations of the input.
 
 By leveraging the `Parser` type and refining our parsing functions, we bridge the gap between the syntax of the input and its corresponding AST, enabling us to perform further analysis and interpretation of programming languages.
 

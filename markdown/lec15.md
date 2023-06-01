@@ -1,28 +1,28 @@
-# CS131: Programming Languages
+### CS 131: Programming Languages
 
-## Type Systems
+# Type Systems
 
 In this lecture, we will recap the concept of types and delve deeper into type systems. We'll explore how to represent possible types using grammars and understand the relationship between types and proofs.
 
-### Representing Types with Grammars
+## Representing Types with Grammars
 
 Grammars provide a formal way to represent the syntax and structure of types. They specify the possible forms and combinations of types in a programming language. Although similar to Haskell syntax, the grammar notation used here is simplified. Recognizing a grammar as a specification is a valuable skill in programming languages.
 
-### Types and Proofs
+## Types and Proofs
 
 Types and proofs are interconnected in programming languages. Recall the concept of Natural Deduction from CS81, where premises are used to derive conclusions. Similarly, in type systems, typing rules allow us to infer the type of an expression based on premises. Typing rules define how types interact and provide a basis for type inference and checking.
 
-### Typing Rules for Simple Expressions
+## Typing Rules for Simple Expressions
 
 Typing rules describe the types of expressions based on their structure. Let's start with simple expressions involving constants, such as true and false. These expressions have known types, so no premises are needed to determine their types.
 
 We can then move on to more complex expressions and introduce typing rules for variables. These rules define the types of variables based on their declaration and usage in the program.
 
-### Environments and Type Checking
+## Environments and Type Checking
 
 Environments help us keep track of variables and their types. We maintain a value environment that maps variables to their values and a type environment that maps variables to their types. By using these environments, we can perform type checking and ensure that expressions and statements use variables of the correct types.
 
-### Typing Rules: Examples
+## Typing Rules: Examples
 
 Let's apply the typing rules to various examples to demonstrate how they work in practice.
 
@@ -34,7 +34,7 @@ Example 3: We prove that `x :: int ⊢ if 2 < x then x else 5 :: int`. This exam
 
 Example 4: We prove that `y :: bool ⊢ let x = 5 in x + 1 :: int`. This example introduces a let expression. We extend the type environment to include the type of the variable `x`. By following the typing rules for let expressions and addition, we establish the well-typedness of the expression.
 
-### Subtypes and Substitutability
+## Subtypes and Substitutability
 
 Subtyping is an important concept in type systems that allows for substitutability of types. Subtyping defines relationships between types, where one type is considered a subtype of another.
 
@@ -48,7 +48,7 @@ Subtyping also applies to functions. We can have subtyping relationships between
 
 By defining subtyping rules for functions, we ensure that functions can be used in contexts where a more general or specific function type is expected.
 
-### Any and None Types
+## Any and None Types
 
 In type systems, we often encounter special types called "Any" and "None."
 
@@ -56,7 +56,7 @@ The Any type is a generic type that encompasses all other types. It is a top typ
 
 The None type, on the other hand, is a bottom type in the type lattice. It is a subtype of all other types and represents the absence of a value. None is often used to indicate cases where there are no valid values of a particular type.
 
-### Type Lattices
+## Type Lattices
 
 Type lattices visualize the subtype relationships between types in a flowchart-like structure. Types are represented as nodes in the graph, and subtyping relationships are shown by the relative heights of the nodes.
 

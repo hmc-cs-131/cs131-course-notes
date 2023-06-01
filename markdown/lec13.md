@@ -1,14 +1,14 @@
-# CS131: Programming Languages
+### CS 131: Programming Languages
 
-## Functors and Monads Review
+# Functors and Monads Review
 
 In this review, we will revisit the concepts of functors and monads. Functors and monads are powerful abstractions in functional programming that enable us to work with parameterized types in a structured and compositional manner.
 
-### Parameterized Types
+## Parameterized Types
 
 Let's start with a reminder about parameterized types. Parameterized types, such as `Maybe a`, `[a]`, and `Tree a`, allow us to create types that can hold values of any type `a`. For example, `Maybe a` represents a value that can either be `Nothing` or `Just x`, where `x` is a value of type `a`. Similarly, `[a]` represents a list of values of type `a`, and `Tree a` represents a binary tree with values of type `a`.
 
-### Functors
+## Functors
 
 Functors are a typeclass that defines the `fmap` function, allowing us to apply a function to each element within a parameterized type while preserving the structure.
 
@@ -20,7 +20,7 @@ The `fmap` function takes a function `(a -> b)` and a parameterized type `f a` a
 
 Functors provide a way to perform transformations on parameterized types without unwrapping and rewrapping them. They allow us to work with different data structures in a uniform way.
 
-### Monads
+## Monads
 
 Monads are another typeclass that provides a way to sequence computations and handle effects within a parameterized type. Monads encapsulate computations within a context and provide operations to compose these computations in a structured manner.
 
@@ -28,7 +28,7 @@ The key operations in monads are `(>>=)` (bind) and `return`. `(>>=)` allows us 
 
 Monads enable us to handle effects, such as IO, error handling, and non-determinism, in a controlled and modular way. They provide a structured approach to sequencing actions, handling failures, and managing state.
 
-### Exercise
+## Exercise
 
 Let's consider some exercises to test our understanding of monads in the `Maybe` monad.
 

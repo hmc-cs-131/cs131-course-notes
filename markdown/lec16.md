@@ -1,10 +1,10 @@
-# HMC CS 131: Programming Languages
+### CS 131: Programming Languages
 
-## Lambda Calculus
+# Lambda Calculus
 
 Lambda Calculus is a formal system in mathematical logic that provides a foundation for understanding computation using functions. It was introduced by Alonzo Church in the 1930s as a way to investigate the notion of effective computability.
 
-### Historical and Contextual Recap
+## Historical and Contextual Recap
 
 Before diving deeper into Lambda Calculus, let's briefly recap its historical and contextual significance. Lambda Calculus emerged as part of the broader effort to develop formal systems and mechanical methods for mathematics and computation.
 
@@ -52,13 +52,13 @@ Understanding computation involves navigating different levels of abstraction. T
 
 Moving up and down this ladder of abstraction allows us to explore different levels of expressiveness, control, and simplicity in programming languages and systems.
 
-### Haskell: The Vehicle, Not the Focus
+## Haskell: The Vehicle, Not the Focus
 
 In this class, Haskell serves as the vehicle for exploring various programming language concepts. The focus is not solely on Haskell itself but on the underlying concepts of functional programming, data representation, parsing, and interpreters.
 
 While Haskell is a powerful and expressive language, the principles and ideas learned can be applied to other languages and systems. Haskell provides a unique environment for understanding and experimenting with these concepts, offering a concise and elegant syntax.
 
-### Some Topics in this Class
+## Some Topics in this Class
 
 Throughout the course, several topics will be covered, each providing valuable insights into programming language concepts. Here are some of the topics presented in a bumper sticker style:
 
@@ -73,7 +73,7 @@ Throughout the course, several topics will be covered, each providing valuable i
 
 These topics provide a comprehensive understanding of programming language concepts, preparing students to think critically and design elegant solutions to complex problems.
 
-### Lambda Calculus: Introduction
+## Lambda Calculus: Introduction
 
 Lambda Calculus is a formal system that operates on symbols, specifically functions. It serves as a foundation for understanding computation using functions as the central element.
 

@@ -1,8 +1,8 @@
-# HMC CS 131: Programming Languages
+### CS 131: Programming Languages
 
-## Lambda Calculus Encodings
+# Lambda Calculus Encodings
 
-### Functional Encoding of Sets
+## Functional Encoding of Sets
 
 In lambda calculus, we can encode sets using functional encodings. The idea is to represent a set as a function that takes an argument and evaluates to either `True` or `False` depending on whether the argument is in the set or not.
 
@@ -21,7 +21,7 @@ SND ≜ (λp.(p FALSE))
 
 These definitions provide a way to perform logical operations and manipulate pairs in lambda calculus.
 
-### Encoding Sets as Functions
+## Encoding Sets as Functions
 
 We can represent sets as functions in lambda calculus. The idea is that a set `S` can be thought of as a function that takes an argument `x` and evaluates to `True` if `x` is in the set, and `False` otherwise.
 
@@ -49,7 +49,7 @@ intersection = (λs. (λt. (λx. ((And (s x)) (t x)))))
 
 These encodings allow us to perform set operations using lambda calculus.
 
-### Set Theory Paradox: Russell's Set
+## Set Theory Paradox: Russell's Set
 
 One of the famous paradoxes in set theory is Russell's Paradox. It arises when we consider a set `R` defined as follows:
 
@@ -67,11 +67,9 @@ In lambda calculus, we can encode Russell's set as `R = (λx. (Not (x x)))`. Whe
 
 This infinite recursion leads to the paradox.
 
-### A Puzzle: How to Write a Recursive Anonymous Function?
+## A Puzzle: How to Write a Recursive Anonymous Function?
 
-In functional
-
- programming, recursion is a powerful technique. We often write recursive functions to solve problems. However, when working with anonymous functions, it is not immediately obvious how to write a recursive anonymous function.
+In functional programming, recursion is a powerful technique. We often write recursive functions to solve problems. However, when working with anonymous functions, it is not immediately obvious how to write a recursive anonymous function.
 
 For example, let's say we want to write a recursive anonymous function that calculates the factorial of a number. In Haskell, we can define the factorial function recursively as follows:
 
