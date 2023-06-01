@@ -1,210 +1,240 @@
-# CS 131: Programming Languages
+# CS131: Programming Languages
 
-## Parsing, Part 1
+## Parsing, Part 2
 
-## Today's Topics
-- Software architecture of a programming language
-- Parsing: terminology and approaches
-- Grammars
-- Tokenization
-- Recursive-descent parsers
+In this lecture, we will delve deeper into parsing and explore advanced concepts such as parser combinators, parameterized types, and the Maybe type. Parsing is a fundamental aspect of programming languages, as it involves checking for syntax errors and constructing the Abstract Syntax Tree (AST) when the syntax is correct.
 
-## Parsing: An Overview
-Recall: syntax and semantics
+### Let's Build a Parsing Library!
 
-- What the programmer writes is a sequence of characters (text, strings).
-- A tree data structure represents the meaning.
-- Haskell data types and eval function are written in Haskell.
+To understand the purpose of a parser, we first need to grasp the distinction between syntax and semantics. Syntax refers to what the programmer writes, usually represented as a sequence of characters (text or strings). Semantics, on the other hand, deals with the meaning behind the syntax. In Haskell, the syntax is defined using data types, and the semantics are captured by an evaluation function written in Haskell.
 
-**Previous focus:**
-- Recall: syntax and semantics
-- What the programmer writes
-- A tree data structure
-- The meaning
-- Sequence of characters
-- Haskell data types
-- eval function written in Haskell
+When implementing a parser, there are several approaches we can take. We can build the parser from scratch manually, utilize an existing parsing library, employ a parser generator that compiles a syntax description to parser code, or use a parser synthesizer that generates parser code based on examples of valid and invalid programs. In the CS131 course, which focuses on compilers, we explore these different techniques and delve into ongoing research in the field.
 
-**Current focus:**
-- What does a parser do?
-  1. Check for syntax errors.
-  2. If there are no syntax errors, construct the Abstract Syntax Tree (AST).
+### Parser Combinators
 
-**How do we implement a parser?**
-1. By hand, from scratch.
-2. By hand, using a library.
-3. Using a parser generator that compiles a description of the syntax to parser code.
-4. Using a parser synthesizer that uses examples of (in)valid programs to create parser code.
+We begin our exploration of parsing techniques with parser combinators. A parser combinator is a higher-order function that takes one or more parsers as input and returns a new parser as output. These combinators allow us to create complex parsers by combining simpler parsers together.
 
-## Tokenization
-What are the smallest pieces of this code?
-```c
-int main()
-{
-    for (int count = 0; count < 10; ++count) {
-        printf("Hello, World!");
-    }
-    return 0;
-}
-```
+To illustrate this, let's consider a simple example. Suppose we want to parse a digit in a string. We can start with a basic parsing function called `digit` that checks if the first character in the string is a digit. If it is, we return a success result along with the remaining portion of the string; otherwise, we return a failure result.
 
-- Type: literal, number, string, punctuation, identifier, operator, reserved word, whitespace (ignored)
-
-**Some vocabulary:**
-- Token (noun): an atomic piece of syntax (e.g., a reserved word, a literal value, or an operator).
-- Tokenize (or lex) (verb): turn concrete syntax into a list of tokens.
-- Tokenizer (or lexer) (noun): a piece of code that tokenizes.
-
-**Implementing a Tokenizer:**
-A first step towards parsing.
-
-Step 1: Data type for tokens
 ```haskell
-data Token = CrossToken      -- ^ the '+' character
-           | DashToken       -- ^ the '-' character
-           | StarToken       -- ^ the '*' character
-           | SlashToken      -- ^ the '/' character
-           | LParenToken     -- ^ the '(' character
-           | RParenToken     -- ^ the ')' character
-           | NumberToken Double  -- ^ a numeric literal
-           deriving (Eq, Show)
+digit "" = (False, "")
+digit s@(c:cs) =
+  if isDigit c
+    then (True, cs)
+    else (False, s)
 ```
 
-Step 2: `tokenize` function
+Now, instead of defining separate parsing functions for digits, letters, and spaces, we can create a more general function called `getCharThat` that takes a character condition as an argument and returns a parsing function. This function abstracts away the common pattern of checking a specific condition on the input character.
+
 ```haskell
-tokenize :: String -> [Token]
--- Tokenize literal characters
-tokenize ('+':rest) = CrossToken : tokenize rest
-tokenize ('-':rest) = DashToken : tokenize rest
-tokenize ('*':rest) = StarToken : tokenize rest
-tokenize ('/':rest) = SlashToken : tokenize rest
-tokenize ('(':rest) = LParenToken : tokenize rest
-tokenize (')':rest) = RParenToken : tokenize rest
-tokenize [] = []
-tokenize s@(c:rest)
-    -- Skip whitespace
-    | isSpace c = tokenize rest
-    -- Tokenize a numeric literal
-    | isNumber c =
-        let (num, s') = span isNumber s in
-        (NumberToken (read num)) : tokenize s'
-    -- Everything else is an error
-    | otherwise = error ("Invalid character: " ++ show c)
+getCharThat _ "" = (False, "")
+getCharThat cond s@(c:cs) =
+  if cond c
+    then (True, cs)
+    else (False, s)
 ```
 
-## Grammars
-A grammar is a specification for a parser.
+By leveraging the power of function composition, we can define parsing functions for digits, letters, and spaces more concisely.
 
-**Example Grammar:**
-```
-Expr ::= Expr + Expr
-       | Expr - Expr
-       | Expr * Expr
-       | Expr / Expr
-       | number
-       | (Expr)
+```haskell
+digit :: ParsingFunction
+digit s  = getCharThat isDigit s
 
+letter :: ParsingFunction
+letter s = getCharThat isLetter s
 
+space :: ParsingFunction
+space s  = getCharThat isSpace s
 ```
 
-- `Expr`: The start symbol.
-- Alternatives: Different valid forms for expressions.
-- Production rules: Definitions for each alternative.
-- Terminal symbols: Tokens or characters.
-- Non-terminal symbols: Symbols representing syntactic categories.
+### Composing Parsers
 
-## From a Grammar to a Parser
-The goal is to write parser code that resembles the grammar.
+With basic parsers in hand, we can now combine them to build more complex parsers. Parser combinators allow us to express sequential parsing (`p1` then `p2`) and alternative parsing (`p1` or `p2`).
 
-**Approach: Recursive-descent parsing**
-- Each non-terminal becomes a parsing function.
-- The type of a parsing function is `[Token] -> Bool` (for now).
+Let's consider the example of parsing a letter followed by a digit. We can define a parsing function called `letterThenDigit` that uses the `letter` parser, followed by the `digit` parser, and returns the result. If both parsers succeed, we continue parsing with the remaining portion of the string; otherwise, we return a failure result.
 
-**Recursive-descent Parsing:**
-A problem with the grammar:
-```
-Expr ::= Expr + Expr
-       | Expr - Expr
-       | Expr * Expr
-       | Expr / Expr
-       | number
-       | (Expr)
+```haskell
+letterThenDigit "" = (False, "")
+letterThenDigit s = 
+  case letter s of
+    (True,
+
+ s') -> digit s'
+    (False, _) -> (False, s)
 ```
 
-Problem: Left-recursion causes the parser to diverge.
+Similarly, we can define a parsing function called `digitThenLetter` that parses a digit followed by a letter.
 
-**Our grammar "refactored" to remove left-recursion:**
+```haskell
+digitThenLetter "" = (False, "")
+digitThenLetter s = 
+  case digit s of
+    (True, s') -> letter s'
+    (False, _) -> (False, s)
+```
+
+To further generalize the process of combining parsers, we can define a combinator `<&&>` that takes two parsing functions, `p1` and `p2`, and returns a new parsing function. The resulting function attempts to parse with `p1` and, if successful, continues parsing with `p2`. Otherwise, it returns a failure result.
+
+```haskell
+(<&&>) :: ParsingFunction -> ParsingFunction -> ParsingFunction
+(p1 <&&> p2) s =
+  case p1 s of
+    (True, s') -> p2 s'
+    (False, _) -> (False, s)
+```
+
+Another type of combinator we can utilize is the alternative combinator `<||>`. Given two parsing functions, `p1` and `p2`, it tries to parse with `p1`. If `p1` fails, it then attempts to parse with `p2`. This combinator enables us to express choices in parsing.
+
+```haskell
+(<||>) :: ParsingFunction -> ParsingFunction -> ParsingFunction
+(p1 <||> p2) s =
+  case p1 s of
+    (True, s') -> (True, s')
+    (False, _) -> p2 s
+```
+
+### Repetition and Skipping Whitespace
+
+In addition to sequential and alternative parsing, we often encounter scenarios where we need to repeat a parser multiple times. To address this, we can define combinators for repetition. The `many` combinator takes a parsing function `p` as input and returns a new parsing function that attempts to parse `p` repeatedly until it fails. The result is a list of successful parsing results.
+
+```haskell
+many :: ParsingFunction -> ParsingFunction
+many p = (p <&&> many p) <||> psucceed
+```
+
+Similarly, the `some` combinator ensures that at least one successful parse is required. It combines `p` with `many p`, enforcing that `p` must succeed at least once.
+
+```haskell
+some :: ParsingFunction -> ParsingFunction
+some p = p <&&> many p
+```
+
+Whitespace is often irrelevant in many programming languages, so it's helpful to have a mechanism to skip over whitespace automatically. We can define a `skipws` combinator that takes a parsing function `p` as input, and returns a new parsing function that skips over any whitespace before attempting to parse with `p`. It achieves this by using the `many` combinator with the `space` parser.
+
+```haskell
+skipws :: ParsingFunction -> ParsingFunction
+skipws p = many space <&&> p
+```
+
+### Parsing Arithmetic Operations
+
+To demonstrate the power of parser combinators, let's consider the grammar for arithmetic expressions.
+
 ```
 Expr ::= Factor + Expr
        | Factor - Expr
        | Factor * Expr
        | Factor / Expr
        | Factor
-
 Factor ::= number
          | (Expr)
 ```
 
-A problem with the grammar:
-```
-Expr ::= Factor + Expr
-       | Factor - Expr
-       | Factor * Expr
-       | Factor / Expr
-       | Factor
+We can write parser code that mirrors the grammar itself, thanks to the flexibility provided by parser combinators.
 
-Factor ::= number
-         | (Expr)
-```
+```haskell
+expr =  (factor <&&> sym '+' <&&> expr)
+   <||> (factor <&&> sym '-' <&&> expr)
+   <||> (factor <&&> sym '*' <&&> expr)
 
-Problem: All operators have the same precedence.
 
-**Our grammar "refactored" to add precedence:**
-```
-Expr ::= Term + Expr
-       | Term - Expr
-       | Term
+   <||> (factor <&&> sym '/' <&&> expr)   
+   <||> factor
 
-Term ::= Factor * Term
-       | Factor / Term
-       | Factor
-
-Factor ::= number
-         | (Expr)
+factor =  number
+       <||> (sym '(' <&&> expr <&&> sym ')')
 ```
 
-A problem with the grammar:
-```
-Expr ::= Term + Expr
-       | Term - Expr
-       | Term
+With these parser definitions, our parser code directly resembles the grammar it is parsing. It can detect parse errors and abstract away the complexities of parsing using combinators.
 
-Term ::= Factor * Term
-       | Factor / Term
-       | Factor
+However, it's worth noting that creating the Abstract Syntax Tree (AST) can still be challenging initially. Building up the AST and abstracting the code requires additional effort and understanding of the underlying structure of the language.
 
-Factor ::= number
-         | (Expr)
-```
+## Parameterized Types
 
-Problem: All operators have right-associativity.
+### Recall: Lists are Parameterized Types
 
-**Our grammar "refactored" to handle left-associativity:**
-```
-Expr ::= Term PlusMinus
+Lists in Haskell are examples of parameterized types. The cons operator, `(:)`, has the following types for its arguments:
+- Left side: `a`
+- Right side: `[a]`
 
-PlusMinus ::= + Term PlusMinus
-            | - Term PlusMinus
-            | ε
+This means that the left side can be of any type, while the right side is a list of elements of the same type. The type variable `a` represents any type that satisfies the condition.
 
-Term ::= Factor TimesDiv
+### Parameterized Data Types (Motivation)
 
-TimesDiv ::= * Factor TimesDiv
-           | / Factor TimesDiv
-           | ε
+Consider the scenario where we want to define data types for trees. We may initially define separate data types for different kinds of trees, such as `IntegerTree`, `StringTree`, and `DoubleTree`. However, this leads to code duplication and limits the flexibility of our definitions.
 
-Factor ::= number
-         | (Expr)
+```haskell
+data IntegerTree = Empty
+                 | Branch  Integer IntegerTree IntegerTree
+  deriving (Eq, Show)
+
+data StringTree = Empty
+                | Branch  String StringTree StringTree
+  deriving (Eq, Show)
+
+data DoubleTree = Empty
+                | Branch  Double DoubleTree DoubleTree
+  deriving (Eq, Show)
 ```
 
-This grammar can help us with left-associativity.
+### Parameterized Data Types (Defining)
+
+To avoid duplication and improve code reusability, we can introduce parameterized data types. By abstracting the type of the tree nodes using a type variable, we can define a single data type called `Tree` that can accommodate different types of trees.
+
+```haskell
+data Tree a = Empty
+            | Branch a (Tree a) (Tree a)
+  deriving (Eq, Show)
+```
+
+Here, `Tree` is a parameterized data type, where the type variable `a` can represent any type. The `Empty` constructor represents an empty tree, while the `Branch` constructor represents a non-empty tree with a value of type `a` and two child trees of type `Tree a`.
+
+### Parameterized Data Types (Using)
+
+Parameterized data types allow us to write generic functions that operate on different types of trees. For example, we can define a function `treeSize` that calculates the number of nodes in a tree. It takes a `Tree a` as input and returns an `Integer`.
+
+```haskell
+treeSize :: Tree a -> Integer
+treeSize Empty = 0
+treeSize (Branch value left right) = 1 + treeSize left + treeSize right
+```
+
+Additionally, we can compare the sizes of two trees using the `maxTreeSize` function. It takes two `Tree` instances, `t1` and `t2`, and returns the maximum size among them.
+
+```haskell
+maxTreeSize :: Tree a -> Tree b -> Integer
+maxTreeSize t1 t2 = max (treeSize t1) (treeSize t2)
+```
+
+By parameterizing our data types, we achieve code reusability and abstraction. The same functions can operate on different types of trees without the need for redundant code.
+
+## Maybe
+
+The Maybe type is a built-in parameterized type in Haskell. It is useful for representing the presence or absence of a value. The Maybe type is defined as follows:
+
+
+
+```haskell
+data Maybe a = Nothing
+             | Just a
+  deriving (Eq, Ord, Show)
+```
+
+- The `Nothing` constructor represents the absence of a value.
+- The `Just` constructor wraps a value of type `a`, indicating its presence.
+
+Maybe types are commonly used in Haskell maps, where lookup operations return a Maybe value. The `Map.lookup` function, for example, returns `Just value` if a value is found for a given key, and `Nothing` otherwise.
+
+```haskell
+initialEnv :: Env
+initialEnv = Map.insert "x" 42 Map.empty
+
+defaultLookup :: String -> Env -> Double
+defaultLookup var env = case Map.lookup var env of
+                          Just value -> value
+                          Nothing -> 0
+```
+
+In this example, we define an initial environment (`initialEnv`) and a function (`defaultLookup`) that looks up a variable in the environment. If the variable is found (`Just value`), we return the corresponding value. If not (`Nothing`), we provide a default value of 0.
+
+The Maybe type allows us to handle situations where values may or may not be present, providing a safe and expressive way to work with optional values in Haskell.

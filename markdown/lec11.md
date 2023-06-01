@@ -1,240 +1,88 @@
 # CS131: Programming Languages
 
-## Parsing, Part 2
+## Parsing, Part 3
 
-In this lecture, we will delve deeper into parsing and explore advanced concepts such as parser combinators, parameterized types, and the Maybe type. Parsing is a fundamental aspect of programming languages, as it involves checking for syntax errors and constructing the Abstract Syntax Tree (AST) when the syntax is correct.
+In this lecture, we continue our exploration of parsing techniques, focusing on parameterized parsers and parsers capable of constructing Abstract Syntax Trees (ASTs). These concepts enhance our ability to parse complex language structures and extract meaningful representations from the input.
 
-### Let's Build a Parsing Library!
+### Recap: Our Library So Far
 
-To understand the purpose of a parser, we first need to grasp the distinction between syntax and semantics. Syntax refers to what the programmer writes, usually represented as a sequence of characters (text or strings). Semantics, on the other hand, deals with the meaning behind the syntax. In Haskell, the syntax is defined using data types, and the semantics are captured by an evaluation function written in Haskell.
+To provide context, let's briefly recap the progress we have made with our parsing library. We started by understanding the distinction between syntax and semantics, where syntax refers to what the programmer writes, and semantics captures the meaning behind the syntax. Our library aims to check for syntax errors and construct an AST when the syntax is correct.
 
-When implementing a parser, there are several approaches we can take. We can build the parser from scratch manually, utilize an existing parsing library, employ a parser generator that compiles a syntax description to parser code, or use a parser synthesizer that generates parser code based on examples of valid and invalid programs. In the CS131 course, which focuses on compilers, we explore these different techniques and delve into ongoing research in the field.
-
-### Parser Combinators
-
-We begin our exploration of parsing techniques with parser combinators. A parser combinator is a higher-order function that takes one or more parsers as input and returns a new parser as output. These combinators allow us to create complex parsers by combining simpler parsers together.
-
-To illustrate this, let's consider a simple example. Suppose we want to parse a digit in a string. We can start with a basic parsing function called `digit` that checks if the first character in the string is a digit. If it is, we return a success result along with the remaining portion of the string; otherwise, we return a failure result.
+We defined the concrete syntax and abstract syntax for our language, which involves representing expressions and operators using data types. For example:
 
 ```haskell
-digit "" = (False, "")
-digit s@(c:cs) =
-  if isDigit c
-    then (True, cs)
-    else (False, s)
+data Exp = Num Double
+         | BinOp Exp Op Exp
+   deriving (Show, Eq)
+
+data Op = PlusOp
+        | MinusOp
+        | TimesOp
+        | DivOp
+   deriving (Show, Eq)
 ```
 
-Now, instead of defining separate parsing functions for digits, letters, and spaces, we can create a more general function called `getCharThat` that takes a character condition as an argument and returns a parsing function. This function abstracts away the common pattern of checking a specific condition on the input character.
-
-```haskell
-getCharThat _ "" = (False, "")
-getCharThat cond s@(c:cs) =
-  if cond c
-    then (True, cs)
-    else (False, s)
-```
-
-By leveraging the power of function composition, we can define parsing functions for digits, letters, and spaces more concisely.
-
-```haskell
-digit :: ParsingFunction
-digit s  = getCharThat isDigit s
-
-letter :: ParsingFunction
-letter s = getCharThat isLetter s
-
-space :: ParsingFunction
-space s  = getCharThat isSpace s
-```
-
-### Composing Parsers
-
-With basic parsers in hand, we can now combine them to build more complex parsers. Parser combinators allow us to express sequential parsing (`p1` then `p2`) and alternative parsing (`p1` or `p2`).
-
-Let's consider the example of parsing a letter followed by a digit. We can define a parsing function called `letterThenDigit` that uses the `letter` parser, followed by the `digit` parser, and returns the result. If both parsers succeed, we continue parsing with the remaining portion of the string; otherwise, we return a failure result.
-
-```haskell
-letterThenDigit "" = (False, "")
-letterThenDigit s = 
-  case letter s of
-    (True,
-
- s') -> digit s'
-    (False, _) -> (False, s)
-```
-
-Similarly, we can define a parsing function called `digitThenLetter` that parses a digit followed by a letter.
-
-```haskell
-digitThenLetter "" = (False, "")
-digitThenLetter s = 
-  case digit s of
-    (True, s') -> letter s'
-    (False, _) -> (False, s)
-```
-
-To further generalize the process of combining parsers, we can define a combinator `<&&>` that takes two parsing functions, `p1` and `p2`, and returns a new parsing function. The resulting function attempts to parse with `p1` and, if successful, continues parsing with `p2`. Otherwise, it returns a failure result.
-
-```haskell
-(<&&>) :: ParsingFunction -> ParsingFunction -> ParsingFunction
-(p1 <&&> p2) s =
-  case p1 s of
-    (True, s') -> p2 s'
-    (False, _) -> (False, s)
-```
-
-Another type of combinator we can utilize is the alternative combinator `<||>`. Given two parsing functions, `p1` and `p2`, it tries to parse with `p1`. If `p1` fails, it then attempts to parse with `p2`. This combinator enables us to express choices in parsing.
-
-```haskell
-(<||>) :: ParsingFunction -> ParsingFunction -> ParsingFunction
-(p1 <||> p2) s =
-  case p1 s of
-    (True, s') -> (True, s')
-    (False, _) -> p2 s
-```
-
-### Repetition and Skipping Whitespace
-
-In addition to sequential and alternative parsing, we often encounter scenarios where we need to repeat a parser multiple times. To address this, we can define combinators for repetition. The `many` combinator takes a parsing function `p` as input and returns a new parsing function that attempts to parse `p` repeatedly until it fails. The result is a list of successful parsing results.
-
-```haskell
-many :: ParsingFunction -> ParsingFunction
-many p = (p <&&> many p) <||> psucceed
-```
-
-Similarly, the `some` combinator ensures that at least one successful parse is required. It combines `p` with `many p`, enforcing that `p` must succeed at least once.
-
-```haskell
-some :: ParsingFunction -> ParsingFunction
-some p = p <&&> many p
-```
-
-Whitespace is often irrelevant in many programming languages, so it's helpful to have a mechanism to skip over whitespace automatically. We can define a `skipws` combinator that takes a parsing function `p` as input, and returns a new parsing function that skips over any whitespace before attempting to parse with `p`. It achieves this by using the `many` combinator with the `space` parser.
-
-```haskell
-skipws :: ParsingFunction -> ParsingFunction
-skipws p = many space <&&> p
-```
-
-### Parsing Arithmetic Operations
-
-To demonstrate the power of parser combinators, let's consider the grammar for arithmetic expressions.
+Additionally, we established the grammar for expressions, which consists of factors and various operations:
 
 ```
 Expr ::= Factor + Expr
-       | Factor - Expr
-       | Factor * Expr
-       | Factor / Expr
-       | Factor
+      | Factor - Expr
+      | Factor * Expr
+      | Factor / Expr
+      | Factor
+
 Factor ::= number
-         | (Expr)
+          | (Expr)
 ```
 
-We can write parser code that mirrors the grammar itself, thanks to the flexibility provided by parser combinators.
+To facilitate parsing, we introduced the concept of a parsing function, which takes a string as input and produces either a successful parse result or a failure result. Initially, our parsing function returned a boolean value indicating success or failure:
 
 ```haskell
-expr =  (factor <&&> sym '+' <&&> expr)
-   <||> (factor <&&> sym '-' <&&> expr)
-   <||> (factor <&&> sym '*' <&&> expr)
-
-
-   <||> (factor <&&> sym '/' <&&> expr)   
-   <||> factor
-
-factor =  number
-       <||> (sym '(' <&&> expr <&&> sym ')')
+type ParsingFunction = String -> Bool
 ```
 
-With these parser definitions, our parser code directly resembles the grammar it is parsing. It can detect parse errors and abstract away the complexities of parsing using combinators.
-
-However, it's worth noting that creating the Abstract Syntax Tree (AST) can still be challenging initially. Building up the AST and abstracting the code requires additional effort and understanding of the underlying structure of the language.
-
-## Parameterized Types
-
-### Recall: Lists are Parameterized Types
-
-Lists in Haskell are examples of parameterized types. The cons operator, `(:)`, has the following types for its arguments:
-- Left side: `a`
-- Right side: `[a]`
-
-This means that the left side can be of any type, while the right side is a list of elements of the same type. The type variable `a` represents any type that satisfies the condition.
-
-### Parameterized Data Types (Motivation)
-
-Consider the scenario where we want to define data types for trees. We may initially define separate data types for different kinds of trees, such as `IntegerTree`, `StringTree`, and `DoubleTree`. However, this leads to code duplication and limits the flexibility of our definitions.
+However, we realized the need to keep track of the state and the remaining unparsed portion of the input string. To address this, we modified our parsing function to return a tuple of type `(Bool, String)`:
 
 ```haskell
-data IntegerTree = Empty
-                 | Branch  Integer IntegerTree IntegerTree
-  deriving (Eq, Show)
-
-data StringTree = Empty
-                | Branch  String StringTree StringTree
-  deriving (Eq, Show)
-
-data DoubleTree = Empty
-                | Branch  Double DoubleTree DoubleTree
-  deriving (Eq, Show)
+type ParsingFunction = String -> (Bool, String)
 ```
 
-### Parameterized Data Types (Defining)
+We then developed parsing functions for different non-terminals, such as `expr` and `factor`, using combinators such as `<&&>` and `<||>` to handle sequencing and alternatives.
 
-To avoid duplication and improve code reusability, we can introduce parameterized data types. By abstracting the type of the tree nodes using a type variable, we can define a single data type called `Tree` that can accommodate different types of trees.
+### Introducing AST Construction
+
+While our parsing library successfully checks for syntax errors, it currently falls short in constructing an AST, which represents the structure and meaning of the parsed expression. To address this limitation, we need to enhance our parsing functions to generate AST nodes.
+
+To achieve AST construction, we introduce a new type called `Parser`:
 
 ```haskell
-data Tree a = Empty
-            | Branch a (Tree a) (Tree a)
-  deriving (Eq, Show)
+type Parser a = String -> Maybe (a, String)
 ```
 
-Here, `Tree` is a parameterized data type, where the type variable `a` can represent any type. The `Empty` constructor represents an empty tree, while the `Branch` constructor represents a non-empty tree with a value of type `a` and two child trees of type `Tree a`.
+The `Parser` type takes a type variable `a` and represents a function that takes a string as input and returns a `Maybe` result containing the parsed value of type `a` and the remaining unparsed portion of the input string.
 
-### Parameterized Data Types (Using)
+By utilizing the `Maybe` type, we can handle both successful parses (`Just (result, remainder)`) and parse failures (`Nothing`), providing a clearer indication of success or failure compared to the previous approach.
 
-Parameterized data types allow us to write generic functions that operate on different types of trees. For example, we can define a function `treeSize` that calculates the number of nodes in a tree. It takes a `Tree a` as input and returns an `Integer`.
+### Refining Parsing Functions for AST Construction
+
+With the introduction of the `Parser` type, we can enhance our parsing functions to produce AST nodes instead of simple success or failure indications.
+
+For example, let's consider the `expr` parsing function. Previously, it had the type `ParsingFunction`, but now we can redefine it as a `Parser Exp`:
 
 ```haskell
-treeSize :: Tree a -> Integer
-treeSize Empty = 0
-treeSize (Branch value left right) = 1 + treeSize left + treeSize right
+expr :: Parser Exp
 ```
 
-Additionally, we can compare the sizes of two trees using the `maxTreeSize` function. It takes two `Tree` instances, `t1` and `t2`, and returns the maximum size among them.
+This revised `expr` function encapsulates the logic for parsing expressions and constructs AST nodes of type `Exp`.
 
-```haskell
-maxTreeSize :: Tree a -> Tree b -> Integer
-maxTreeSize t1 t2 = max (treeSize t1) (treeSize t2)
-```
+To achieve this, we need to modify the implementation of our parsing functions to return the parsed AST node along with the remaining unparsed portion of the input string.
 
-By parameterizing our data types, we achieve code reusability and abstraction. The same functions can operate on different types of trees without the need for redundant code.
+### Wrapping Up
 
-## Maybe
+With the introduction of parameterized parsers
 
-The Maybe type is a built-in parameterized type in Haskell. It is useful for representing the presence or absence of a value. The Maybe type is defined as follows:
+ and the ability to construct ASTs, our parsing library becomes more powerful and expressive. We can now handle complex language structures, parse with context, and generate meaningful representations of the input.
 
+By leveraging the `Parser` type and refining our parsing functions, we bridge the gap between the syntax of the input and its corresponding AST, enabling us to perform further analysis and interpretation of programming languages.
 
-
-```haskell
-data Maybe a = Nothing
-             | Just a
-  deriving (Eq, Ord, Show)
-```
-
-- The `Nothing` constructor represents the absence of a value.
-- The `Just` constructor wraps a value of type `a`, indicating its presence.
-
-Maybe types are commonly used in Haskell maps, where lookup operations return a Maybe value. The `Map.lookup` function, for example, returns `Just value` if a value is found for a given key, and `Nothing` otherwise.
-
-```haskell
-initialEnv :: Env
-initialEnv = Map.insert "x" 42 Map.empty
-
-defaultLookup :: String -> Env -> Double
-defaultLookup var env = case Map.lookup var env of
-                          Just value -> value
-                          Nothing -> 0
-```
-
-In this example, we define an initial environment (`initialEnv`) and a function (`defaultLookup`) that looks up a variable in the environment. If the variable is found (`Just value`), we return the corresponding value. If not (`Nothing`), we provide a default value of 0.
-
-The Maybe type allows us to handle situations where values may or may not be present, providing a safe and expressive way to work with optional values in Haskell.
+This lecture provides a foundation for understanding advanced parsing techniques and sets the stage for deeper explorations into programming language implementation.

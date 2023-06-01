@@ -1,88 +1,84 @@
 # CS131: Programming Languages
 
-## Parsing, Part 3
+## Functional Abstractions
 
-In this lecture, we continue our exploration of parsing techniques, focusing on parameterized parsers and parsers capable of constructing Abstract Syntax Trees (ASTs). These concepts enhance our ability to parse complex language structures and extract meaningful representations from the input.
+Hello! In this lecture, we will explore functional abstractions in Haskell. We'll cover important concepts such as typeclasses, functors, monads, and the do notation. These concepts provide powerful tools for writing reusable and composable code. So let's dive in!
 
-### Recap: Our Library So Far
+### Typeclasses
 
-To provide context, let's briefly recap the progress we have made with our parsing library. We started by understanding the distinction between syntax and semantics, where syntax refers to what the programmer writes, and semantics captures the meaning behind the syntax. Our library aims to check for syntax errors and construct an AST when the syntax is correct.
+Typeclasses in Haskell allow us to define common behavior for different types. They provide a way to generalize functions and operations that can work with various data types. We can think of typeclasses as interfaces or contracts that specify the behavior expected from types that are instances of the typeclass.
 
-We defined the concrete syntax and abstract syntax for our language, which involves representing expressions and operators using data types. For example:
+Let's take a look at some examples of typeclasses:
 
-```haskell
-data Exp = Num Double
-         | BinOp Exp Op Exp
-   deriving (Show, Eq)
+- **Eq**: The `Eq` typeclass defines equality and inequality operations. Instances of this typeclass can be compared for equality using the `==` operator.
 
-data Op = PlusOp
-        | MinusOp
-        | TimesOp
-        | DivOp
-   deriving (Show, Eq)
-```
+- **Show**: The `Show` typeclass provides a way to convert values to strings. Instances of this typeclass can be converted to strings using the `show` function.
 
-Additionally, we established the grammar for expressions, which consists of factors and various operations:
+- **Read**: The `Read` typeclass enables conversion from strings to values. Instances of this typeclass can be created from strings using the `readsPrec` function.
 
-```
-Expr ::= Factor + Expr
-      | Factor - Expr
-      | Factor * Expr
-      | Factor / Expr
-      | Factor
+- **Ord**: The `Ord` typeclass is used for types that can be compared. Instances of this typeclass can be compared using operators like `<=`, `<`, `>=`, `>`.
 
-Factor ::= number
-          | (Expr)
-```
+- **Num**: The `Num` typeclass represents numeric types and provides operations like addition (`+`), subtraction (`-`), multiplication (`*`), and more.
 
-To facilitate parsing, we introduced the concept of a parsing function, which takes a string as input and produces either a successful parse result or a failure result. Initially, our parsing function returned a boolean value indicating success or failure:
+- **Fractional**: The `Fractional` typeclass is used for fractional numbers and provides division (`/`) and other related operations.
+
+### Functors
+
+Functors in Haskell represent data structures that can be mapped over. They define the `fmap` function, which allows us to apply a function to each element within the structure while preserving the structure itself.
+
+Let's consider an example of a functor: lists. We can use the `fmap` function to apply a function to each element of a list. This operation is often referred to as mapping over the list.
 
 ```haskell
-type ParsingFunction = String -> Bool
+fmap :: Functor f => (a -> b) -> f a -> f b
 ```
 
-However, we realized the need to keep track of the state and the remaining unparsed portion of the input string. To address this, we modified our parsing function to return a tuple of type `(Bool, String)`:
+Functors provide a way to perform common transformations on data structures without unwrapping and rewrapping them.
+
+### Monads
+
+Monads are a powerful abstraction in functional programming that enable sequencing of computations. They encapsulate computations within a context and provide operations to compose these computations in a structured manner.
+
+The key operation in monads is `(>>=)`, pronounced as "bind," which allows us to chain computations together. It takes a monadic value, extracts the value inside it, and applies a function that produces a new monadic value.
+
+Monads also provide the `return` function, which takes a value and wraps it in a monad. It allows us to lift pure values into the monadic context.
+
+Monads enable us to handle effects, such as IO, error handling, and non-determinism, in a controlled and modular way. They provide a way to sequence actions, handle failures, and manage state.
+
+### Do Notation
+
+The do notation is a convenient syntax for working with monadic computations. It allows us to write imperative-style code in a monadic context, making it easier to understand and reason about sequential operations.
+
+In the do notation, we can use the `<-` symbol to bind the result of a monadic computation to a variable. We can then use this variable in subsequent computations. The do notation takes care of unwrapping and rewrapping monadic values automatically.
+
+The do notation is particularly useful when working with IO operations
+
+. It provides a clear and concise way to express sequences of input/output actions.
+
+Let's consider an example of using the do notation with the IO monad:
 
 ```haskell
-type ParsingFunction = String -> (Bool, String)
+reverseInput :: IO ()
+reverseInput = do
+  putStr "Enter a string: "
+  input <- getLine
+  let reversed = reverse input
+  putStrLn ("Reversed string: " ++ reversed)
 ```
 
-We then developed parsing functions for different non-terminals, such as `expr` and `factor`, using combinators such as `<&&>` and `<||>` to handle sequencing and alternatives.
+In this example, we prompt the user for a string, read the input using `getLine`, reverse the string, and then print the reversed string using `putStrLn`. The do notation helps us express this sequential flow of IO actions in a readable and intuitive way.
 
-### Introducing AST Construction
+### IO in Haskell
 
-While our parsing library successfully checks for syntax errors, it currently falls short in constructing an AST, which represents the structure and meaning of the parsed expression. To address this limitation, we need to enhance our parsing functions to generate AST nodes.
+IO is a special monad in Haskell that allows us to perform input and output operations. It represents computations that interact with the external world, such as reading from the console, writing to files, or making network requests.
 
-To achieve AST construction, we introduce a new type called `Parser`:
+In Haskell, IO operations are executed in a controlled manner to ensure referential transparency and purity. IO actions can be composed using monadic operations like `(>>=)` and `return`, and the do notation provides a convenient syntax for working with IO computations.
 
-```haskell
-type Parser a = String -> Maybe (a, String)
-```
+The IO monad has a type `IO a`, where `a` represents the type of the result produced by the IO action. For example, an IO action that reads a string from the console has the type `IO String`, and an IO action that performs some output has the type `IO ()` (unit type).
 
-The `Parser` type takes a type variable `a` and represents a function that takes a string as input and returns a `Maybe` result containing the parsed value of type `a` and the remaining unparsed portion of the input string.
+IO operations are executed when they are sequenced in a do block and invoked using the `main` function, which is the entry point of a Haskell program. The main function must have the type `IO ()` to indicate that it performs IO operations but does not produce any meaningful result.
 
-By utilizing the `Maybe` type, we can handle both successful parses (`Just (result, remainder)`) and parse failures (`Nothing`), providing a clearer indication of success or failure compared to the previous approach.
+### Recap
 
-### Refining Parsing Functions for AST Construction
+In this lecture, we covered important functional abstractions in Haskell, including typeclasses, functors, monads, and the do notation. Typeclasses provide a way to define common behavior for different types, allowing us to write generic functions. Functors enable mapping over data structures, applying functions to each element while preserving the structure. Monads facilitate sequencing of computations and handling effects in a modular way. The do notation provides a convenient syntax for working with monadic computations, making them easier to read and understand.
 
-With the introduction of the `Parser` type, we can enhance our parsing functions to produce AST nodes instead of simple success or failure indications.
-
-For example, let's consider the `expr` parsing function. Previously, it had the type `ParsingFunction`, but now we can redefine it as a `Parser Exp`:
-
-```haskell
-expr :: Parser Exp
-```
-
-This revised `expr` function encapsulates the logic for parsing expressions and constructs AST nodes of type `Exp`.
-
-To achieve this, we need to modify the implementation of our parsing functions to return the parsed AST node along with the remaining unparsed portion of the input string.
-
-### Wrapping Up
-
-With the introduction of parameterized parsers
-
- and the ability to construct ASTs, our parsing library becomes more powerful and expressive. We can now handle complex language structures, parse with context, and generate meaningful representations of the input.
-
-By leveraging the `Parser` type and refining our parsing functions, we bridge the gap between the syntax of the input and its corresponding AST, enabling us to perform further analysis and interpretation of programming languages.
-
-This lecture provides a foundation for understanding advanced parsing techniques and sets the stage for deeper explorations into programming language implementation.
+By leveraging these functional abstractions, we can write expressive and reusable code in Haskell, taking advantage of its strong type system and purity guarantees.
