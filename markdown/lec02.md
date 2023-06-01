@@ -316,9 +316,42 @@ successor :: Integer -> Integer
 average :: Double -> Double -> Double
 ```
 
-By specifying type annotations, we can ensure that functions are used correctly and catch potential type errors early on.
+#### Function Types
+In Haskell, functions have explicit type declarations that specify the types of their parameters and the result they produce. Let's explore the concept of function types:
+
+- Function Name: The name of the function identifies it and allows it to be called in the program.
+
+- Parameter Types: Each parameter of a function has a specific type that defines the kind of values it can accept. Function types include the types of all their parameters.
+
+- Result Type: The result type specifies the type of value that the function produces as its output.
+
+In Haskell, function types are indicated using an arrow (`->`) notation. The arrow separates the parameter types from the result type, indicating the flow of data within the function. For example:
+
+```haskell
+successor :: Integer -> Integer
+```
+
+The `::` symbol is read as "has type," and the arrow (`->`) denotes the function type. In this case, it reads as "successor is a function that takes an `Integer` and results in an `Integer`." The arrow serves as a visual representation of the function's input and output.
+
+Here's another example:
+
+```haskell
+average :: Double -> Double -> Double
+```
+
+In this case, the arrow separates the parameter types (`Double` and `Double`) from the result type (`Double`). The function type reads as "average is a function that takes two `Double` values and results in a `Double`."
+
+By specifying the types of functions, Haskell enables static type checking. The type declarations provide information about the expected inputs and outputs, helping detect type errors early in the development process. Function types in Haskell facilitate program clarity, robustness, and maintainability. 
 
 ## Functional Programming: Some Basic Concepts
+
+### What is Functional Programming?
+- **Evaluation of Expressions**: In functional programming, computation occurs through the evaluation of expressions. This is in contrast to imperative programming, where computation relies on updating state.
+- **Stateless Computation**: Functional programming emphasizes stateless computation, where the output of a function solely depends on its input, without any hidden side effects or reliance on external state.
+- **Pure Functional Programming**: In pure functional programming, the evaluation of expressions is the sole mechanism for computation. Pure functions are used, which produce consistent results based only on their inputs, without modifying any external state.
+- **Haskell: A Pure, Functional Language**: Haskell is an example of a pure, functional programming language. It enforces immutability, encourages the use of pure functions, and facilitates expression evaluation as the primary mode of computation.
+
+Functional programming provides a different approach to software development, focusing on composing and evaluating expressions rather than manipulating state. By embracing the principles of functional programming, languages like Haskell enable developers to write code that is easier to reason about, facilitates code reuse, and supports efficient and parallel execution.
 
 ### The Essence of CS 131: Abstraction
 In CS 131, we emphasize the concept of abstraction. Abstraction involves refactoring code by eliminating repetition and extracting common operations into helper functions. This process improves code quality, reduces duplication, and enhances readability.
