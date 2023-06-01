@@ -1,8 +1,8 @@
-# CS 131: Programming Languages
+### CS 131: Programming Languages
 
-## Lists, Tuples, Pattern Matching, and Parameterized Types
+# Lists, Tuples, Pattern Matching, and Parameterized Types
 
-### Why Lists?
+## Why Lists?
 
 #### Practical Reason
 Collecting data together in a single data structure is convenient. In programming languages like Java, C++, and Python, we have arrays, linked lists, and lists, respectively, for such purposes.
@@ -135,9 +135,9 @@ myFilter test (x:xs)
  = myFilter test xs
 ```
 
-### Tuples and Pattern Matching
+## Tuples and Pattern Matching
 
-#### Tuples
+### Tuples
 Tuples are used to combine different types of data into a single structure. They have a fixed number of elements. In Haskell, tuples are created using parentheses and commas to separate the elements. Here's an example:
 ```haskell
 prof1 = ("Lucas Bang", 131, False)
@@ -171,5 +171,5 @@ The type variables `a` and `b` represent any types. This allows `map` to work wi
 #### Pattern Matching and Parameterized Types
 Pattern matching and parameterized types work together seamlessly. When pattern matching on lists, the type variable `a` can represent any type, allowing us to handle different cases based on the elements' types.
 
-### Summary
+## Summary
 In this lecture, we explored the practical and pedagogical reasons for using lists in Haskell. We learned about building lists using the cons operator `(:)` and concatenation operator `(++)`. We discussed useful list functions such as `length`, `head`, `tail`, `take`, `drop`, `null`, `elem`, `map`, `filter`, and examined their type signatures. We also covered pattern matching for lists and tuples, as well as the concept of parameterized types, which allows functions to operate on lists containing elements of any type.

@@ -1,14 +1,14 @@
-# CS 131: Programming Languages
+### CS 131: Programming Languages
 
-## Code as Data, Evaluating Expressions
+# Code as Data, Evaluating Expressions
 
 In this lecture, we explore the concept of code as data and delve into the evaluation of expressions. We will cover various topics, including the representation of abstract syntax, syntax and semantics, concrete and abstract syntax, and the evaluation of expressions with variables.
 
-### CS131: Past, Present, Future
+## CS131: Past, Present, Future
 
 To understand the current landscape of CS131, it is essential to look back at its historical and social context. Influential figures such as Babbage, Lovelace, Turing, and Church paved the way for the development of computer science. Functional programming concepts, such as functions as values, higher-order functions, pattern matching, recursion, recursive data structures, and Haskell programming basics, form the foundation of CS131.
 
-### What kinds of inputs/outputs can a program have?
+## What kinds of inputs/outputs can a program have?
 
 Before delving into code as data, let's examine the various types of inputs and outputs that programs can handle. These examples will help us understand the versatility of programs:
 
@@ -19,11 +19,11 @@ Before delving into code as data, let's examine the various types of inputs and 
 - **Program 7:** Input: Source code (representation of a program), Output: Binary machine code
 - **Program 8:** Input: Source code (representation of a program), Output: Value (result of executing the program)
 
-### Code as Data
+## Code as Data
 
 The fundamental concept we will explore is "code is data." In programming, we can treat code as structured data, similar to other data types we manipulate in our programs. By representing code as data, we gain the ability to analyze, transform, and manipulate it programmatically.
 
-### Syntax and Semantics
+## Syntax and Semantics
 
 To understand code fully, we need to distinguish between syntax and semantics. 
 
@@ -32,7 +32,7 @@ To understand code fully, we need to distinguish between syntax and semantics.
 
 Attaching meaning (semantics) to symbols (syntax) is a crucial aspect of programming. It involves bridging the gap between the symbols we write in code and their intended interpretations. Linguistics, semiotics, and various branches of philosophy, such as the philosophy of AI and philosophy of mind, delve into the complexities of symbol grounding and meaning.
 
-### Concrete and Abstract Syntax
+## Concrete and Abstract Syntax
 
 To work with code effectively, we need to understand the distinction between concrete and abstract syntax.
 
@@ -71,7 +71,7 @@ To represent abstract syntax, we have several options. Let's explore some of the
 
 Option 3 provides an elegant representation, where expressions are composed of nested `BinOp` instances with associated operators and subexpressions. This approach eliminates redundancy and allows for concise pattern matching during evaluation.
 
-### Evaluating Expressions
+## Evaluating Expressions
 
 To evaluate expressions represented as abstract syntax, we need mechanisms to handle both numerical values and binary operations. Let's recap the abstract syntax representation using the `Op` and `Exp` data types:
 
@@ -83,7 +83,7 @@ data Exp = Num Double | BinOp Exp Op Exp deriving (Show)
 
 In addition to the representation, we also require functions for pretty printing and evaluation.
 
-#### Pretty Printing
+### Pretty Printing
 
 The `format` function provides a way to convert an abstract syntax expression to a human-readable string. We can use pattern matching to traverse the expression tree and construct the string representation:
 
@@ -102,7 +102,7 @@ opString DivOp   = " / "
 
 The `format` function recursively traverses the expression, formatting each subexpression and concatenating them with appropriate operators.
 
-#### Evaluation
+### Evaluation
 
 The `eval` function allows us to compute the value of an abstract syntax expression. We define evaluation rules for numerical values and each binary operation:
 

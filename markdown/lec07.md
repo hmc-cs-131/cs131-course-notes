@@ -1,6 +1,6 @@
-# CS 131: Programming Languages
+### CS 131: Programming Languages
 
-## Code as Data, Evaluating Expressions
+# Code as Data, Evaluating Expressions
 
 In this lecture, we delve into the concept of code as data and explore how expressions can be represented and evaluated. By understanding the abstract syntax representation of expressions and employing evaluation techniques, we gain insights into the inner workings of programming languages.
 

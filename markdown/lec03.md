@@ -1,8 +1,8 @@
-# CS 131: Programming Languages
+### CS 131: Programming Languages
 
-## Functions = Values
+# Functions = Values
 
-### Today's Topics
+## Today's Topics
 - Referential transparency
 - Lazy evaluation
 - Operators

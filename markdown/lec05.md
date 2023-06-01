@@ -1,16 +1,16 @@
-# CS 131: Programming Languages
+### CS 131: Programming Languages
 
-## Haskell Data Types, Pattern Matching, Type Classes
+# Haskell Data Types, Pattern Matching, Type Classes
 
-### Warm-up Problem: Working with Shapes
+## Warm-up Problem: Working with Shapes
 In this lecture, we will explore the foundations of Haskell data types, pattern matching, and type classes. As a warm-up problem, let's consider working with shapes such as circles, squares, and right triangles.
 
 We want to represent shapes and perform various operations on them, including computing areas and shifting their positions.
 
-#### Question 1: Object-Oriented Approach
+### Question 1: Object-Oriented Approach
 How would you approach this problem using an object-oriented programming language like Java, C++, or Python? Consider how you would represent the shapes, implement methods for shifting and computing areas, and outline your solution.
 
-#### Question 2: How Was Your Weekend?
+### Question 2: How Was Your Weekend?
 
 ### Warm-up Problem Solution: Object-Oriented Approach
 Let's consider an object-oriented solution using Java for representing and operating on shapes.
@@ -52,7 +52,7 @@ class RightTriangle extends Shape {
 }
 ```
 
-### Haskell Solution using Data Types and Pattern Matching
+## Haskell Solution using Data Types and Pattern Matching
 In Haskell, we can represent shapes and perform operations on them using data types and pattern matching.
 
 ```haskell
@@ -77,12 +77,12 @@ shift shape deltaX deltaY =
     RightTriangle x y base height -> RightTriangle (x + deltaX) (y + deltaY) base height
 ```
 
-### Functional Programming vs. Object-Oriented Programming
+## Functional Programming vs. Object-Oriented Programming
 In object-oriented programming, shapes are objects that know how to perform different operations on themselves. In functional programming, functions know how to compute over different data types. The shift function in Haskell knows how to compute a shifted shape (circle, square, or right triangle), while the area function knows how to compute the area for each shape.
 
 Functional programming takes a different approach by separating data from behavior and treating functions as first-class citizens.
 
-### Recursive Data Types
+## Recursive Data Types
 We can define recursive data types in Haskell. Let's consider a simple example of creating lists.
 
 ```haskell
@@ -142,7 +142,7 @@ intListSum Empty = 0
 intListSum (Cons x xs) = x + intListSum xs
 ```
 
-### Combining Data Types
+## Combining Data Types
 We can combine multiple data types to create more complex structures. Let's combine the `CardSuit` and `FaceValues` types to represent a deck of cards.
 
 ```haskell
@@ -164,7 +164,7 @@ data CardList
 
 Now we can create a deck of cards represented by `CardList` and perform operations on it.
 
-### Type Classes
+## Type Classes
 Type classes in Haskell define a set of functions that can operate on certain types. Some common type classes are `Eq`, `Ord`, `Show`, and `Read`.
 
 For example, the `CardSuit` and `FaceValues` types can derive the `Show`, `Eq`, and `Ord` type classes, allowing us to print, compare, and order their values.
@@ -179,5 +179,5 @@ data FaceValues
   deriving (Show, Eq, Ord)
 ```
 
-### Summary
+## Summary
 In this lecture, we explored the foundations of Haskell data types, pattern matching, and type classes. We discussed representing shapes using data types and performed operations on them. We also covered recursive data types, combining data types, and type classes in Haskell. By understanding these concepts, we can build more complex and powerful programs using Haskell's functional programming paradigm.
