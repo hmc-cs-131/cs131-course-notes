@@ -78,6 +78,8 @@ Babbage, often referred to as the "father of the computer," designed early mecha
 
 Ada Lovelace wrote an extensive set of notes on Babbage's Analytical Engine, which contained what is now recognized as the first published algorithm. Her notes described how the machine could be programmed to compute Bernoulli numbers; because of this, she could be considered the first computer programmer. Lovelace recognized that the Analytical Engine could go beyond mere arithmentic calculations and could be used to manipulate symbols. These insights into the Analytical Engine's capabilities foreshadowed the development of programming languages that would enable humans to interact with computers and instruct them to perform specific tasks.
 
+To learn more about Lovelace and Babbage, feel free to check out Sydney Padua's graphic novel, _The Thrilling Adventures of Lovelace and Babbage_. 
+
 ## Math, Logic, and Western Philosophy Before 1900
 Philosophers and mathematicians of the past, such as Gottfried Leibniz, George Boole, and John Locke, posed questions about the nature of knowledge, the laws of thought, and what can be known or proven. These inquiries set the stage for advancements in mathematics, logic, and the exploration of computation.
 
@@ -88,7 +90,19 @@ The questions about knowledge and proof persisted. David Hilbert famously procla
 Alan Turing and Alonzo Church made groundbreaking contributions to understanding computation. Turing proposed the idea of Turing Machines, simple theoretical devices capable of universal computation. Church developed the Lambda Calculus, a formal system for manipulating symbols that deals with functions. Both Turing Machines and Lambda Calculus contributed to our understanding of computation and the limits of what can be computed.
 
 ## Up and Down the Ladder of Abstraction
-Programming languages exist on a spectrum of abstraction. At the lowest level, we have Turing Machines, which operate at the bit level and are highly stateful. As we move up the ladder of abstraction, we encounter higher-level languages, such as Assembly Language, imperative languages like C and C++ with manual memory management, higher-level languages like Python with no memory management, and functional languages like Racket, where functions are treated as data.
+Programming languages exist on a spectrum of abstraction. At the lowest level, we have Turing Machines, which operate at the bit level and are highly stateful. As we move up the ladder of abstraction, we encounter higher-level languages, such as Assembly Language, imperative languages like C and C++ with manual memory management, higher-level languages like Python with no memory management, and functional languages like Racket, where functions are treated as data. Below we can see more abstract (more math-like!) methods of computing at the top of the table, and more stateful (more engineering-like!) methods at the bottom. 
+
+| Concept/Categorization      | Examples/Notes                                               |
+|-------------------------------|-----------------------------------------------------------------------------|
+| Lambda Calculus              | Anonymous functions                                                         |
+| Pure Functional Languages    | Haskell                                                                     |
+| Functional Languages         | Racket                                                                      |
+| Higher-level Languages       | Python                                                                      |
+| Imperative Languages         | C, C++                                                                      |
+| Assembly Language            | HMMM, x86                                                                   |
+| von Neumann Architecture      |                                                                             |
+| Turing Machine               | Very simple, very low (bit) level, very "stateful"                          |
+
 
 ## Pure Functional Languages
 Pure functional languages, like Haskell, go a step further in abstraction by eliminating mutable state entirely. In these languages, computations are expressed solely through the evaluation of functions, leading to elegant and concise code. Understanding pure functional languages broadens our perspective on programming paradigms.
