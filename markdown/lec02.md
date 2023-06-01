@@ -53,7 +53,7 @@ It's important to note that in Haskell, all type names start with an uppercase l
 
 Operations can be performed on these values and types, such as arithmetic operations (`+`, `-`, `*`, `/`) and comparison operations (`==`, `/=`, `>`, `<`, `>=`, `<=`). Additionally, the `++` operator is used to concatenate strings and lists.
 
-### Example: Type Error!
+### Type Error Example
 
 Type errors in Haskell occur when there is a mismatch between the expected type and the actual type of a value or expression. Let's examine a specific type error and its components.
 
@@ -91,21 +91,16 @@ Functions in Haskell can also be used with infix operators, which require parent
 ### Haskell: Variables, Bindings, and Scope
 In Haskell, we can associate variable names with expressions through bindings. This process is similar to assignment in other programming languages. Let's explore some concepts related to variables, bindings, and scope in Haskell.
 
-- Binding (noun) and bind (verb):
-
- Associates a variable name with an expression.
-
-
+- Binding (noun) and bind (verb): Associates a variable name with an expression. This is similar to assignment (noun) and assign (verb), which we often see in imperative programming languages.
 - Value (noun): The expression to which a name is bound.
 - Reference (verb): Using a name in an expression. During evaluation, the name acts as an alias for the expression.
-- Scope: The region of the program where a name can be referenced. A variable's scope depends on where it is bound.
-- Lookup (verb) or resolve (verb): Evaluating a name and finding its value.
+- Scope: The region of the program where a name can be referenced. A variable's scope depends on where it is bound. In Haskell, a scope can bind a name at most once. In other words, all "variables" are constants!
+- Lookup (verb) or resolve (verb): Evaluate a name and finding its value.
 
 Here's some related vocabulary to keep in mind:
 
 - Variable name: The name given to a variable. In Haskell, variable names are written in lowercase.
-- Value: The expression to which a name is bound.
-- Top-level bindings: Similar to global variables, these bindings have a scope that extends throughout the entire file or the rest of the GHCi session.
+- Top-level bindings: Similar to global variables, these bindings have a scope that extends throughout the entire file or the rest of the GHCi (Glasgow Haskell Compiler interactive environment) session. 
 - Local bindings: These bindings have a limited scope within a function or a `let` expression.
 
 ```haskell
@@ -148,37 +143,104 @@ main.hs:3:1: error:
   | ^
 ```
 
-In GHCi (Glasgow Haskell Compiler interactive environment), we can interact with the code as follows:
+In GHCi, we can interact with the code as follows:
 
 1. We can type the first line, `x = 24`, and get the value of x.
 2. We can type the second line, `x = 41`, and get the value of x.
 3. We can type the third line, `x = x + 1`,
-   but when we try to get the value of x,
-   GHCi goes into an infinite loop!
+   but when we try to get the value of x, GHCi goes into an infinite loop!
    
 These results occur due to the nature of how Haskell handles variable assignments and evaluations. In Haskell, variables are immutable, meaning they cannot be changed once assigned. The line `x = x + 1` tries to assign a new value to x based on its current value, but this creates a circular dependency that results in an infinite loop when evaluated.
 
 This example highlights the importance of understanding the language-specific behaviors and rules when writing and executing code. Haskell's immutability and strict evaluation strategy can lead to unexpected outcomes if not handled correctly.
 
+#### `let` expressions and Local Binding 
+
+**Local Bindings and Scopes in Haskell**
+
+In Haskell, local bindings allow us to create temporary variables with a limited scope, similar to local variables in other programming languages. This is achieved using the `let` keyword or the `where` clause.
+
+The `let` expression allows us to introduce local bindings within an expression. The syntax for a `let` expression is:
+```haskell
+let <binding> in <expression>
+```
+where `<binding>` represents the declaration of a variable and `<expression>` represents the body of the `let` expression.
+
+For example:
+```haskell
+let x = 21 in x + x
+```
+In this case, the variable `x` is locally bound to the value 21. The scope of `x` is limited to the body of the `let` expression. The result of the `let` expression is the evaluation of the body, which in this case is `x + x`.
+
+Scopes can be nested in Haskell, allowing for the creation of multiple levels of local bindings. Each nested `let` expression introduces its own scope. When resolving names, Haskell starts from the innermost scope and moves outward, ensuring that the correct binding is used.
+
+Alternatively, Haskell also provides the `where` clause, which is used for local bindings at the end of a function definition. The syntax for a `where` clause is:
+```haskell
+function definition
+where
+  <binding>
+```
+where `<binding>` represents the declaration of a variable that is accessible within the function body.
+
+For example:
+```haskell
+myFunction x = y + y
+  where
+    y = x * 2
+```
+In this case, the variable `y` is locally bound to the value `x * 2` within the `where` clause. The scope of `y` is limited to the function body of `myFunction`. The result of `myFunction` is the evaluation of `y + y`.
+
+Both `let` expressions and `where` clauses are powerful constructs in Haskell for creating local bindings and managing variable visibility within specific code blocks. They provide a way to define variables with limited scope and promote modular and readable code.
+
 ### Haskell: Writing Code in Files
-Haskell code is typically written in files with the `.hs` extension. Let's take a look at some additional aspects related to writing Haskell code in files:
 
-- Comments: Single-line comments can be added using `--`, while multiline comments can be enclosed between `{--` and `--}`.
-- Loading code in GHCi: Instead of clicking the "Run" button on `repl.it`, it's recommended to load the code into GHCi, the Haskell interpreter. You can do this using the `:load <file>` or `:l <file>` command. This allows you to interactively test your code.
+Haskell files typically have the `.hs` extension. When writing Haskell code in files, there are a few additional aspects to consider. Let's explore them:
 
-If you modify a loaded file and want to reload its contents, you can use the `:reload` or `:r` command.
+**Comments:** Comments in Haskell can improve code readability and provide explanations. Single-line comments start with `--`, while multiline comments are enclosed between `{--` and `--}`.
 
+```haskell
+-- This is a single-line comment
 
+{--
+   This is a
+   multiline comment
+--}
+```
 
-### Haskell: Defining Functions
-Defining functions in Haskell is straightforward and follows a simple syntax. Let's explore some key concepts related to function definitions:
+**Loading Code in GHCi:** GHCi (Glasgow Haskell Compiler interactive) is the Haskell interpreter that allows interactive testing and evaluation of code. Instead of using the "Run" button on `repl.it`, it's recommended to load your code into GHCi. This can be done using the `:load <file>` or `:l <file>` command.
 
-- Function definitions: Functions are defined by providing the function name, followed by the parameters and the function body.
-- Function calls: Functions can be called by providing the function name followed by the arguments.
-- Parameter scope: The scope of the parameters is limited to the function body.
-- Local bindings within functions: Haskell provides two ways to define local bindings within a function: `let` expressions and `where` clauses.
+```haskell
+-- Load a file into GHCi
+:load MyCode.hs
+```
 
-Here's an example to illustrate these concepts:
+This enables you to interactively test your code and experiment with different expressions and functions. If you make changes to the loaded file and want to reload its contents, you can use the `:reload` or `:r` command in GHCi.
+
+```haskell
+-- Reload the contents of a file in GHCi
+:reload
+```
+
+By using GHCi, you can have a more interactive development experience and easily iterate on your code by loading and reloading files as needed.
+
+### Haskell: Defining functions
+
+In Haskell, defining and calling functions follows a simple syntax. Let's explore the two key aspects of function usage:
+
+#### Function Definitions
+Functions in Haskell are defined by specifying the function name, parameters, and the function body. Here are the key concepts related to function definitions:
+
+- **Name**: A function is identified by its name, which is used to refer to and call the function.
+- **Parameters**: Parameters are placeholders that represent the input values to the function. They are listed after the function name and separated by spaces.
+- **Function Body**: The function body contains the actual code that specifies the computation to be performed. It is executed when the function is called.
+
+#### Function Calls
+To use a defined function, you can call it by providing the function name followed by the arguments. Here are the related terms:
+
+- **Arguments**: Arguments are the actual values passed to a function when it is called. They correspond to the parameters defined in the function's signature.
+- **Parameter Scope**: The scope of the parameters is limited to the function body. They are accessible and valid only within the function's context.
+
+Here are some examples to illustrate function definitions and calls:
 
 ```haskell
 -- Function definitions
@@ -188,28 +250,62 @@ average x y = (x + y) / 2
 -- Function calls
 successor 1
 average 0 10
+```
+
+In addition to function definitions and calls, Haskell provides ways to define local bindings within functions. These local bindings allow you to define variables that are only accessible within the function. Let's explore different approaches using local bindings to calculate x^2 + 1/x^2:
+
+```haskell
+-- Local bindings in a function using explicit computation
+f x = x * x + 1 / (x * x)
 
 -- Local bindings in a function using let expressions
 f x = let value = x * x
       in value + 1 / value
 
 -- Local bindings in a function using where clauses
-g x = value + 1 / value
+f x = value + 1 / value
   where value = x * x
 ```
 
-Both `let` expressions and `where` clauses allow us to define local variables within a function. The scope of a `let` binding is limited to the body of the `let` expression, while the scope of a `where` clause extends to the entire function (including the `where` clause itself).
+In the first example, the computation is directly expressed in the function body. The second and third examples demonstrate the usage of let expressions and where clauses to define local variables within the function. Both approaches achieve the same result, but they differ in their syntax and scoping rules.
+
+Let expressions provide a way to define local variables within a function. The scope of a let binding is limited to the body of the let expression. On the other hand, where clauses define local variables at the end of a function, and their scope extends to the entire function body.
+
+By understanding function definitions, function calls, and the usage of local bindings, you can effectively write and utilize functions in Haskell to build complex computations and solve problems.
+
+#### Pattern Matching
+Pattern matching is a powerful feature in Haskell that allows for concise and expressive function definitions based on different patterns. Let's see how it works using an example with a factorial function:
+
+```haskell
+-- Using if-then-else
+fact n = if n == 0 
+         then 1 
+         else n * fact (n - 1)
+
+-- Using pattern matching
+fact 0 = 1
+fact n = n * fact (n - 1)
+```
+
+In the first example, the factorial function `fact` is defined using an `if-then-else` construct to handle the base case (when `n` is equal to 0) and the recursive case. However, the second example demonstrates the power of pattern matching. The factorial function is defined using two patterns: one for the base case and one for the recursive case. 
+
+When a program calls the factorial function, Haskell tries to match the call's argument against each pattern, from top to bottom. As soon as it finds a match, Haskell uses that specific version of the function.
+
+Pattern matching allows us to create specialized behavior for different inputs, making our code more concise and readable. It offers the flexibility to handle different cases directly in the function definition.
 
 ### Types in Haskell
 Haskell is a statically typed language, meaning that types are checked during compilation. Let's explore some concepts related to types in Haskell:
 
-- Type-safe: A program that has no type errors is considered type-safe.
-- Type-check: The process of determining whether a program has type errors.
-- Static typing: A property of a program that can be determined without running it. In statically typed languages, type checking is typically performed by the compiler. If a type error is found, the program won't compile.
-- Dynamic typing: A property of a program that is determined by running it. In dynamically typed languages, type checking may be performed by the interpreter during runtime. If a program encounters a type error, it may crash.
-- Type annotation: Information provided by the programmer about the type of a variable, function, etc.
-- Type inference: A form of type checking that infers types without requiring extensive type annotations.
+- **Type-safe** (adjective): A program is considered type-safe when it has no type errors. Type errors occur when there is a mismatch between the expected and actual types of values in the program.
+- **Type-check** (verb): To determine whether a program has type errors, the process of type checking is performed. Type checking ensures that the types of expressions, variables, and functions are consistent and compatible.
+- **Static** (adjective): In Haskell, type checking is a static process, meaning it can be determined without running the program. The compiler performs type checking during the compilation phase, analyzing the program's types before execution.
+- **Dynamic** (adjective): In contrast, dynamic properties of a program are determined by running the program. Dynamic type checking can occur during program execution and may result in runtime errors if type inconsistencies are encountered.
+- **Statically typed** (adjective): Haskell is a statically typed programming language, which means it performs static type checking. The compiler checks the types of expressions, variables, and functions, ensuring type consistency throughout the program. If a type error is found, the program fails to compile.
+- **Dynamically typed** (adjective): In dynamically typed programming languages, type checking may occur at runtime. Interpreters or runtime systems perform checks on types as the program executes. If a type error is encountered, the program may crash or raise runtime errors.
+- **Type annotation** (noun): Type annotations provide explicit information about the types of variables, functions, or expressions. Programmers can annotate their code with type declarations to provide hints to the compiler or improve code clarity.
+- **Type inference** (noun): Haskell features powerful type inference capabilities, allowing the compiler to deduce types without extensive type annotations. Type inference reduces the need for explicit type declarations while maintaining type safety.
 
+By leveraging static type checking, Haskell helps catch potential type errors early in the development process, providing a high level of confidence in program correctness. The balance between static typing and type inference allows for concise code while maintaining type safety.
 In Haskell, types are typically inferred by the compiler based on the expressions used. However, it's still good practice to provide type annotations for clarity and documentation.
 
 You can check the type of an expression in GHCi using the `:type <expr>` or `:t <expr>` command.
