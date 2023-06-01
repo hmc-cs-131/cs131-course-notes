@@ -1,8 +1,8 @@
-# CS 131: Programming Languages
+### CS 131: Programming Languages
 
-## Introduction to Haskell and Functional Programming
+# Introduction to Haskell and Functional Programming
 
-### Today's Topics
+## Today's Topics
 1. The Read-Eval-Print Loop (REPL)
 2. A Tour of Haskell:
    - Basic values and types
@@ -16,14 +16,14 @@
 
 Learning a new programming language can be both exciting and frustrating. In this course, we will explore Haskell and delve into the world of functional programming.
 
-## Haskell: Getting Started
+# Haskell: Getting Started
 
-### REPL: Read-Eval-Print Loop
+## REPL: Read-Eval-Print Loop
 When working with Haskell, we often use a tool called the REPL (Read-Eval-Print Loop) to interactively experiment with code. The REPL allows us to enter expressions, evaluates them, and prints the results. It provides a convenient way to explore Haskell's features and test code snippets.
 
 You can access an online REPL for Haskell on platforms like `repl.it`.
 
-### Haskell: Basic Values and Types
+## Haskell: Basic Values and Types
 In Haskell, values represent specific instances of data, while types categorize these values. Let's take a look at some basic types in Haskell:
 
 - Integer: Whole numbers like 1, 2, 100000000000, -42, etc.
@@ -53,7 +53,7 @@ It's important to note that in Haskell, all type names start with an uppercase l
 
 Operations can be performed on these values and types, such as arithmetic operations (`+`, `-`, `*`, `/`) and comparison operations (`==`, `/=`, `>`, `<`, `>=`, `<=`). Additionally, the `++` operator is used to concatenate strings and lists.
 
-### Haskell: Calling Functions
+## Haskell: Calling Functions
 Haskell is a functional programming language, which means that functions play a central role. Calling functions in Haskell is straightforward:
 
 ```haskell
@@ -67,12 +67,14 @@ not True      -- Negates the boolean value True
 
 Functions in Haskell can also be used with infix operators, which require parentheses when used with other operators or expressions.
 
-### Haskell: Variables, Bindings, and Scope
+## Haskell: Variables, Bindings, and Scope
 In Haskell, we can associate variable names with expressions through bindings. This process is similar to assignment in other programming languages. Let's explore some concepts related to variables, bindings, and scope in Haskell.
 
 - Binding (noun) and bind (verb):
 
  Associates a variable name with an expression.
+
+
 - Value (noun): The expression to which a name is bound.
 - Reference (verb): Using a name in an expression. During evaluation, the name acts as an alias for the expression.
 - Scope: The region of the program where a name can be referenced. A variable's scope depends on where it is bound.
@@ -100,7 +102,44 @@ f x = value + 1 / value
 
 It's worth noting that in Haskell, the "let before use" rule applies, meaning that bindings must be defined before they are referenced.
 
-### Haskell: Writing Code in Files
+## Trick question: What's the value of x?
+
+```haskell
+x = 24
+x = 41
+x = x + 1
+```
+
+If we type this code into a file and try to run it, we will encounter an error:
+
+```
+main.hs:2:1: error:
+    Multiple declarations of `x'
+…
+  |
+2 | x = 41
+  | ^
+main.hs:3:1: error:
+    Multiple declarations of `x'
+…
+  |
+3 | x = x + 1
+  | ^
+```
+
+In GHCi (Glasgow Haskell Compiler interactive environment), we can interact with the code as follows:
+
+1. We can type the first line, `x = 24`, and get the value of x.
+2. We can type the second line, `x = 41`, and get the value of x.
+3. We can type the third line, `x = x + 1`,
+   but when we try to get the value of x,
+   GHCi goes into an infinite loop!
+   
+These results occur due to the nature of how Haskell handles variable assignments and evaluations. In Haskell, variables are immutable, meaning they cannot be changed once assigned. The line `x = x + 1` tries to assign a new value to x based on its current value, but this creates a circular dependency that results in an infinite loop when evaluated.
+
+This example highlights the importance of understanding the language-specific behaviors and rules when writing and executing code. Haskell's immutability and strict evaluation strategy can lead to unexpected outcomes if not handled correctly.
+
+## Haskell: Writing Code in Files
 Haskell code is typically written in files with the `.hs` extension. Let's take a look at some additional aspects related to writing Haskell code in files:
 
 - Comments: Single-line comments can be added using `--`, while multiline comments can be enclosed between `{--` and `--}`.
@@ -108,7 +147,9 @@ Haskell code is typically written in files with the `.hs` extension. Let's take 
 
 If you modify a loaded file and want to reload its contents, you can use the `:reload` or `:r` command.
 
-### Haskell: Defining Functions
+
+
+## Haskell: Defining Functions
 Defining functions in Haskell is straightforward and follows a simple syntax. Let's explore some key concepts related to function definitions:
 
 - Function definitions: Functions are defined by providing the function name, followed by the parameters and the function body.
@@ -138,10 +179,8 @@ g x = value + 1 / value
 
 Both `let` expressions and `where` clauses allow us to define local variables within a function. The scope of a `let` binding is limited to the body of the `let` expression, while the scope of a `where` clause extends to the entire function (including the `where` clause itself).
 
-### Types in Haskell
-Haskell is a statically typed language, meaning that types are checked during compilation. Let's explore some concepts related to types in Haskell
-
-:
+## Types in Haskell
+Haskell is a statically typed language, meaning that types are checked during compilation. Let's explore some concepts related to types in Haskell:
 
 - Type-safe: A program that has no type errors is considered type-safe.
 - Type-check: The process of determining whether a program has type errors.
@@ -162,9 +201,9 @@ average :: Double -> Double -> Double
 
 By specifying type annotations, we can ensure that functions are used correctly and catch potential type errors early on.
 
-## Functional Programming: Some Basic Concepts
+# Functional Programming: Some Basic Concepts
 
-### The Essence of CS 131: Abstraction
+## The Essence of CS 131: Abstraction
 In CS 131, we emphasize the concept of abstraction. Abstraction involves refactoring code by eliminating repetition and extracting common operations into helper functions. This process improves code quality, reduces duplication, and enhances readability.
 
 By identifying patterns and common operations, we can factor them out into separate functions, allowing us to write more concise and reusable code.
@@ -187,11 +226,13 @@ f 4
 f 5
 ```
 
-In the refactored code above, we introduced a helper function `f` to eliminate the repetition. Now, instead of duplicating the same expression multiple times, we can simply call `f` with different arguments. This approach improves code maintainability and reduces the risk of introducing errors.
+In the refact
+
+ored code above, we introduced a helper function `f` to eliminate the repetition. Now, instead of duplicating the same expression multiple times, we can simply call `f` with different arguments. This approach improves code maintainability and reduces the risk of introducing errors.
 
 Abstraction is a fundamental concept in CS 131, allowing us to write clean and reusable code.
 
-## Exercises
+# Exercises
 
 1. Write a function `circleArea` that calculates the area of a circle given its radius as a parameter. The formula for the area of a circle is `pi * r^2`, where `pi` is a constant (approximately 3.14159). Use the `Double` type for the radius and the result.
 
