@@ -14,8 +14,6 @@
 3. Functional Programming: Definitions and Foundations
 4. Abstraction: The Essence of CS 131
 
-Learning a new programming language can be both exciting and frustrating. In this course, we will explore Haskell and delve into the world of functional programming.
-
 ## Haskell: Getting Started
 
 ### REPL: Read-Eval-Print Loop
@@ -26,13 +24,15 @@ You can access an online REPL for Haskell on platforms like `repl.it`.
 ### Haskell: Basic Values and Types
 In Haskell, values represent specific instances of data, while types categorize these values. Let's take a look at some basic types in Haskell:
 
-- Integer: Whole numbers like 1, 2, 100000000000, -42, etc.
-- Double: Floating-point numbers like 3.14, 3.2831, -2.718, etc.
-- Bool: Boolean values, either True or False.
-- Char: Individual characters enclosed in single quotes, such as 'a', 'z', etc.
-- String: Sequences of characters enclosed in double quotes, like "hello", "world", etc.
+- `Integer`: Whole numbers like 1, 2, 100000000000, -42, etc.
+- `Double`: Floating-point numbers like 3.14, 3.2831, -2.718, etc.
+- `Bool`: Boolean values, either True or False.
+- `Char`: Individual characters enclosed in single quotes, such as 'a', 'z', etc.
+- `String`: Sequences of characters enclosed in double quotes, like "hello", "world", etc.
 
-Haskell also supports lists and tuples, which are commonly used types. Lists are denoted by square brackets (`[ ]`), and tuples are denoted by parentheses (`( )`).
+Note that in Haskell, all type names are uppercase. 
+
+Haskell also supports lists (`[ ]`) and tuples (`( )`) as commonly used types. Lists are homogeneous, meaning they can only store elements of the same type, and provide a flexible way to store ordered sequences of values. Tuples, on the other hand, are heterogeneous, meaning they can store elements of different types, and they have a fixed length. Lists are useful for representing ordered collections of the same type, while tuples allow combining different value types into a single structure.
 
 ```haskell
 -- Examples of basic values and types
@@ -52,6 +52,27 @@ True :: Bool
 It's important to note that in Haskell, all type names start with an uppercase letter. However, not all uppercase names are types.
 
 Operations can be performed on these values and types, such as arithmetic operations (`+`, `-`, `*`, `/`) and comparison operations (`==`, `/=`, `>`, `<`, `>=`, `<=`). Additionally, the `++` operator is used to concatenate strings and lists.
+
+### Example: Type Error!
+
+Type errors in Haskell occur when there is a mismatch between the expected type and the actual type of a value or expression. Let's examine a specific type error and its components.
+
+**Error Message:**
+```
+<interactive>:27:14: error:
+    • Couldn't match expected type ‘Bool’ with actual type ‘Char’
+    • In the expression: 'a'
+      In the expression: [True, True, 'a']
+      In an equation for ‘it’: it = [True, True, 'a']
+```
+
+**Location:** The error occurred at line 27, column 14 in the specified file.
+
+**Description:** The error arises when assigning a value of type `Char` to a list that expects elements of type `Bool`. The problematic expression is `[True, True, 'a']`.
+
+**Explanation:** In Haskell, lists are homogeneous, meaning they can only contain elements of the same type. However, the presence of the character `'a'` violates this rule by having a different type (`Char`) than the expected type (`Bool`).
+
+**Solution:** To resolve the error, ensure that the list contains only elements of the expected type (`Bool`). Remove the character `'a'` or replace it with a `Bool` value to achieve type consistency and avoid type errors.
 
 ### Haskell: Calling Functions
 Haskell is a functional programming language, which means that functions play a central role. Calling functions in Haskell is straightforward:
