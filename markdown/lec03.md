@@ -129,8 +129,6 @@ Now, let's move on to exploring currying and higher-order functions.
 
 ## Currying & Higher-order Functions
 
-## Currying & Higher-order Functions
-
 In Haskell, all functions are designed to take **only one argument**, which might seem counterintuitive at first. This concept, known as _currying_, allows functions with multiple parameters to be treated as a sequence of functions, each accepting a single argument.
 
 Let's consider the example of the `average` function:
