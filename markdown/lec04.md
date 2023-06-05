@@ -252,13 +252,6 @@ By using tuples and pattern matching, Haskell allows us to create and manipulate
 
 ## Parameterized Types
 
-### Recap: Building Lists in Haskell
-When constructing lists, the cons operator `(:)` allows us to create lists that can hold values of any type. The type signature of `(:)` is as follows:
-```
-(:) :: a -> [a] -> [a]
-```
-The left side of `(:)` has type `a`, representing an individual element, while the right side has type `[a]`, representing the rest of the list.
-
 ### Examining Types with `type` Command
 
 To check the type of an expression in GHCi, we use the `type` command followed by the expression. Here are some examples:

@@ -12,7 +12,8 @@ How would you approach this problem using an object-oriented programming languag
 
 ### Question 2: How Was Your Weekend?
 
-### Warm-up Problem Solution: Object-Oriented Approach
+## Warm-up Problem Solution
+### Object-Oriented Approach
 Let's consider an object-oriented solution using Java for representing and operating on shapes.
 
 ```java
@@ -52,7 +53,7 @@ class RightTriangle extends Shape {
 }
 ```
 
-## Haskell Solution using Data Types and Pattern Matching
+### Haskell Solution using Data Types and Pattern Matching
 In Haskell, we can represent shapes and perform operations on them using data types and pattern matching.
 
 ```haskell
@@ -77,7 +78,7 @@ shift shape deltaX deltaY =
     RightTriangle x y base height -> RightTriangle (x + deltaX) (y + deltaY) base height
 ```
 
-## Functional Programming vs. Object-Oriented Programming
+### Functional Programming vs. Object-Oriented Programming
 In object-oriented programming, shapes are objects that know how to perform different operations on themselves. In functional programming, functions know how to compute over different data types. The shift function in Haskell knows how to compute a shifted shape (circle, square, or right triangle), while the area function knows how to compute the area for each shape.
 
 Functional programming takes a different approach by separating data from behavior and treating functions as first-class citizens.
