@@ -2,18 +2,6 @@
 
 # Introduction to Haskell and Functional Programming
 
-## Today's Topics
-1. The Read-Eval-Print Loop (REPL)
-2. A Tour of Haskell:
-   - Basic values and types
-   - Calling functions
-   - Variables, bindings, and scope
-   - Writing code in files
-   - Defining functions
-   - Types
-3. Functional Programming: Definitions and Foundations
-4. Abstraction: The Essence of CS 131
-
 ## Haskell: Getting Started
 
 ### REPL: Read-Eval-Print Loop

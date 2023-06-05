@@ -2,14 +2,6 @@
 
 # Functions = Values
 
-## Today's Topics
-- Referential transparency
-- Lazy evaluation
-- Operators
-- Currying
-- Higher-order functions
-- Composition
-
 ## Recap: Expressions, Functions, and Functional Programming
 
 In this course, we have been exploring the world of programming languages, particularly focusing on expressions, functions, and the principles of functional programming. Before we delve into today's topics, let's quickly review some important concepts.
