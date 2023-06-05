@@ -63,6 +63,7 @@ Type errors in Haskell occur when there is a mismatch between the expected type 
 **Solution:** To resolve the error, ensure that the list contains only elements of the expected type (`Bool`). Remove the character `'a'` or replace it with a `Bool` value to achieve type consistency and avoid type errors.
 
 ### Haskell: Calling Functions
+
 Haskell is a functional programming language, which means that functions play a central role. Calling functions in Haskell is straightforward:
 
 ```haskell
@@ -75,6 +76,49 @@ not True      -- Negates the boolean value True
 ```
 
 Functions in Haskell can also be used with infix operators, which require parentheses when used with other operators or expressions.
+
+```haskell
+-- Examples of function calls with infix operators
+True && False  -- Logical AND between True and False
+not False || True  -- Logical OR between the negation of False and True
+2 / 3   -- Floating-point division of 2 by 3
+div 1 2  -- Integer division of 1 by 2
+mod 4 2  -- Modulo operation: remainder of dividing 4 by 2
+```
+
+When calling functions with multiple arguments, we separate the function name and arguments with spaces. However, if an argument itself contains spaces, we need to enclose it in parentheses to avoid confusion.
+
+```haskell
+-- Example of function call with multiple arguments
+max (-42) 42  -- Returns the maximum value between -42 and 42
+```
+
+It's important to note that function calls in Haskell do not require parentheses around the arguments, as in some other programming languages. However, using parentheses can improve readability, especially when dealing with complex expressions.
+
+```haskell
+-- Function calls with parentheses for clarity
+max (42 + 1) 100  -- Returns the maximum value between 42 + 1 and 100
+```
+
+Haskell follows operator precedence rules when evaluating expressions. If parentheses are not used to group sub-expressions, the evaluation order can be affected.
+
+```haskell
+-- Example of expression evaluation without parentheses
+not False || True  -- Evaluates (not False) || True
+```
+
+In this example, the `not False` expression is evaluated first, and then the result is combined with `True` using the logical OR operator `||`. The use of parentheses can explicitly specify the intended grouping.
+
+```haskell
+-- Example of expression evaluation with parentheses
+(not False) || True  -- Evaluates not (False || True)
+```
+
+By using parentheses, we can control the evaluation order and make the code more readable.
+
+When in doubt, it's perfectly fine to use parentheses liberally until you become more comfortable with Haskell's syntax and operator precedence rules. Over time, you'll develop a sense of when to include or omit parentheses for clarity.
+
+By understanding how to call functions, use infix operators, and employ parentheses effectively, you can write concise and expressive Haskell code.
 
 ### Haskell: Variables, Bindings, and Scope
 In Haskell, we can associate variable names with expressions through bindings. This process is similar to assignment in other programming languages. Let's explore some concepts related to variables, bindings, and scope in Haskell.

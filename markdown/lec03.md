@@ -194,4 +194,3 @@ In these examples, `(.)` composes the functions `increment`, `double`, and `squa
 
 Function composition allows us to write elegant and concise code. By breaking down complex operations into smaller, reusable functions, we can improve code modularity and readability.
 
-In summary, by understanding currying, higher-order functions, and function composition, we gain powerful tools for creating flexible and modular code in Haskell.
