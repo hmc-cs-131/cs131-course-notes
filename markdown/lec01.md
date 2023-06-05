@@ -28,7 +28,6 @@ To give you an idea of the course flow, here's a breakdown of a typical week in 
 |                            |                            |         | Modules available<br>Flexible class<br>HW write-up available|          |        |          |
 | Sub-module completion due <br>Previous assignment due| HW fully posted <br>In-class HW kickoff <br>Required Class |         | Sub-module completion due <br>Next Modules posted <br>Flexible class|          |        |          |
 | **Current Assignment due**     |                            |         |                             |          |        |          |
-|  
 
 And here are the deadlines and class format for a typical week: 
 
