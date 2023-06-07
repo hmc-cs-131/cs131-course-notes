@@ -461,9 +461,7 @@ By using wildcards, we indicate that we are not interested in those particular v
 
 There are different ways to write functions in Haskell, and you may explore other syntax options, such as using case expressions. However, in this lecture, we focused on using pattern matching on function arguments.
 
-# Recursive Data Types and Functions
-
-## Recursive Data Types
+## Recursive Data Types with Lists
 
 Recursive data types in Haskell allow us to define complex data structures that can include references to objects of the same type within themselves. One quintessential example of a recursive data type is a list. We can define a list in Haskell using the keyword `data` and the recursive structure of a list can be expressed as follows:
 
@@ -571,7 +569,7 @@ In this case, we pattern match on the `Cons` constructor to extract the first el
 Now, you can try implementing the `listSum` function and test it with different lists of numbers.
 
 
-## Recursive Data Types, Continued
+## Recursive Data Types with Trees
 
 Recursive data types in Haskell allow us to define complex data structures that can include references to objects of the same type within themselves. Let's consider the example of a string binary tree.
 
@@ -653,7 +651,7 @@ let exclamationTree = treeMap (++ "!") tree2
 
 Here, we apply the function `(++ "!")` to all nodes in `tree2`, appending an exclamation mark to each string. The resulting tree is stored in the `exclamationTree` variable.
 
-## Recursive Data Types
+## Recursive Data Types: IntList
 We can define recursive data types in Haskell. Let's consider a simple example of creating lists.
 
 ```haskell
