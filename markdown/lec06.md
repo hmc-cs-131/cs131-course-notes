@@ -4,28 +4,88 @@
 
 In this lecture, we explore the concept of code as data and delve into the evaluation of expressions. We will cover various topics, including the representation of abstract syntax, syntax and semantics, concrete and abstract syntax, and the evaluation of expressions with variables.
 
-## CS131: Past, Present, Future
+## CS131: Past, Present, Future (Recap)
 
-To understand the current landscape of CS131, it is essential to look back at its historical and social context. Influential figures such as Babbage, Lovelace, Turing, and Church paved the way for the development of computer science. Functional programming concepts, such as functions as values, higher-order functions, pattern matching, recursion, recursive data structures, and Haskell programming basics, form the foundation of CS131.
+At the beginning of the course, we delved into the historical context of programming and computation, discussing notable figures such as Charles Babbage, Ada Lovelace, Alan Turing, and Alonzo Church. We explored their perspectives on programming and computation.
 
-## What kinds of inputs/outputs can a program have?
+We then shifted our focus to functional programming concepts, such as functions as values, higher-order functions, pattern matching, recursion, and recursive data structures. We emphasized the power and versatility of functions as fundamental building blocks in programming. Simultaneously, we learned the syntax and features of Haskell, which served as our primary language for learning these concepts.
 
-Before delving into code as data, let's examine the various types of inputs and outputs that programs can handle. These examples will help us understand the versatility of programs:
+## Programs Operating on Different Entities
 
-- **Program 1:** Input: List of integers, Output: Average of the numbers
-- **Program 2:** Input: Coordinates, Output: Shortest path
-- **Program 3:** Input: Text file, Output: Spelling errors
-- **Program 6:** Input: Source code (representation of a program), Output: Nicely formatted code
-- **Program 7:** Input: Source code (representation of a program), Output: Binary machine code
-- **Program 8:** Input: Source code (representation of a program), Output: Value (result of executing the program)
+Traditionally, we think of programs operating on inputs and producing outputs. For example:
+
+- A program that takes a list of integers and returns their average.
+- A program that takes coordinates and computes the shortest path between them.
+- A program that analyzes a text file and identifies spelling errors.
+
+However, we can also create programs that operate on code itself. Consider the following examples:
+
+- A program that counts the number of lines of code.
+- A program that formats source code to improve readability.
+- A program that translates source code into lower-level machine code (compiler).
+- A program that interprets or evaluates source code to produce a value.
+
+These programs demonstrate the versatility of code and the ability to manipulate it programmatically.
 
 ## Code as Data
 
-The fundamental concept we will explore is "code is data." In programming, we can treat code as structured data, similar to other data types we manipulate in our programs. By representing code as data, we gain the ability to analyze, transform, and manipulate it programmatically.
+One fundamental concept we are exploring is that **code is data**. In programming, we can treat code as structured data, similar to other data types we manipulate in our programs. By representing code as data, we gain the ability to analyze, transform, and manipulate it programmatically.
+
+Certainly! Here are the notes organized under the heading "Expressions and Statements":
+
+## Expressions and Statements
+
+Expressions and statements are fundamental elements in programming languages. Let's define these terms:
+
+- **Expression**: An expression is a computation that calculates a value. In functional programming, computation primarily occurs through the evaluation of expressions. Functional languages, such as Haskell, closely associate with expressions.
+
+- **Statement**: A statement is a computation that is performed for its effect. It modifies the state of a program, such as changing the value of a variable. Statements are prevalent in imperative languages like C and C++. Unlike expressions, statements do not have a value themselves.
+
+A side effect refers to any action performed by an expression or statement besides calculating a value. In functional languages, minimizing side effects is a key principle. For instance, in languages like Racket, side effects are limited and require explicit handling. In Haskell, side effects are completely absent.
+
+It's worth noting that some consider a statement as code with side effects. However, this notion is somewhat redundant since the purpose of statements is to produce effects.
+
+To illustrate the distinction between expressions and statements, let's examine some examples in C and C++:
+
+1. **Expressions**
+   
+   ```c
+   10 * Z + 4
+   ```
+   
+   This example consists of multiple expressions combined together. Each component is itself an expression:
+   
+   - `10 * Z`: Evaluating this expression yields a value based on the current value of `Z`.
+   - `10 * Z + 4`: This entire expression is the sum of the previous expression and the constant `4`.
+   - `10`, `Z`, `4`: These are individual expressions with their respective values.
+
+2. **Statements**
+   
+   ```c
+   x++
+   ```
+   
+   The increment statement `x++` is considered a statement because it modifies the value of `x`. Interestingly, it can also be seen as an expression since it returns a value: the original value of `x` before the increment operation.
+
+   For example, assigning the result of `x++` to `Y` would give `Y` a value based on the original value of `x` before incrementing.
+
+   The line between statements and expressions can sometimes blur, as in this case.
+
+3. **Pure Statements**
+   
+   ```c
+   x = y + z;
+   ```
+
+   This example represents a statement that executes to modify the variables `x` and `y`. It does not produce a value that can be used in further computations.
+
+By examining these examples, we can observe the differences between expressions and statements. While expressions yield values when evaluated, statements focus on modifying the program's state without producing values.
+
+Understanding the distinction between expressions and statements is crucial for working with functional languages like Haskell, where side effects are minimized. Emphasizing expressions enables a more declarative and functional programming style.
 
 ## Syntax and Semantics
 
-To understand code fully, we need to distinguish between syntax and semantics. 
+To understand code fully, we also need to distinguish between syntax and semantics. 
 
 - **Syntax** refers to what the programmer writes or is allowed to write. It encompasses the rules and structure of the programming language. For example, in C++, the `^` symbol is a valid binary operator.
 - **Semantics** deals with the meaning and behavior of code. It describes how the code is interpreted and executed. For instance, the `^` operator, when applied to two integers, performs bitwise exclusive-or.

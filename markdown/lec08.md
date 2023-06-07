@@ -1,6 +1,6 @@
 ### CS 131: Programming Languages
 
-# Recap: Defining and Applying Functions
+#  Defining and Applying Functions
 
 ## Syntax and Semantics
 
@@ -513,6 +513,8 @@ eval env (Apply fexp exp) =
 ```
 
 We can observe that the `eval` function doesn't handle function definitions (`FuncDef`) and function applications (`Apply`) correctly. In the case of `FuncDef`, it simply returns the function definition itself without capturing the environment. Similarly, in the case of `Apply`, it attempts to destructure a `FuncDef` without considering the environment.
+
+## Closures
 
 To fix this issue, we need to introduce the concept of closures. A closure is a combination of a function and the environment in which it was defined. It allows us to capture the environment and associate it with the function, ensuring that variables within the function have access to their correct bindings.
 
