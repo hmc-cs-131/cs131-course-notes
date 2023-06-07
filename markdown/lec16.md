@@ -60,7 +60,7 @@ While Haskell is a powerful and expressive language, the principles and ideas le
 
 ## Some Topics in this Class
 
-Throughout the course, several topics will be covered, each providing valuable insights into programming language concepts. Here are some of the topics presented in a bumper sticker style:
+Throughout the course, several topics have been covered, each providing valuable insights into programming language concepts. Here are some of the topics presented in a bumper sticker style:
 
 - **Functional Programming**: Functions are treated as data, enabling powerful abstractions and expressive programming.
 - **Pattern Matching**: Leveraging the structure of data for manipulation and analysis, making code concise and clear.

@@ -46,9 +46,7 @@ To establish the well-typedness of a program, we can show that the typing rules 
 
 ## Type Environments
 
-Type environments play a crucial role in type checking. They store information about the types of variables in a program and provide a context for
-
- type inference and checking.
+Type environments play a crucial role in type checking. They store information about the types of variables in a program and provide a context for type inference and checking.
 
 A type environment is a mapping that associates variables with their corresponding types. It keeps track of the types of variables encountered during the program's execution and ensures that expressions and statements use variables of the correct types.
 
@@ -63,7 +61,3 @@ In type checking, we use typing rules to establish the relationships between exp
 Type checking involves analyzing expressions, statements, and their interactions to ensure type compatibility, type inference, and type consistency. It helps identify type errors and enforce the correct usage of types in the program.
 
 By understanding type systems, typing rules, and type checking, we can reason about the correctness, behavior, and safety of programs. Types provide a powerful tool for catching errors, enabling efficient code generation, and ensuring the proper interpretation of data.
-
-## Conclusion
-
-Types are a fundamental concept in programming languages that provide structure, interpretation, and restrictions on data. They enable the detection of type conflicts, support efficient code generation, and enforce proper data manipulation. Understanding types, type systems, and type checking is essential for writing well-typed and reliable programs.
