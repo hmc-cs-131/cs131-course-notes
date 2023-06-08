@@ -156,7 +156,7 @@ Programs can be represented as strings or tree data structures, depending on the
 ## What CS 131 is Not
 CS 131 is not a traditional programming languages class that covers one language per week. Such an approach quickly becomes outdated as languages evolve. Instead, this course takes a more fundamental approach, emphasizing key concepts and principles that transcend specific languages.
 
-We recognize that a programming languages class that focuses on individual languages might not be the best approach. Languages change and evolve over time, rendering such an approach easily outdated. For example, a list of languages from 30 years ago differs significantly from what is used in modern development. Functional programming, on the other hand, provides a powerful and enduring paradigm that is rapidly growing in popularity.
+We recognize that a programming languages class that focuses on individual languages might not be the best approach. Languages change and evolve over time, rendering such an approach easily outdated. For example, a list of popular languages from 30 years ago would differ significantly from what is used in modern development. Functional programming, on the other hand, provides a powerful and enduring paradigm that is rapidly growing in popularity.
 
 ## The Power of Functional Programming
 Functional programming, our primary focus in this course, offers numerous benefits. By eliminating mutable state and emphasizing function evaluation, functional programming simplifies code, enhances modularity, and encourages a new way of thinking about computation. It complements knowledge of other paradigms and finds applications in critical domains like security and finance.
