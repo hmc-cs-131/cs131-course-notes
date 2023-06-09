@@ -20,9 +20,6 @@ In this course, we emphasize **Flexibility, Community, and Certainty**. Here's a
 - A project and three quizzes will help you apply your knowledge.
 - The course follows a highly structured and scaffolded schedule to ensure a smooth learning experience.
 
-## Personal Item Sharing
-As a way to get to know each other, take a moment to find a personal item that you want to share with the class. This can be a physical object or a picture on your device. In groups of 3 (or 2 or 4), introduce yourselves and share the item you brought. Explain why it is important to you. This activity aims to foster a sense of community and provide insights into each other's interests.
-
 ## A "Typical Week" in CS 131
 To give you an idea of the course flow, here's a breakdown of a typical week in CS 131:
 | Sunday                     | Monday                     | Tuesday | Wednesday                   | Thursday | Friday | Saturday |
@@ -60,9 +57,6 @@ Overall, our aim is to provide a structured yet adaptable learning experience th
 
 ## What is a Programming Language?
 In this exercise, take a moment to reflect on the definition of a programming language. Write a definition that you believe would be agreed upon by everyone. Alternatively, write a definition that you personally agree with but others may have differing opinions on. This exercise encourages critical thinking about the nature and purpose of programming languages.
-
-## Module 1.1 on Sakai
-To continue covering the remaining material from these slides, please complete Module 1.1 on Sakai. The module pages contain lecture videos and questions to reinforce your understanding. Regular participation and providing feedback help improve the learning experience for everyone.
 
 ## Upcoming Tasks
 Here's a summary of the tasks to be completed this week:
