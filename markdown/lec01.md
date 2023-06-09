@@ -113,19 +113,19 @@ The questions about knowledge and proof persisted. David Hilbert famously procla
 
 Alan Turing and Alonzo Church made groundbreaking contributions to understanding computation. Turing proposed the idea of Turing Machines, simple theoretical devices capable of universal computation. Church developed the Lambda Calculus, a formal system for manipulating symbols that deals with functions. Both Turing Machines and Lambda Calculus contributed to our understanding of computation and the limits of what can be computed.
 
-### Turing Machines
+#### Turing Machines
 
 Alan Turing made a significant contribution to the understanding of computation with his proposal of Turing machines. Turing machines are abstract state machines capable of universal computation. They operate by transitioning between states and manipulating symbols on an infinite tape. Turing machines can perform various computations, but Turing also discovered their limitations. The halting problem demonstrated that there are computations that Turing machines cannot definitively determine, whether a given program will halt or run indefinitely.
 
-### Lambda Calculus
+#### Lambda Calculus
 
 Alonzo Church developed lambda calculus, a formal system for manipulating symbols, with a particular focus on functions. Lambda calculus deals with the forms and structures of expressions, emphasizing the shape of functions. Church explored the boundaries of what can be computed using lambda calculus and also discovered its limitations. He showed that there are computations that lambda calculus cannot express or compute, leading to the notion of incompleteness in lambda calculus.
 
-### Equivalence of Turing Machines and Lambda Calculus
+#### Equivalence of Turing Machines and Lambda Calculus
 
 Despite their different foundations, Turing machines and lambda calculus were found to be equivalent in terms of computational power. Turing and Church realized that any computation expressible in one system could be simulated in the other. This remarkable insight led to the formulation of the Church-Turing thesis, asserting that any computable problem can be solved by either a Turing machine or lambda calculus.
 
-### Insight through Equivalence
+#### Insight through Equivalence
 
 The discovery of equivalence between seemingly disparate computational systems has been a powerful tool for gaining insight. It allows researchers to delve into the core essence of different systems and uncover hidden connections. Examples of such insights include the relationship between graph theory and linear algebra and the equivalence of logic and type theory.
 
@@ -213,7 +213,7 @@ The design choices made by programming language creators significantly impact th
 
 Programming languages are not mere sets of syntax rules; they are living technologies created by people. The languages we use influence the way we think, the problems we choose to solve, and the solutions we develop. Considering the impact of programming languages on society, culture, and diversity is essential.
 
-### Commonly Used Programming Languages
+#### Commonly Used Programming Languages
 
 - C (Dennis Ritchie)
 - Java (James Gosling)
@@ -228,5 +228,3 @@ Programming languages are not mere sets of syntax rules; they are living technol
 
 It is important to acknowledge that this list predominantly features male language designers, and most are of white ethnicity. While programming languages are not limited to specific genders or ethnicities, the lack of diversity raises questions about the potential impact on language design and biases in the industry.
 
-## Conclusion
-Programming languages are powerful tools that enable us to express computations and tackle complex problems. In CS 131, our goal is to delve into the fundamental principles and concepts that form the foundation of programming languages. By developing a deep understanding of these principles and gaining proficiency in functional programming, we can enhance our skills as programmers. This proficiency allows us to harness the unique strengths of various languages and approach problem-solving from diverse perspectives. With this knowledge, we can become more effective and versatile programmers, equipped to tackle the challenges of the ever-evolving programming landscape.
