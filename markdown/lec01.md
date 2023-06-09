@@ -1,6 +1,8 @@
 ### CS 131: Programming Languages
 # Welcome to Programming Languages
 
+**Notes: these notes include information shared during the first day of class, as well as in Module 1.1.**
+
 ## Course Information
 ### Professors
 - Lucas Bang, "Prof. Bang" (he/him)
@@ -144,14 +146,9 @@ Programming languages exist on a spectrum of abstraction. At the lowest level, w
 
 
 ## Programs = Data!
-**Programs can be treated as data!** This fundamental insight has revolutionized computer science and led to the development of modern computing systems.
+As we discussed earlier, at the turn of the 20th century, mathematicians sought to automate theorem proving but encountered insurmountable challenges. Gödel, Church, and Turing, prominent figures in this pursuit, shared a common thread of self-referentiality in their approaches. Gödel used logic to reason about theorems, Church explored functions operating on functions, and Turing investigated machines reasoning about machines. These explorations laid the foundation for the realization that there is no intrinsic difference between programs and data.
 
-### Historical Context
-At the turn of the 20th century, mathematicians sought to automate theorem proving but encountered insurmountable challenges. Gödel, Church, and Turing, prominent figures in this pursuit, shared a common thread of self-referentiality in their approaches. Gödel used logic to reason about theorems, Church explored functions operating on functions, and Turing investigated machines reasoning about machines. These explorations laid the foundation for the realization that there is no intrinsic difference between programs and data.
-
-### Equivalence of Programs and Data
-The profound insight that emerged from these endeavors is the equivalence of programs and data. Although it dashed the dreams of automated theorem proving, it gave birth to computer science as a field. Practical examples demonstrate the interchangeability of programs and data. In app stores, programs are downloaded as files and executed as applications. Interpreters, like Python, take programs as input and execute them, while compilers, such as Clang, transform programs into new programs in different languages.
-Programs can be represented as strings or tree data structures, depending on the interpreter or compiler being used. Strings represent programs as sequences of characters, while tree structures use nodes to represent values and operations.
+The profound insight that emerged from these endeavors is the equivalence of programs and data. Although it dashed the dreams of automated theorem proving, it gave birth to computer science as a field. Practical examples demonstrate the interchangeability of programs and data. In app stores, programs are downloaded as files and executed as applications. Interpreters, like Python, take programs as input and execute them, while compilers, such as Clang, transform programs into new programs in different languages. Programs can be represented as strings or tree data structures, depending on the interpreter or compiler being used. Strings represent programs as sequences of characters, while tree structures use nodes to represent values and operations.
 
 ## What CS 131 is Not
 CS 131 is not a traditional programming languages class that covers one language per week. Such an approach quickly becomes outdated as languages evolve. Instead, this course takes a more fundamental approach, emphasizing key concepts and principles that transcend specific languages.
