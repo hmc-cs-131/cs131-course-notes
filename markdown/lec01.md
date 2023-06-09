@@ -58,16 +58,6 @@ Overall, our aim is to provide a structured yet adaptable learning experience th
 ## What is a Programming Language?
 In this exercise, take a moment to reflect on the definition of a programming language. Write a definition that you believe would be agreed upon by everyone. Alternatively, write a definition that you personally agree with but others may have differing opinions on. This exercise encourages critical thinking about the nature and purpose of programming languages.
 
-## Upcoming Tasks
-Here's a summary of the tasks to be completed this week:
-- Complete the class participation/feedback form.
-- Finish Module 1 by Sunday, 11:59 PM.
-- Submit HW1 by Sunday, 11:59 PM.
-- Fill out CS 131 intro survey to subit your GitHub ID.
-- (optional but encouraged!) Attend Prof. Bang's office hours today from 5-6 PM in this room.
-- On Monday, the HW2 kickoff will take place, along with a Haskell programming environment demo. We'll ensure everyone feels prepared and comfortable to start HW2 and Module 2.
-
-
 ## A Little History and Herstory (Theirstory?)
 
 ### The Era of Human Computers
