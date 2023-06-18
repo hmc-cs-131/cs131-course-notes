@@ -31,8 +31,6 @@ These programs demonstrate the versatility of code and the ability to manipulate
 
 One fundamental concept we are exploring is that **code is data**. In programming, we can treat code as structured data, similar to other data types we manipulate in our programs. By representing code as data, we gain the ability to analyze, transform, and manipulate it programmatically.
 
-Certainly! Here are the notes organized under the heading "Expressions and Statements":
-
 ## Expressions and Statements
 
 Expressions and statements are fundamental elements in programming languages. Let's define these terms:
