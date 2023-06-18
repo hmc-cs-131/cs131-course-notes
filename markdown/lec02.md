@@ -412,10 +412,3 @@ In the refactored code above, we introduced a helper function `f` to eliminate t
 
 Abstraction is a fundamental concept in CS 131, allowing us to write clean and reusable code.
 
-## Exercises
-
-1. Write a function `circleArea` that calculates the area of a circle given its radius as a parameter. The formula for the area of a circle is `pi * r^2`, where `pi` is a constant (approximately 3.14159). Use the `Double` type for the radius and the result.
-
-2. Implement a function `isPrime` that takes an integer as input and returns `True` if it is a prime number, and `False` otherwise. A prime number is a positive integer greater than 1 that has no positive divisors other than 1 and itself.
-
-Try solving these exercises and test your functions in the Haskell REPL.
