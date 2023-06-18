@@ -18,11 +18,6 @@ Consider the problem from an object-oriented perspective. How would you represen
 Now that you've had some time to think about the object-oriented approach to working with shapes, I encourage you to discuss your ideas with others. Once you've finished discussing shapes, take a moment to share how your weekend went. Let us know how you're doing!
 
 ## Warm-up Problem Solution
-Certainly! Here's the combined set of notes that include the Java code for the object-oriented approach:
-
-# CS131 Programming Languages - Week Three Lecture Notes
-
-## Warm-up Problem: Working with Shapes
 
 ### Object-Oriented Approach
 In the warm-up problem, we explored how to work with shapes using an object-oriented approach. Let's recap the solution and highlight the important components.
