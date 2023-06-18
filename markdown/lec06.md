@@ -173,9 +173,7 @@ eval (BinOp left TimesOp right) = eval left * eval right
 eval (BinOp left DivOp   right) = eval left / eval right
 ```
 
-By recursively evaluating sub
-
-expressions and applying the appropriate operations, we can compute the final result of an expression.
+By recursively evaluating subexpressions and applying the appropriate operations, we can compute the final result of an expression.
 
 ### Evaluating Expressions with Variables
 
