@@ -169,9 +169,7 @@ Let's consider some exercises to test our understanding of monads in the `Maybe`
    ```
    Given `value :: Maybe Integer` where `Maybe` is a monad, is the expression correct or incorrect? If correct, what is the result? If incorrect, what is the problem, and how should we fix it?
 
-4.
-
- **Exercise 4**
+4. **Exercise 4**
    ```haskell
    e4 :: Maybe Integer
    e4 = do
