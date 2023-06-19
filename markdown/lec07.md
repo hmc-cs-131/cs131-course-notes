@@ -242,13 +242,9 @@ Let's explore some examples to gain a better understanding of expression substit
 
 These examples showcase how expression substitution operates by replacing variables with corresponding expressions.
 
-# Lecture: Evaluating Function Application
+## Evaluating Function Application
 
-## Introduction
-
-In this section, we will explore the concept of evaluating function application in programming languages. We will discuss the semantics of applying a function, the evaluation process, and the challenges of handling functions with multiple arguments. We will also examine the implementation details in Haskell and understand the significance of call-by-name and call-by-value evaluation strategies.
-
-## Applying a Function
+### Applying a Function
 
 Applying a function involves substituting the function's argument into the function's body and evaluating the result. Let's consider an example to understand this process better:
 
@@ -258,7 +254,7 @@ Apply (FuncDef "x" (BinOp (Var "x") PlusOp (Num 1))) (Num 5)
 
 Here, we apply the "plus one" function to the argument `5`. The semantics of applying a function entail substituting `5` for the parameter `x` in the function's body.
 
-## Evaluating Function Application
+### Evaluating Function Application
 
 To evaluate function application, we need to define how functions and their arguments are evaluated. In Haskell, we can implement the evaluation process using the `eval` function. The implementation of `eval` considers various cases based on the type of expression being evaluated.
 
@@ -312,7 +308,7 @@ eval (Apply (FuncDef varname body) arg) =
 
 - The argument (`arg`) is first evaluated, and the resulting value (`val`) is substituted for the parameter (`Var varname`) in the body of the function. Finally, the substituted expression is evaluated.
 
-## Handling Functions with Multiple Arguments
+### Handling Functions with Multiple Arguments
 
 So far, our examples have only involved functions with a single argument. However, what if we need functions with multiple arguments? Let's consider an example:
 
