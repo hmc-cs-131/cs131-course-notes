@@ -7,16 +7,18 @@ In this lecture, we will explore the concept of types and their role in programm
 ## Understanding Types
 To warm up, let's consider the following question: What is the same and what is different about this data? 
 
-| 1617972849                 | Big-Endian Integer         |
-| 1900965984                 | Little-Endian Integer      |
-| 1.02223624099482e+30       | IEEE 32-bit Floating Point |
-| `pNq                        | ASCII/UTF-8                |
-| 恰乱                       | UTF-16                     |
+| Value | Description |
+|-------|-------------|
+| 1617972849 | Big-Endian Integer |
+| 1900965984 | Little-Endian Integer |
+| 1.02223624099482e+30 | IEEE 32-bit Floating Point |
+| `pNq | ASCII/UTF-8 |
+| 恰乱 | UTF-16 |
 | ld h,b; ld (hl),b; ld c,(hl); ld (hl),c | Z80 Assembly (8-bit instructions) |
-| bra pc+0x70; nop           | m68k Assembly (16-bit instructions) |
-| call pc+0x81c139c4         | x86 (variable-length instructions) |
-| 0x 60 70 4E 71             | Hexadecimal notation       |
-| 01100000011100000100111001110001 | Raw bits (binary)           |
+| bra pc+0x70; nop | m68k Assembly (16-bit instructions) |
+| call pc+0x81c139c4 | x86 (variable-length instructions) |
+| 0x 60 70 4E 71 | Hexadecimal notation |
+| 01100000011100000100111001110001 | Raw bits (binary) |
 
 Looking at the provided example, we can observe that the 32 bits at the bottom can be interpreted in various ways. Depending on how we consider these bits, we can translate them into integers, ASCII characters, Unicode characters, assembly language instructions, or even decimal numbers. The key point here is that without knowing how to interpret the bits, we cannot fully understand their meaning. This is where types come into play. Type information tells us how to interpret and understand data stored in computer memory.
 
