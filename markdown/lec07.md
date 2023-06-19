@@ -2,7 +2,6 @@
 
 # Syntax, semantics, evaluation of simple expressions
 
-In this lecture, we will provide a detailed recap of the important concepts related to syntax, semantics, and evaluation of simple expressions. We will also explore the representation of abstract syntax and the evaluation of expressions involving variables and functions.
 
 ## Syntax, Abstract Syntax, and Semantics
 
