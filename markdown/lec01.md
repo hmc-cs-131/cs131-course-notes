@@ -12,7 +12,7 @@
 
 ## Course Mechanics
 In this course, we emphasize **Flexibility, Community, and Certainty**. Here's an overview of how the course operates:
-- All course materials, including videos, readings, and exercises, are available on Sakai.
+- All course materials, including videos, readings, and exercises, are available on Canvas.
 - We follow a flipped classroom model where you engage with the course materials before the class session.
 - Pair programming is encouraged to foster collaboration and learning from peers.
 - We provide office and tutoring hours to address your questions and provide additional support.
