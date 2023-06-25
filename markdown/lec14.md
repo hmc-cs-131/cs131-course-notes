@@ -63,16 +63,14 @@ For example, assigning an integer value to an integer variable, performing arith
 
 In statically typed languages like Haskell or C++, the type checking is performed at compile-time, ensuring that the program is well-typed before execution. In dynamically typed languages like Python or Racket, type errors may be discovered during runtime.
 
-
-### Example of a Well-Typed Program
-To illustrate a well-typed program, let's consider an expression in Haskell:
+#### Example: Is This Expression Well-Typed?
+Consider the following expression:
 
 ```haskell
-x = 1
-x + 1
+let x = 1 in x + 1
 ```
 
-In this example, we define a variable `x` with the value of 1. Later, we use `x` in an expression where we add 1 to it. Since both `x` and the number 1 are integers, the addition operation is well-defined for them. Therefore, this program is well typed.
+The expression assigns the value 1 to the variable `x`, which is of type integer. It performs an addition operation between `x` and 1 using the `+` operator, which is defined for integers. Therefore, the expression is well-typed.
 
 It is worth noting that Haskell, unlike some other languages, enforces type checking before running a program. This means that a program will not be executed unless it is well typed.
 
@@ -80,11 +78,15 @@ It is worth noting that Haskell, unlike some other languages, enforces type chec
 There is no one-size-fits-all type system, and different languages may adopt different approaches based on design choices and language requirements. Therefore, it is essential to consider the specific needs and goals when designing a type system.
 
 ### Handling Type Errors
-Different languages handle type errors in distinct ways. Here are a few examples:
+Different languages handle type errors in distinct ways. For instance, let's consider the following program:
 
-1. JavaScript: When adding a value to a string, JavaScript attempts to convert the value into a string and performs string concatenation. For instance, `"one" + 2` would result in the string "one2".
+```
+“one” + 2
+```
 
-2. Perl: In Perl, adding a string to a numeric value yields different results. If the string contains a numeric character, it converts the string into an integer and performs addition accordingly. Otherwise, it treats the string as zero. For example, adding the string "one" to the number 2 results in the value 3.
+1. JavaScript: When adding a value to a string, JavaScript attempts to convert the value into a string and performs string concatenation. `"one" + 2` would result in the string "one2".
+
+2. Perl: In Perl, adding a string to a numeric value yields different results. If the string contains a numeric character, it converts the string into an integer and performs addition accordingly. Otherwise, it treats the string as zero. Adding the string "one" to the number 2 results in the value 3.
 
 3. Haskell: Haskell, being statically typed, would consider the expression `"one" + 2` as a type error. It recognizes that adding a string to a number is invalid, as the types are incompatible.
 
@@ -99,20 +101,39 @@ Type systems can be categorized into two main types: static typing and dynamic t
 
 ## Formalizing Type Checking: Grammars
 
-To represent possible types and their relationships, we can use grammars. Grammars provide a way to specify the syntax and structure of types in a concise and formal manner.
+To represent possible types and their relationships, we can use grammars. Grammars provide a way to specify the syntax and structure of types in a concise and formal manner. This syntax is similar to Haskell but much more simplified. If there are things that look Haskell-y, then they probably behave in the same way.
 
-In type checking, we use typing rules to establish the relationships between expressions and their types. By applying the typing rules and following the grammar specifications, we can ensure that a program is well-typed.
 
-Type checking involves analyzing expressions, statements, and their interactions to ensure type compatibility, type inference, and type consistency. It helps identify type errors and enforce the correct usage of types in the program.
 
-By understanding type systems, typing rules, and type checking, we can reason about the correctness, behavior, and safety of programs. Types provide a powerful tool for catching errors, enabling efficient code generation, and ensuring the proper interpretation of data.
+Recognizing a grammar as a specification is an essential skill in CS131. It allows us to understand what the grammar is trying to tell us.
 
 ## Typing Rules
+
 Typing rules define the rules and constraints for assigning types to expressions and statements in a programming language. They specify how the types of subexpressions and variables influence the type of the overall expression or statement.
 
-Typing rules typically include rules for basic types, operators, variables, functions, control flow structures, and more. They define the conditions under which a program is considered well-typed.
+Typing rules include rules for basic types, operators, variables, functions, control flow structures, and more. They define the conditions under which a program is considered well-typed.
 
-To establish the well-typedness of a program, we can show that the typing rules are satisfied, similar to writing a proof. This connection between types and proofs is known as the Curry-Howard Correspondence, where a proof corresponds to a program, and the formula it proves corresponds to the type of the program.
+To establish the well-typedness of a program, we can show that the typing rules are satisfied, similar to writing a proof. This connection between types and proofs is known as the Curry-Howard Correspondence.
+
+## Curry-Howard Correspondence
+
+The Curry-Howard Correspondence is a fundamental concept that establishes a connection between types and proofs. It states that a proof is a program, and the formula it proves corresponds to the type for the program.
+
+In other words, showing that a program is well-typed is equivalent to writing a proof. Just as a proof provides evidence for the truth of a mathematical statement, a well-typed program provides evidence for the correctness of its computations.
+
+The Curry-Howard Correspondence is named after mathematicians Haskell Curry and William Howard, who independently discovered the connection between types and proofs. It highlights the deep relationship between logic, programming languages, and type systems.
+
+## Types and Proofs
+
+In CS81, you learned about Natural Deduction, which follows the structure:
+
+```
+premise1    premise2  …    premiseN
+----------------------------------
+        conclusion
+```
+
+When it comes to type systems, we can view typing rules as analogous to the premises and conclusions in natural deduction. By applying the typing rules, we can infer the type of an expression or program, just as we can derive conclusions based on premises in a proof.
 
 ## Type Environments
 
