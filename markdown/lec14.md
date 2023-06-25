@@ -101,7 +101,7 @@ Type systems can be categorized into two main types: static typing and dynamic t
 
 ## Formalizing Type Checking: Grammars
 
-To represent possible types and their relationships, we can use grammars. Grammars provide a way to specify the syntax and structure of types in a concise and formal manner. This syntax is similar to Haskell but much more simplified. If there are things that look Haskell-y, then they probably behave in the same way.
+To represent possible types and their relationships, we can use grammars. Grammars provide a way to specify the syntax and structure of types in a concise and formal manner. The syntax below is similar to Haskell but much more simplified. If there are things that look Haskell-y, then they probably behave in the same way.
 
 ![Grammar](images/grammar.png)
 
