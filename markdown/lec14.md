@@ -103,6 +103,7 @@ Type systems can be categorized into two main types: static typing and dynamic t
 
 To represent possible types and their relationships, we can use grammars. Grammars provide a way to specify the syntax and structure of types in a concise and formal manner. This syntax is similar to Haskell but much more simplified. If there are things that look Haskell-y, then they probably behave in the same way.
 
+![Grammar](images/grammar.png)
 
 
 Recognizing a grammar as a specification is an essential skill in CS131. It allows us to understand what the grammar is trying to tell us.
