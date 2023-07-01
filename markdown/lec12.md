@@ -307,3 +307,97 @@ do
 In this example, we prompt the user to enter a word and store the input in the variable `input`. We then use a `let` expression to define the variable `qualifier`, which determines whether the input is a palindrome or not. Finally, we print the result using `putStrLn`.
 
 
+## Monadic Parsers
+
+### Refactoring Combinators
+
+As we deepen our understanding of parsing, it becomes clear that our existing combinator library has several overlapping patterns. These patterns often involve applying a parser to an input, followed by some computation based on the parser's success or failure. Refactoring these patterns allows us to streamline our code and remove duplications, thus making our library easier to manage and modify.
+
+### Parser Combinator Refactoring
+
+#### Identifying the Common Structure
+
+On inspection of our combinators, we can see that many of them share a common structure. They apply a parser to the input, then perform actions based on whether the parsing was successful or not. This pattern hints at a possible abstraction, allowing us to factor out the shared functionality.
+
+#### Abstracting the Next Step
+
+This common pattern can be abstracted into a function that handles the next step after parsing. The function takes the elements of the parse state (the parse result and remaining input) and produces a new parse state. By employing type variables, we can make this function work for any types `A` and `B`, taking an `A` and producing a `Parser B`.
+
+#### The Bind Operator
+
+To encapsulate this abstraction, we introduce a new operator called the "bind" operator, `>>=`. The bind operator takes a parser `A` and a function from `A` to `Parser B`, returning a `Parser B`. This allows us to automatically pass the successful parse state to the next step, simplifying our implementation.
+
+### Usage of the Bind Operator
+
+Now that we've introduced the bind operator, let's look at how we can use it to define new parsing operations. For example, given a parser `letter` that parses lowercase letters, we might want to transform the parsed letter to uppercase. We can do this by binding the `letter` parser to a function that converts the parsed letter to uppercase and wraps it in a parser using the `return` function. This can be simplified even further using the `>>=:` operator, which combines the bind operator with function composition, giving us a convenient way to transform parsed results without having to explicitly use `return`.
+
+The bind operator can also be used to sequence parsers. For instance, we might want to parse a digit followed by a letter, combining their results into a pair. Using the bind operator, we can sequence these parsers and capture their results without having to perform explicit error checking, simplifying our combinator implementations like `<:>` and `<++>`.
+
+### Parser Combinator Core
+
+Our parser combinator library centers around a few core elements. The `Parser` interface comprises a type that is parameterized by the type of its parse result. The `parse` function applies a parser to an input string, returning either a successful parse result or an error if parsing fails.
+
+#### Core Functions and Combinators
+
+Our library provides several basic parsing functions and combinators:
+
+1. `get`: A parser that retrieves the next character from the input.
+2. `return`: A function that takes a value and returns a parser that always produces that value.
+3. `pfail`: A parser that always fails.
+4. `<|>`: A combinator that combines two parsers, producing a parser that tries the first parser and, if it fails, then tries the second parser.
+5. `<:>`: A combinator that combines a parser for a single value with a parser for a list of values, producing a parser for a list of values that starts with the single value.
+6. `<++>`: A combinator that combines two parsers for lists of values, producing a parser for a list of values that is the concatenation of the two lists.
+
+### Refactoring Our Parser Library
+
+With these core elements
+
+ in place, we can start refactoring our parser library using a monadic approach. This involves redefining our combinators and functions in terms of the bind operator and other monadic operations.
+
+#### The `<+>` Combinator
+
+The `<+>` combinator sequences two parsers, producing a parser that parses an `a` and a `b` in sequence and returns a pair of the parsed values. Its type is:
+
+```haskell
+(<+>) :: Parser a -> Parser b -> Parser (a, b)
+```
+
+An example of using `<+>` is `digit <+> letter`, which parses a digit followed by a letter and returns a pair of the parsed digit and letter.
+
+Here's how we can redefine `<+>` using the bind operator and `return`:
+
+```haskell
+p1 <+> p2 = p1 >>= \a -> p2 >>= \b -> return (a, b)
+```
+
+#### The `<:>` Combinator
+
+The `<:>` combinator combines a parser for a single value with a parser for a list of values. It applies the first parser and then the second parser, producing a parser that returns a list of values that starts with the parsed single value. Its type is:
+
+```haskell
+(<:>) :: Parser a -> Parser [a] -> Parser [a]
+```
+
+An example of using `<:>` is `digit <:> digits`, which parses a digit followed by any number of digits and returns a list of the parsed digits.
+
+We can redefine `<:>` using the bind operator and `return` as follows:
+
+```haskell
+p1 <:> p2 = p1 >>= \a -> p2 >>= \as -> return (a:as)
+```
+
+#### The `<++>` Combinator
+
+The `<++>` combinator concatenates the results of two list parsers. It applies the first parser and then the second parser, producing a parser that returns a list of values that is the concatenation of the two lists. Its type is:
+
+```haskell
+(<++>) :: Parser [a] -> Parser [a] -> Parser [a]
+```
+
+An example of using `<++>` is `digits <++> letters`, which parses a sequence of digits followed by a sequence of letters, returning a list of the parsed digits and letters.
+
+Here's how we can redefine `<++>` using the bind operator and `return`:
+
+```haskell
+p1 <++> p2 = p1 >>= \as -> p2 >>= \bs -> return (as ++ bs)
+```

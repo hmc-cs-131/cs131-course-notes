@@ -1,232 +1,150 @@
 ### CS 131: Programming Languages
 
-# Lambda Calculus
+# Lambda Calculus Encodings
 
-Lambda Calculus is a formal system in mathematical logic that provides a foundation for understanding computation using functions. It was introduced by Alonzo Church in the 1930s as a way to investigate the notion of effective computability.
+## Functional Encoding of Sets
 
-## Historical and Contextual Recap
+In lambda calculus, we can encode sets using functional encodings. The idea is to represent a set as a function that takes an argument and evaluates to either `True` or `False` depending on whether the argument is in the set or not.
 
-Before diving deeper into Lambda Calculus, let's briefly recap its historical and contextual significance. Lambda Calculus emerged as part of the broader effort to develop formal systems and mechanical methods for mathematics and computation.
+For example, in Haskell, we can define boolean functions for `NOT`, `AND`, `OR`, as well as functions for creating pairs (`MKPAIR`), extracting the first component (`FST`), and extracting the second component (`SND`).
 
-At the time, the fields of engineering, mathematics, and computer science were starting to intersect, giving birth to new ideas and approaches. Courses like Engineering Mathematics (CS105), Introduction to Programming (E115), Computer Organization and Systems (CS140), and Lambda Calculus (CS131) provided the necessary foundations for understanding computation from different perspectives.
-
-### Computation is More Than Numbers
-
-While early forms of computation focused on numerical calculations and algorithms, Lambda Calculus expanded the notion of computation to include functions and symbolic manipulation. It introduced a way to represent and reason about computations using functions as the fundamental building blocks.
-
-This shift in perspective opened up new possibilities, allowing for the manipulation of functions and the exploration of higher-level concepts beyond mere numbers.
-
-### Could we compute EVERYTHING?
-
-The question of whether it is possible to compute everything has intrigued many great minds in the history of computer science and mathematics. Several prominent figures have expressed their thoughts on this matter:
-
-- **David Hilbert**, a mathematician, expressed an optimistic viewpoint, believing that with the right methods and tools, all problems in mathematics could be solved.
-- **Alonzo Church**, the creator of Lambda Calculus, disagreed with Hilbert's optimistic view. He demonstrated that there is no general-purpose algorithm that can determine if two lambda expressions are equivalent.
-- **Alan Turing**, another influential figure in computer science, also reached a similar conclusion. He proved the undecidability of the Halting Problem, showing that there are limits to what can be computed.
-
-These perspectives highlight the inherent complexity and limitations of computation.
-
-### Lambda Calculus and Turing Machines
-
-Lambda Calculus and Turing Machines are two foundational models of computation. While Turing Machines focus on the mechanics of computation and provide a theoretical framework for understanding computation in terms of tape manipulation and state transitions, Lambda Calculus approaches computation from a functional perspective.
-
-Alan Turing's Machines, introduced in 1936, are theoretical devices capable of performing any computation that can be algorithmically described. Turing showed that it is impossible to have a general procedure that determines whether an arbitrary Turing Machine halts.
-
-On the other hand, Alonzo Church's Lambda Calculus, developed in 1935, provides a formal system for manipulating symbols based on functions. Church demonstrated that there is no general-purpose algorithm that can determine if two lambda expressions are equivalent.
-
-These two models of computation, while different in their approach and formalism, highlight the fundamental limits and challenges in determining the computability of certain problems.
-
-### Up and Down the Ladder of Abstraction
-
-Understanding computation involves navigating different levels of abstraction. The ladder of abstraction provides a framework for visualizing these levels:
-
-- At the lowest level, we have **Turing Machines**. They are simple, low-level models that operate on bits and perform basic operations.
-- Moving up, we encounter the **von Neumann Architecture**, which is the foundation of most modern computers. It consists of a CPU, memory, and I/O systems.
-- Above that, we have **Assembly Language**, which represents machine instructions using mnemonics. It provides a closer connection to the underlying machine language.
-- **Imperative Languages** like C/C++ operate at a low level, offering manual memory management and direct control over hardware.
-
-
-- **Higher-level Languages** such as Python provide abstractions and handle memory management automatically. They focus more on expressing algorithms and logic rather than low-level details.
-- **Functional Languages** like Racket treat functions as first-class citizens, allowing functions to be manipulated and composed as data.
-- **Pure Functional Languages** like Haskell eliminate mutable state altogether, emphasizing immutability and function purity.
-
-Moving up and down this ladder of abstraction allows us to explore different levels of expressiveness, control, and simplicity in programming languages and systems.
-
-## Haskell: The Vehicle, Not the Focus
-
-In this class, Haskell serves as the vehicle for exploring various programming language concepts. The focus is not solely on Haskell itself but on the underlying concepts of functional programming, data representation, parsing, and interpreters.
-
-While Haskell is a powerful and expressive language, the principles and ideas learned can be applied to other languages and systems. Haskell provides a unique environment for understanding and experimenting with these concepts, offering a concise and elegant syntax.
-
-## Some Topics in this Class
-
-Throughout the course, several topics have been covered, each providing valuable insights into programming language concepts. Here are some of the topics presented in a bumper sticker style:
-
-- **Functional Programming**: Functions are treated as data, enabling powerful abstractions and expressive programming.
-- **Pattern Matching**: Leveraging the structure of data for manipulation and analysis, making code concise and clear.
-- **Representing Your Data**: Exploring different data structures and their representation in a functional programming style.
-- **Parsing**: Transforming characters into structured programs, allowing for the creation of interpreters and compilers.
-- **Interpreters**: Understanding how programs are executed by interpreting their semantics.
-- **Abstraction**: The art of doing more with less code, reducing complexity and increasing modularity.
-- **Types**: Ensuring that computations produce the desired kind of results and catching errors at compile-time.
-- **Lambda Calculus**: Exploring the essence of computation through lambda abstractions and function manipulations.
-
-These topics provide a comprehensive understanding of programming language concepts, preparing students to think critically and design elegant solutions to complex problems.
-
-## Lambda Calculus: Introduction
-
-Lambda Calculus is a formal system that operates on symbols, specifically functions. It serves as a foundation for understanding computation using functions as the central element.
-
-The term "lambda" refers to the Greek letter λ, which Alonzo Church used to symbolize function abstraction in Lambda Calculus.
-
-### Lambda Calculus: Syntax
-
-Lambda Calculus expressions are built using a simple syntax consisting of three types of expressions:
-
-- **Variables**: Represented by lowercase alphabetic symbols (a, b, c, ..., z). Variables are used to bind values and represent arguments in lambda abstractions.
-- **Function Application**: Expressions of the form (expr1 expr2), where expr1 represents the function and expr2 represents the argument being applied to the function.
-- **Lambda Abstraction**: Expressions of the form (λ var . expr), where λ denotes the lambda symbol, var represents the parameter being bound, and expr represents the body of the function.
-
-The lambda symbol λ and the dot (.) are used to construct lambda abstractions, allowing for the definition of anonymous functions.
-
-Lambda Calculus expressions are deliberately kept simple, providing a foundation for expressing complex computations using only these basic constructs.
-
-### Lambda Calculus: Examples
-
-Lambda Calculus expressions can be as simple as a single variable or as complex as nested abstractions and function applications. Here are some examples:
-
-- (λx.x): An identity function that returns its argument as it is.
-- (λx.y): A function that ignores its argument and always returns y.
-- (x y): Applying the function x to the argument y.
-- (x x): Applying the function x to itself.
-- z
-
-: A variable representing a specific value.
-- ((λx.x) a): Applying the identity function to the argument a.
-
-These examples showcase the versatility and expressiveness of Lambda Calculus in representing computations and functions.
-
-### Lambda Calculus: Vocabulary
-
-To understand and reason about Lambda Calculus expressions, it's essential to be familiar with the following vocabulary:
-
-- **Parameter**: The variable used in a lambda abstraction, representing the argument being bound.
-- **Bound Variable**: A variable that is bound within the scope of a lambda abstraction.
-- **Body**: The expression following the lambda abstraction, representing the function's behavior.
-- **Lambda Abstraction**: The process of defining an anonymous function using the λ symbol, parameter, and body.
-- **Closed Expression**: A lambda abstraction where all variables are bound within the expression.
-- **Free Variable**: A variable that appears outside the scope of a lambda abstraction.
-- **Open Expression**: A lambda abstraction with free variables, indicating dependencies on variables outside the function definition.
-
-Understanding these terms helps in analyzing Lambda Calculus expressions and reasoning about their behavior.
-
-### Lambda Calculus: β-Reduction, α-Equivalence, Normal Forms
-
-In Lambda Calculus, β-reduction, α-equivalence, and normal forms are important concepts that allow us to manipulate and simplify lambda expressions.
-
-**β-Reduction**: β-reduction is the process of applying a function to an argument by substituting the argument for the parameter in the function's body. It allows us to evaluate lambda expressions and simplify them further.
-
-For example, given the lambda expression `(λx.x) a`, we can perform β-reduction as follows:
-
-```
-(λx.x) a  ⟶   a
+```haskell
+NOT ≜ (λb.((b FALSE) TRUE))
+TRUE ≜ (λa.(λb.a))
+FALSE ≜ (λa.(λb.b))
+AND ≜ (λa.(λb.((a b) FALSE)))
+OR ≜ (λa.(λb.((a TRUE) b)))
+MKPAIR ≜ (λx.(λy.(λb.((b x) y))))
+FST ≜ (λp.(p TRUE))
+SND ≜ (λp.(p FALSE))
 ```
 
-The expression `(λx.x) a` represents a function `(λx.x)` applied to an argument `a`. By substituting `a` for the parameter `x` in the body of the function `(λx.x)`, we obtain the result `a`.
+These definitions provide a way to perform logical operations and manipulate pairs in lambda calculus.
 
-Another example is the β-reduction of a nested lambda expression:
+## Encoding Sets as Functions
 
-```
-((λx.(λy.x)) a)  ⟶  (λy.a)
-```
+We can represent sets as functions in lambda calculus. The idea is that a set `S` can be thought of as a function that takes an argument `x` and evaluates to `True` if `x` is in the set, and `False` otherwise.
 
-In this case, we have a function `(λx.(λy.x))` applied to an argument `a`. By substituting `a` for `x` in the body of the outer function and removing the redundant inner function, we obtain the result `(λy.a)`.
+In Haskell, we can define functions for `empty` set, `universe` set, `singleton` set, as well as operations like `complement`, `union`, and `intersection` on sets.
 
-**α-Equivalence**: α-equivalence refers to the notion of renaming variables in a lambda expression without changing its meaning. It allows us to consider two lambda expressions equivalent even if they differ in variable names.
-
-For example, consider the lambda expressions `(λx.x)` and `(λy.y)`. These two expressions are α-equivalent because we can rename `x` to `y` in the first expression to obtain the second expression. Both expressions represent the identity function, which returns its argument unchanged.
-
-However, not all lambda expressions are α-equivalent. If a variable is free in one expression but bound in another, they are not considered α-equivalent.
-
-**Normal Form**: A lambda expression is said to be in normal form if it cannot undergo any further β-reduction. In other words, a lambda expression is in normal form when we can no longer simplify it using β-reduction.
-
-For example, consider the expression `(λx.x) z`. We can perform β-reduction as follows:
-
-```
-(λx.x) z  ⟶  z
+```haskell
+empty _ = False
+universe _ = True
+singleton = (==)
+complement s = not . s
+union s t x = (s x) || (t x)
+intersection s t x = (s x) && (t x)
 ```
 
-The resulting expression `z` is in normal form because no further β-reduction is possible. It represents the value `z` without any additional computations.
+Similarly, in lambda calculus, we can encode these set operations using lambda functions.
 
-On the other hand, some lambda expressions do not have a normal form. A well-known example is the expression `(λx.(x x)) (λx.(x x))`. It leads to an infinite loop of self-application and cannot be reduced to a normal form.
+```plaintext
+empty = (λx. False)
+universe = (λx. True)
+singleton = (λx. (λy. ((Equal x) y)))  # Equal from HW8
+complement = (λs. (λx. (Not (s x))))
+union = (λs. (λt. (λx. ((Or (s x)) (t x)))))
+intersection = (λs. (λt. (λx. ((And (s x)) (t x)))))
+```
 
-Understanding β-reduction, α-equivalence, and normal forms allows us to manipulate and reason about lambda expressions effectively in Lambda Calculus.
+These encodings allow us to perform set operations using lambda calculus.
 
-### Lambda Calculus: Useful Functions
+## Set Theory Paradox: Russell's Set
 
-Lambda Calculus allows us to define and manipulate various functions. Here are some notable ones:
+One of the famous paradoxes in set theory is Russell's Paradox. It arises when we consider a set `R` defined as follows:
 
-- **Identity Function**: (λx.x) returns its argument as it is, preserving its value.
-- **Constant Functions**: Functions like (λx.y) always return a constant value, ignoring their argument.
-- **Nested Functions and Applications**: Combining lambda abstractions and function applications to create more complex computations.
+```
+R = { x | x ∉ x }
+```
 
-These functions demonstrate the flexibility and power of Lambda Calculus in defining different behaviors and operations.
+The paradox arises when we ask whether `R` is an element of itself (`R ∈ R`). If `R` is an element of itself, then it should not be an element of itself, and if it is not an element of itself, then it should be an element of itself. This leads to a contradiction.
 
-### Useful Encodings: Simple Logic and Data Structures
+In lambda calculus, we can encode Russell's set as `R = (λx. (Not (x x)))`. When we try to beta-reduce this expression, we encounter an infinite recursion:
 
-Lambda Calculus provides a framework for encoding logical operations and basic data structures. Here are some examples:
+```
+(R R) = ((λx. (Not (x x))) R) = (Not (R R))
+```
 
-**Booleans**: Booleans are fundamental in programming logic. In Lambda Calculus, we can represent booleans using lambda abstractions and if-then-else expressions. We define two constants:
+This infinite recursion leads to the paradox.
 
-- **TRUE**: Represented as (λa.(λb.a)), which takes two arguments and returns the first argument.
-- **FALSE**: Represented as (λa.(λb.b)), which takes two arguments and returns the second argument.
+## A Puzzle: How to Write a Recursive Anonymous Function?
 
-These boolean representations allow us to perform logical operations using lambda abstractions and function applications. For example, to define the conjunction (AND) operation:
+In functional programming, recursion is a powerful technique. We often write recursive functions to solve problems. However, when working with anonymous functions, it is not immediately obvious how to write a recursive anonymous function.
 
-- **Conjunction (AND)**: We define the AND operation as a lambda abstraction that takes two boolean arguments and returns the result of logical conjunction. The lambda expression for AND can be defined as:
+For example, let's say we want to write a recursive anonymous function that calculates the factorial of a number. In Haskell, we can define the factorial function recursively as follows:
 
-  ```
-  AND ≜ (λa.(λb.((a b) FALSE)))
-  ```
+```haskell
+fact n = if n == 0 then 1 else n * fact (n - 1)
+```
 
-  The AND function takes two boolean arguments, `a` and `b`, and applies `a` to `b` (function application). If `a` is FALSE, the result is always FALSE. Otherwise, it returns the value of `b`, which represents the logical conjunction.
+But how can we write the factorial function using a recursive anonymous function?
 
-- **Disjunction (OR)**: Similar to the AND operation, we can define the OR operation as a lambda abstraction that takes two boolean arguments and returns the result of logical disjunction. The lambda expression for OR can be defined as:
+### The Y Combinator
 
-  ```
-  OR ≜ (λa.(λb.((a TRUE) b)))
-  ```
+The Y combinator is a higher-order function that plays a fundamental role in lambda calculus. It enables the definition of recursive functions without the need for named function definitions. The Y combinator allows us to achieve recursion in anonymous functions, which is particularly useful in languages like lambda calculus where explicit recursion is not built into the language itself.
 
-  The OR function takes two boolean arguments, `a` and `b`, and applies `a` to TRUE. If `a` is TRUE, the result is always TRUE. Otherwise, it returns the value of `b`, representing the logical disjunction.
+The Y combinator is defined as:
 
-- **Negation (NOT)**: To negate a boolean value, we define the NOT operation as a lambda abstraction that takes a boolean argument and returns the negated value. The lambda expression for NOT can be defined as:
+```
+Y = (λf. ((λx. (f (x x))) (λx. (f (x x)))))
+```
 
-  ```
-  NOT ≜ (λb.((b FALSE) TRUE))
-  ```
+At first glance, the definition of the Y combinator may seem confusing. However, it embodies a clever mechanism that creates a recursion "loop" within a function expression.
 
-  The NOT function takes a boolean argument `b` and applies it to FALSE. If `b` is FALSE, the result is always TRUE. Otherwise, it returns FALSE, representing the logical negation.
+To understand how the Y combinator works, let's break down its components:
 
-These encodings of logical operations in Lambda Calculus allow us to reason about boolean logic and perform basic logical computations.
+- `(λf. ...)` defines a function that takes a function `f` as an argument.
+- `((λx. (f (x x))) (λx. (f (x x))))` represents the recursion mechanism.
 
-**Pairs**: Pairs are a simple data structure that allows us to combine two values into a single entity. In Lambda Calculus, we can encode pairs using lambda abstractions and function applications. We define the following operations:
+Within the recursion mechanism, `(λx. (f (x x)))` is responsible for creating a function that can call `f` on itself. This self-application is achieved by applying `x` to `x`. However, since the function `(λx. (f (x x)))` is itself the argument for `x`, we end up with `(f (x x))`.
 
-- **MKPAIR**: MKPAIR is a lambda abstraction that takes two values `x` and `y` and returns a pair representation. The lambda expression for MKPAIR can be defined as:
+Next, `(λx. (f (x x)))` is also applied to `(λx. (f (x x)))`, effectively passing the self-applicable function to itself. This creates the recursive loop necessary for recursion.
 
-  ```
-  MKPAIR ≜ (λx.(λy.(λb.((b x) y))))
-  ```
+By applying the Y combinator to a function `f`, we obtain a recursive function that repeatedly applies `f` to itself. This recursion allows for the construction of complex computations and the definition of functions that depend on their own results.
 
-  MKPAIR takes two arguments, `x` and `y`, and creates a lambda abstraction that represents the pair. The resulting function takes a boolean argument `b` and applies it to `x` and `y` accordingly, returning the desired component of the pair.
+Using the Y combinator, we can define recursive functions in lambda calculus without explicit naming. This is particularly useful in lambda calculus, where named function definitions are not available.
 
-- **FST**: FST is a lambda abstraction that takes a pair and returns its first component. The lambda expression for FST can be defined as:
+### Recursive Function Example: Factorial
 
-  ```
-  FST ≜ (λp.(p TRUE))
-  ```
+Let's illustrate the usage of the Y combinator with an example: computing the factorial function.
 
-  FST takes a pair `p` and applies it to TRUE. As per the MKPAIR encoding, applying TRUE to a pair retrieves its first component.
+In Haskell, the factorial function can be defined using recursion as follows:
 
-These encodings demonstrate how Lambda Calculus can represent complex concepts using simple constructs and function manipulations.
+```haskell
+fact n = if n == 0 then 1 else n * fact (n - 1)
+```
 
-Lambda Calculus serves as a foundation for understanding computation and exploring the fundamental principles of programming languages and systems. Its simplicity and expressive power make it a valuable tool for reasoning about computations and defining functions.
+Using the Y combinator, we can write the factorial function in lambda calculus as:
+
+```
+fact = Y (\f. \n. if n == 0 then 1 else n * f (n - 1))
+```
+
+Here's how the Y combinator works in this context:
+
+- The function `\f. \n. if n == 0 then 1 else n * f (n - 1)` represents the factorial computation with a parameter `f` for recursive calls.
+- Applying the Y combinator to this function: `Y (\f. \n. if n == 0 then 1 else n * f (n - 1))` creates a recursive function that can call itself using `f`.
+
+By defining the factorial function with the Y combinator, we can now compute factorials in lambda calculus without needing explicit recursion or named functions.
+
+### The Power of the Y Combinator
+
+The Y combinator's ability to introduce recursion in anonymous functions is powerful. It allows us to solve recursive problems and perform computations that would otherwise require named functions or explicit recursion.
+
+With the Y combinator, we can define a wide range of recursive functions in lambda calculus, from simple arithmetic calculations to complex data manipulations.
+
+However, it's worth noting that the Y combinator is not limited
+
+ to factorial calculations alone. It can be applied to any function that requires recursion. By applying the Y combinator to a suitable function expression, we can achieve recursion and solve a variety of problems within the lambda calculus framework.
+
+### Recursion Recipe with the Y Combinator
+
+To use the Y combinator to define a recursive function, follow this recipe:
+
+1. Define the function expression using a parameter (e.g., `exprs`).
+2. Wrap the expression with the Y combinator: `(Y (\f. exprs f exprs f exprs ... f exprs))`.
+
+By following this recipe, you can define recursive functions in lambda calculus using the Y combinator.
+
+The Y combinator is a fascinating concept that showcases the expressive power of lambda calculus. It highlights the ability to achieve recursion without explicit recursion constructs or named functions, opening up new avenues for computation within the lambda calculus paradigm.
+
